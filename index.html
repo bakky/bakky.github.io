@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>多点好奇 多点折腾</title>
+  
+    <meta name="author" content="霸小奇">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">霸小奇的博客</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About Me</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>多点好奇 多点折腾 </h1>
+</div>
+
+<div class="row">
+  <div class="span12">
+    
+<h3>最近文章</h3>
+
+
+<div class="post">
+  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
+
+  <h2>第1章：</h2>
+
+<ul>
+<li><p>在设计前期采用模式常常导致过度工程</p></li>
+
+<li><p>开发业务代码时很容易面向过程编程</p></li>
+
+<li><p>大方法差成小方法:</p>
+
+<pre><code>所有行为拆成很多小行为，然后将合适的行为提炼到对象中
+分拆出小方法（要避免过多参数的传递）
+这样做可能还会带来代码量的增加
+</code></pre></li>
+
+<li><p>运用常用设计模式
+    可以穿插看设计模式的书籍（对应设计模式）</p></li>
+</ul>
+
+<h2>第2章</h2>
+
+
+  <div class="more">
+    <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/2013/笔记/effective_java.html">《effective java》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
+
+  <h2>第21条：用函数对象表示策略</h2>
+
+<ul>
+<li>java没有函数指针，可以用对象引用实现同样的功能</li>
+<li>如果一个类仅仅导出一个方法，那么这个实例就等同于一个指向该方法的指针（例如常见的排序比较器使用：Comparator）这样就可以在某一个对象的方法中执行其它对象。</li>
+</ul>
+
+<p>例：</p>
+
+<pre><code>Arrays.sort(stringArray,new Comparator&lt;String&gt;(){
+     public int compare(String s1,String s2){
+          return s1.length()-s2.length();
+     }
+})
+</code></pre>
+
+<p>每个比较器就是一个具体策略类，具体策略类往往使用匿名类声明（例如上面的例子），我们也可以声明一个普通的类实现Comparator接口。这个时候，我们可以考虑，因为用匿名类的话，每次执行调用的时候会生成一个新的对象实例，将这个函数对象存储在一个私有的静态final域中。</p>
+
+
+  <div class="more">
+    <a href="/2013/笔记/effective_java.html" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/2012/new-born.html">你的第一篇博客</a> <span class="date">2012-12-22</span></h3>
+
+  <h1>感谢你使用Gor编写博客</h1>
+
+<h2>本文位于 posts/first-blog.md , 你可以任何删掉,修改这个文件</h2>
+
+<p>文件开头是当前文章的元数据</p>
+
+<ol>
+<li>date为自动生成, 当然,你可以修改,这是你的自由</li>
+<li>permalink 可以是固定地址,也可以由gor为你自动生成</li>
+<li>categories 就是分类, 可以多个</li>
+<li>tags 同理,多个标签也是很常见的</li>
+</ol>
+
+<p>请确保文件使用UTF8 without BOM编码</p>
+
+<h2>你可以通过执行下面的语句来新建一篇博客:</h2>
+
+<pre><code>gor post 文章标题
+</code></pre>
+
+
+  <div class="more">
+    <a href="/2012/new-born.html" class="btn">read more..</a>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 霸小奇 2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script>
+    var _gaq=[['_setAccount','UA-123-12'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+  </body>
+</html>
