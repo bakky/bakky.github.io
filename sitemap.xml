@@ -4,6 +4,11 @@
 		<loc>http://bakky.github.io/</loc>
 	</url>
 	<url>
+		<loc>http://bakky.github.io/2013/生活/live.html</loc>
+		<lastmod>2013-06-06</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://bakky.github.io/2013/笔记/effective_java.html</loc>
 		<lastmod>2013-05-12</lastmod>
 		<changefreq>weekly</changefreq>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>多点好奇 多点折腾</title>
+    <title>追女神日记（更新中）</title>
   
     <meta name="author" content="霸小奇">
 
@@ -77,89 +77,79 @@
     <div class="container">
 
       <div class="content">
-        
-<div class="page-header">
-  <h1>多点好奇 多点折腾 </h1>
+        <div class="page-header">
+  <h1>追女神日记（更新中） </h1>
 </div>
 
 <div class="row">
-  <div class="span12">
-    
-<h3>最近文章</h3>
-
-
-<div class="post">
-  <h3 class="title"><a href="/2013/生活/live.html">追女神日记（更新中）</a> <span class="date">2013-06-06</span></h3>
-
-  <p>2013-06-06</p>
+  <div class="span8">
+    <p>2013-06-06</p>
 
 <p>鼓起勇气找女神qq聊天，很平淡的说了些，女神用女神惯有的方式中断了聊天：我要去洗洗睡了</p>
 
 <p>呵呵 呵呵…(悲剧了)</p>
 
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+          
+            <li class="prev disabled"><a>&larr; Previous</a></li>
+          
 
-  <div class="more">
-    <a href="/2013/生活/live.html" class="btn">read more..</a>
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2013/笔记/effective_java.html" title="《effective java》笔记（更新中）">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'bakky'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
   </div>
-</div>
-
-<div class="post">
-  <h3 class="title"><a href="/2013/笔记/effective_java.html">《effective java》笔记（更新中）</a> <span class="date">2013-05-12</span></h3>
-
-  <h2>第21条：用函数对象表示策略</h2>
-
-<ul>
-<li>java没有函数指针，可以用对象引用实现同样的功能</li>
-<li>如果一个类仅仅导出一个方法，那么这个实例就等同于一个指向该方法的指针（例如常见的排序比较器使用：Comparator）这样就可以在某一个对象的方法中执行其它对象。</li>
-</ul>
-
-<p>例：</p>
-
-<pre><code>Arrays.sort(stringArray,new Comparator&lt;String&gt;(){
-     public int compare(String s1,String s2){
-          return s1.length()-s2.length();
-     }
-})
-</code></pre>
-
-<p>每个比较器就是一个具体策略类，具体策略类往往使用匿名类声明（例如上面的例子），我们也可以声明一个普通的类实现Comparator接口。这个时候，我们可以考虑，因为用匿名类的话，每次执行调用的时候会生成一个新的对象实例，将这个函数对象存储在一个私有的静态final域中。</p>
-
-
-  <div class="more">
-    <a href="/2013/笔记/effective_java.html" class="btn">read more..</a>
-  </div>
-</div>
-
-<div class="post">
-  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
-
-  <h2>第1章：</h2>
-
-<ul>
-<li><p>在设计前期采用模式常常导致过度工程</p></li>
-
-<li><p>开发业务代码时很容易面向过程编程</p></li>
-
-<li><p>大方法差成小方法:</p>
-
-<pre><code>所有行为拆成很多小行为，然后将合适的行为提炼到对象中
-分拆出小方法（要避免过多参数的传递）
-这样做可能还会带来代码量的增加
-</code></pre></li>
-
-<li><p>运用常用设计模式
-    可以穿插看设计模式的书籍（对应设计模式）</p></li>
-</ul>
-
-<h2>第2章</h2>
-
-
-  <div class="more">
-    <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
-  </div>
-</div>
-
-
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-06-06</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E7%94%9F%E6%B4%BB%E6%83%85%E6%84%9F-ref">生活情感 <span>1</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E5%A5%B3%E7%A5%9E-ref">女神 <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#%E6%83%85%E6%84%9F-ref">情感 <span>1</span></a>
+</li>
+    
+    </ul>
   </div>
 </div>
 
