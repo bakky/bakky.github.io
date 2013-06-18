@@ -4,6 +4,11 @@
 		<loc>http://bakky.github.io/</loc>
 	</url>
 	<url>
+		<loc>http://bakky.github.io/2013/工作/stream.html</loc>
+		<lastmod>2013-06-18</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://bakky.github.io/2013/生活/live.html</loc>
 		<lastmod>2013-06-06</lastmod>
 		<changefreq>weekly</changefreq>
@@ -16,6 +21,16 @@
 	<url>
 		<loc>http://bakky.github.io/2013/笔记/restruct.html</loc>
 		<lastmod>2013-05-08</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://bakky.github.io/2012/工作/empty.html</loc>
+		<lastmod>2012-08-29</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://bakky.github.io/2012/工作/map.html</loc>
+		<lastmod>2012-08-10</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 </urlset>

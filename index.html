@@ -89,6 +89,53 @@
 
 
 <div class="post">
+  <h3 class="title"><a href="/2013/工作/stream.html">输入流和输出流对接</a> <span class="date">2013-06-18</span></h3>
+
+  <p>基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
+
+<p>使用场景：大量数据传输，list或数组装不下的情况</p>
+
+<pre><code>      DefaultHttpClient client = new DefaultHttpClient();
+      StringBuffer getString = new StringBuffer();
+      HttpMethod method = null;
+      HttpResponse response;
+      JSONObject res = null;
+      int start = creator.indexOf(&quot;(&quot;);
+      int end = creator.indexOf(&quot;)&quot;);
+      String workId = creator.substring(start+1,end);
+      try {
+           getString.append(applyManager.getGoldServiceApi())
+                .append(&quot;getUserGroupList.do?appName=hermes&amp;appPassword=xxx&quot;)
+                .append(&quot;&amp;groupId=&quot;).append(groupid)
+                .append(&quot;&amp;workId=&quot;).append(workId);
+           //发起请求
+           String url = getString.toString();
+           HttpGet get = new HttpGet(url);
+           sendlog.warn(&quot;请求黄金策url:&quot;+url);
+           response = client.execute(get);
+           InputStream input = response.getEntity().getContent();
+           File newFile = new File(tfsPath+&quot;/&quot;+new Date().getTime()+&quot;_&quot;+groupid+&quot;.txt&quot;);
+           OutputStream output = new FileOutputStream(newFile);
+           IOUtils.copy(input, output);
+           sendlog.warn(&quot;从黄金策拉的数据保存路径:&quot;+newFile.getPath());
+           return newFile.getPath();
+      } catch (Exception e) {
+           log.error(&quot;从黄金策拉取数据出错:&quot;+getString+&quot;[res:]&quot;+res, e);
+           return null;
+      }finally{
+           //释放连接
+           if(method!=null)
+                method.releaseConnection();
+      }
+</code></pre>
+
+
+  <div class="more">
+    <a href="/2013/工作/stream.html" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
   <h3 class="title"><a href="/2013/生活/live.html">追女神日记（更新中）</a> <span class="date">2013-06-06</span></h3>
 
   <p>2013-06-06</p>
@@ -172,6 +219,62 @@
 
   <div class="more">
     <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/2012/工作/empty.html">String和StringUtil的判断为空区别</a> <span class="date">2012-08-29</span></h3>
+
+  <p>1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
+
+<p>str为null,则抛出空指针异常</p>
+
+<p>2.<code>StringUtils.isEmpty(str)</code>返回true的条件是<code>str==null</code> 或 <code>str.length()==0</code>    null安全</p>
+
+<p>3.<code>StringUtils.isBlank(str)</code>返回true的条件是<code>str==null</code> 或 <code>str.length()==0</code> 或 由空白符(whitespace) 构成</p>
+
+<p>4.<code>StringUtils.trimToNull(str)</code>、<code>StringUtils.trimToEmpty(str)</code>  去掉字符串两端的控制符(control characters, char &lt;= 32) ,如果变为 null 或&rdquo;&ldquo;，则返回 null、&rdquo;&rdquo;</p>
+
+
+  <div class="more">
+    <a href="/2012/工作/empty.html" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/2012/工作/map.html">map的遍历和排序</a> <span class="date">2012-08-10</span></h3>
+
+  <h3>map的遍历</h3>
+
+<ul>
+<li>最常规的一种遍历方法：</li>
+</ul>
+
+<pre><code>public static void work(Map&lt;String, Student&gt; map) {
+    Collection&lt;Student&gt; c = map.values();
+    Iterator it = c.iterator();
+    for (; it.hasNext();) {
+        System.out.println(it.next());
+    }
+}
+</code></pre>
+
+<ul>
+<li>利用keyset进行遍历，它的优点在于可以根据你所想要的key值得到你想要的 values，更具灵活性！！</li>
+</ul>
+
+<pre><code>public static void workByKeySet(Map&lt;String, Student&gt; map) {
+    Set&lt;String&gt; key = map.keySet();
+    for (Iterator it = key.iterator(); it.hasNext();) {
+        String s = (String) it.next();
+        System.out.println(map.get(s));
+    }
+}
+</code></pre>
+
+
+  <div class="more">
+    <a href="/2012/工作/map.html" class="btn">read more..</a>
   </div>
 </div>
 

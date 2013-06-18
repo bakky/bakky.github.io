@@ -3,7 +3,52 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-16 12:00:27 +0800</pubDate>
+    <pubDate>2013-06-18 11:21:31 +0800</pubDate>
+    <item>
+      <title>输入流和输出流对接</title>
+      <link>http://bakky.github.io/2013/工作/stream.html</link>
+      <pubDate>2013-06-18 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中&lt;/p&gt;
+
+&lt;p&gt;使用场景：大量数据传输，list或数组装不下的情况&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;      DefaultHttpClient client = new DefaultHttpClient();
+      StringBuffer getString = new StringBuffer();
+      HttpMethod method = null;
+      HttpResponse response;
+      JSONObject res = null;
+      int start = creator.indexOf(&amp;quot;(&amp;quot;);
+      int end = creator.indexOf(&amp;quot;)&amp;quot;);
+      String workId = creator.substring(start+1,end);
+      try {
+           getString.append(applyManager.getGoldServiceApi())
+                .append(&amp;quot;getUserGroupList.do?appName=hermes&amp;amp;appPassword=xxx&amp;quot;)
+                .append(&amp;quot;&amp;amp;groupId=&amp;quot;).append(groupid)
+                .append(&amp;quot;&amp;amp;workId=&amp;quot;).append(workId);
+           //发起请求
+           String url = getString.toString();
+           HttpGet get = new HttpGet(url);
+           sendlog.warn(&amp;quot;请求黄金策url:&amp;quot;+url);
+           response = client.execute(get);
+           InputStream input = response.getEntity().getContent();
+           File newFile = new File(tfsPath+&amp;quot;/&amp;quot;+new Date().getTime()+&amp;quot;_&amp;quot;+groupid+&amp;quot;.txt&amp;quot;);
+           OutputStream output = new FileOutputStream(newFile);
+           IOUtils.copy(input, output);
+           sendlog.warn(&amp;quot;从黄金策拉的数据保存路径:&amp;quot;+newFile.getPath());
+           return newFile.getPath();
+      } catch (Exception e) {
+           log.error(&amp;quot;从黄金策拉取数据出错:&amp;quot;+getString+&amp;quot;[res:]&amp;quot;+res, e);
+           return null;
+      }finally{
+           //释放连接
+           if(method!=null)
+                method.releaseConnection();
+      }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将输入流写到输出流中使用了apache的IOUtils工具包，注意不要将服务端获取输入流单独提取方法，因为有个释放链接的过程，而对接的时候，连接是不能被关闭的。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>追女神日记（更新中）</title>
       <link>http://bakky.github.io/2013/生活/live.html</link>
@@ -114,6 +159,85 @@
 &lt;ul&gt;
 &lt;li&gt;优秀的代码组织和性能间的权衡&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>String和StringUtil的判断为空区别</title>
+      <link>http://bakky.github.io/2012/工作/empty.html</link>
+      <pubDate>2012-08-29 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;1.&lt;code&gt;str.isEmpty();return str==null||str.length()==0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;str为null,则抛出空指针异常&lt;/p&gt;
+
+&lt;p&gt;2.&lt;code&gt;StringUtils.isEmpty(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt;    null安全&lt;/p&gt;
+
+&lt;p&gt;3.&lt;code&gt;StringUtils.isBlank(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt; 或 由空白符(whitespace) 构成&lt;/p&gt;
+
+&lt;p&gt;4.&lt;code&gt;StringUtils.trimToNull(str)&lt;/code&gt;、&lt;code&gt;StringUtils.trimToEmpty(str)&lt;/code&gt;  去掉字符串两端的控制符(control characters, char &amp;lt;= 32) ,如果变为 null 或&amp;rdquo;&amp;ldquo;，则返回 null、&amp;rdquo;&amp;rdquo;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>map的遍历和排序</title>
+      <link>http://bakky.github.io/2012/工作/map.html</link>
+      <pubDate>2012-08-10 12:00:00 +0800</pubDate>
+      <description>&lt;h3&gt;map的遍历&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;最常规的一种遍历方法：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;public static void work(Map&amp;lt;String, Student&amp;gt; map) {
+    Collection&amp;lt;Student&amp;gt; c = map.values();
+    Iterator it = c.iterator();
+    for (; it.hasNext();) {
+        System.out.println(it.next());
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;利用keyset进行遍历，它的优点在于可以根据你所想要的key值得到你想要的 values，更具灵活性！！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;public static void workByKeySet(Map&amp;lt;String, Student&amp;gt; map) {
+    Set&amp;lt;String&amp;gt; key = map.keySet();
+    for (Iterator it = key.iterator(); it.hasNext();) {
+        String s = (String) it.next();
+        System.out.println(map.get(s));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;比较复杂的一种遍历，它的灵活性太强了，想得到什么就能得到什么&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;public static void workByEntry(Map&amp;lt;String, Student&amp;gt; map) {
+    Set&amp;lt;Map.Entry&amp;lt;String, Student&amp;gt;&amp;gt; set = map.entrySet();
+    for (Iterator&amp;lt;Map.Entry&amp;lt;String, Student&amp;gt;&amp;gt; it = set.iterator(); it.hasNext();) {
+        Map.Entry&amp;lt;String, Student&amp;gt; entry = (Map.Entry&amp;lt;String, Student&amp;gt;) it.next();
+        System.out.println(entry.getKey() + &amp;quot;---&amp;gt;&amp;quot; + entry.getValue());
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;map中的value排序&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;中心思想：对key按value进行排序，然后放入linkedHashMap中,按要求定制Comparator&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;List&amp;lt;Long&amp;gt; keys = new ArrayList&amp;lt;Long&amp;gt;(map.keySet());           
+Collections. sort(keys,new Comparator&amp;lt;Object &amp;gt;(){
+    @Override
+    public int compare( Object arg0, Object arg1) {
+        return map.get(arg0).compareTo(map.get(arg1));
+    }                
+});    
+Map&amp;lt;Long, String&amp;gt; catmap = new LinkedHashMap&amp;lt;Long,String&amp;gt;();  for(Long l : keys){           
+    catmap.put(l, map.get(l));       
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
   </channel>

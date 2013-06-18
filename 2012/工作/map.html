@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>《重构》笔记（更新中）</title>
+    <title>map的遍历和排序</title>
   
     <meta name="author" content="霸小奇">
 
@@ -78,57 +78,84 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>《重构》笔记（更新中） </h1>
+  <h1>map的遍历和排序 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <h2>第1章：</h2>
+    <h3>map的遍历</h3>
 
 <ul>
-<li><p>在设计前期采用模式常常导致过度工程</p></li>
-
-<li><p>开发业务代码时很容易面向过程编程</p></li>
-
-<li><p>大方法差成小方法:</p>
-
-<pre><code>所有行为拆成很多小行为，然后将合适的行为提炼到对象中
-分拆出小方法（要避免过多参数的传递）
-这样做可能还会带来代码量的增加
-</code></pre></li>
-
-<li><p>运用常用设计模式
-    可以穿插看设计模式的书籍（对应设计模式）</p></li>
+<li>最常规的一种遍历方法：</li>
 </ul>
 
-<h2>第2章</h2>
+<pre><code>public static void work(Map&lt;String, Student&gt; map) {
+    Collection&lt;Student&gt; c = map.values();
+    Iterator it = c.iterator();
+    for (; it.hasNext();) {
+        System.out.println(it.next());
+    }
+}
+</code></pre>
 
 <ul>
-<li><p>设计模式更像是重构的一种手段</p></li>
-
-<li><p>重构就是在整理代码，让代码容易被理解喝修改</p></li>
+<li>利用keyset进行遍历，它的优点在于可以根据你所想要的key值得到你想要的 values，更具灵活性！！</li>
 </ul>
 
-<h2>第6章</h2>
+<pre><code>public static void workByKeySet(Map&lt;String, Student&gt; map) {
+    Set&lt;String&gt; key = map.keySet();
+    for (Iterator it = key.iterator(); it.hasNext();) {
+        String s = (String) it.next();
+        System.out.println(map.get(s));
+    }
+}
+</code></pre>
 
 <ul>
-<li>优秀的代码组织和性能间的权衡</li>
+<li>比较复杂的一种遍历，它的灵活性太强了，想得到什么就能得到什么</li>
 </ul>
+
+<pre><code>public static void workByEntry(Map&lt;String, Student&gt; map) {
+    Set&lt;Map.Entry&lt;String, Student&gt;&gt; set = map.entrySet();
+    for (Iterator&lt;Map.Entry&lt;String, Student&gt;&gt; it = set.iterator(); it.hasNext();) {
+        Map.Entry&lt;String, Student&gt; entry = (Map.Entry&lt;String, Student&gt;) it.next();
+        System.out.println(entry.getKey() + &quot;---&gt;&quot; + entry.getValue());
+    }
+}
+</code></pre>
+
+<h3>map中的value排序</h3>
+
+<ul>
+<li>中心思想：对key按value进行排序，然后放入linkedHashMap中,按要求定制Comparator</li>
+</ul>
+
+<pre><code>List&lt;Long&gt; keys = new ArrayList&lt;Long&gt;(map.keySet());           
+Collections. sort(keys,new Comparator&lt;Object &gt;(){
+    @Override
+    public int compare( Object arg0, Object arg1) {
+        return map.get(arg0).compareTo(map.get(arg1));
+    }                
+});    
+Map&lt;Long, String&gt; catmap = new LinkedHashMap&lt;Long,String&gt;();  for(Long l : keys){           
+    catmap.put(l, map.get(l));       
+}
+</code></pre>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2013/笔记/effective_java.html" title="《effective java》笔记（更新中）">&larr; Previous</a></li>
+            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
           
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">Next &rarr;</a></li>
           
+            <li class="next disabled"><a>Next &rarr;</a>
           
         </ul>
       </ul>
@@ -153,13 +180,13 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-05-08</span></div>
+    <div class="date"><span>2012-08-10</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
     
       <li>
-  <a href="/categories/#%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0-ref">看书笔记 <span>2</span></a>
+  <a href="/categories/#java%E5%9F%BA%E7%A1%80-ref">java基础 <span>2</span></a>
 </li>
     
     </ul>
@@ -168,11 +195,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#%E9%87%8D%E6%9E%84-ref">重构 <span>2</span></a>
-</li>
-    
-      <li>
-  <a href="/tags/#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-ref">设计模式 <span>1</span></a>
+  <a href="/tags/#map-ref">map <span>1</span></a>
 </li>
     
     </ul>
