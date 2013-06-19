@@ -82,3 +82,8 @@ html, body {
   border:1px solid #4C964D;
   color:#FFF;
 }
+.brand {  
+  background:url(https://tfsimg.alipay.com/images/partner/T1NZtaXdJcXXXXXXXX); 
+  background-size:40px 40px; 
+  background-repeat: no-repeat;   
+}
