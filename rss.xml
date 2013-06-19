@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-19 11:38:57 +0800</pubDate>
+    <pubDate>2013-06-19 04:02:57 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -86,7 +86,9 @@
       <title>《effective java》笔记（更新中）</title>
       <link>http://bakky.github.io/2013/笔记/effective_java.html</link>
       <pubDate>2013-05-12 12:00:00 +0800</pubDate>
-      <description>&lt;h2&gt;第21条：用函数对象表示策略&lt;/h2&gt;
+      <description>&lt;h4&gt;第21条：用函数对象表示策略&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;java没有函数指针，可以用对象引用实现同样的功能&lt;/li&gt;
@@ -128,7 +130,9 @@
       <title>《重构》笔记（更新中）</title>
       <link>http://bakky.github.io/2013/笔记/restruct.html</link>
       <pubDate>2013-05-08 12:00:00 +0800</pubDate>
-      <description>&lt;h2&gt;第1章：&lt;/h2&gt;
+      <description>&lt;h4&gt;第1章&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;在设计前期采用模式常常导致过度工程&lt;/p&gt;&lt;/li&gt;
@@ -146,7 +150,9 @@
     可以穿插看设计模式的书籍（对应设计模式）&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;第2章&lt;/h2&gt;
+&lt;h4&gt;第2章&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;设计模式更像是重构的一种手段&lt;/p&gt;&lt;/li&gt;
@@ -154,7 +160,9 @@
 &lt;li&gt;&lt;p&gt;重构就是在整理代码，让代码容易被理解喝修改&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;第6章&lt;/h2&gt;
+&lt;h4&gt;第6章&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;优秀的代码组织和性能间的权衡&lt;/li&gt;
@@ -181,6 +189,8 @@
       <link>http://bakky.github.io/2012/工作/map.html</link>
       <pubDate>2012-08-10 12:00:00 +0800</pubDate>
       <description>&lt;h3&gt;map的遍历&lt;/h3&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;最常规的一种遍历方法：&lt;/li&gt;
@@ -222,6 +232,8 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3&gt;map中的value排序&lt;/h3&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;中心思想：对key按value进行排序，然后放入linkedHashMap中,按要求定制Comparator&lt;/li&gt;
