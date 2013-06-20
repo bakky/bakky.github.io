@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>About Me</title>
+    <title>数组的trimToSize方法</title>
   
     <meta name="author" content="霸小奇">
 
@@ -65,9 +65,9 @@
 
             
               
-  <li class="active"><a href="/about" class="active">About Me</a></li>
 
 
+  <li><a href="/about">About Me</a></li>
 
 
             
@@ -79,17 +79,75 @@
     <div class="container">
 
       <div class="content">
-        
-<div class="page-header">
-  <h1>About Me </h1>
+        <div class="page-header">
+  <h1>数组的trimToSize方法 </h1>
 </div>
 
 <div class="row">
-  <div class="span12">
-    <p><h6><strong>个人标签：</strong><span style="color: #a56a5a;"><strong>90&#8242;s、户外骑行、睡觉、互联网、运动、阿里巴巴、淘宝</strong></span></h6>
-<br />
-<p><img style="float:left;" title="blog" src="https://tfsimg.alipay.com/images/partner/T1NZtaXdJcXXXXXXXX" alt="霸小奇的小照片" width="150" height="150" /></p></p>
+  <div class="span8">
+    <p><br />
+- 一旦能确认数组列表的大小不再发生变化，就可以调用<code>trimToSize</code>方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用<code>trimToSize</code>.
+- 代码洁癖的人适用</p>
 
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/工作/box.html" title="java自动装箱和拆箱">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'bakky'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-08-23</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#java%E5%9F%BA%E7%A1%80-ref">java基础 <span>5</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E6%95%B0%E7%BB%84-ref">数组 <span>1</span></a>
+</li>
+    
+    </ul>
   </div>
 </div>
 

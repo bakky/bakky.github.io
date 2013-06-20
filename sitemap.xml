@@ -24,8 +24,18 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
+		<loc>http://bakky.github.io/2012/工作/proxy.html</loc>
+		<lastmod>2012-09-08</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://bakky.github.io/2012/工作/empty.html</loc>
 		<lastmod>2012-08-29</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://bakky.github.io/2012/工作/shuzu.html</loc>
+		<lastmod>2012-08-23</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>

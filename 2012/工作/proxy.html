@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>输入流和输出流对接</title>
+    <title>代理、动态代理</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,65 +80,101 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>输入流和输出流对接 </h1>
+  <h1>代理、动态代理 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
     <p><br />
-基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
+代理很容易理解，我们平时想要去买火车票，票贩子和代售点都可以理解为代理。
+代理的结构图也很简单，代理类中含有真实类的引用，客户端调用代理类的方法，实际上代理类会去调用真实类的真实方法。那么代理类的主要作用是什么呢？就是在执行真实类的真实方法时，额外做些事情。
+<br /></p>
 
-<p>使用场景：大量数据传输，list或数组装不下的情况</p>
+<p>那么动态代理呢，试想我们买火车票、买飞机票用代理了，如果我们想要买国外奶粉，我们可以用代购，那么这个时候我们又要创建一个代理，如果有很多这种情况而且我们额外要做的事情差不多，那么创建很多代理类就浪费了，动态代理就是解决这种情况的，允许运行时指定其为实现任意一种接口实现类的代理类。</p>
 
-<pre><code>      DefaultHttpClient client = new DefaultHttpClient();
-      StringBuffer getString = new StringBuffer();
-      HttpMethod method = null;
-      HttpResponse response;
-      JSONObject res = null;
-      int start = creator.indexOf(&quot;(&quot;);
-      int end = creator.indexOf(&quot;)&quot;);
-      String workId = creator.substring(start+1,end);
-      try {
-           getString.append(applyManager.getGoldServiceApi())
-                .append(&quot;getUserGroupList.do?appName=hermes&amp;appPassword=xxx&quot;)
-                .append(&quot;&amp;groupId=&quot;).append(groupid)
-                .append(&quot;&amp;workId=&quot;).append(workId);
-           //发起请求
-           String url = getString.toString();
-           HttpGet get = new HttpGet(url);
-           sendlog.warn(&quot;请求黄金策url:&quot;+url);
-           response = client.execute(get);
-           InputStream input = response.getEntity().getContent();
-           File newFile = new File(tfsPath+&quot;/&quot;+new Date().getTime()+&quot;_&quot;+groupid+&quot;.txt&quot;);
-           OutputStream output = new FileOutputStream(newFile);
-           IOUtils.copy(input, output);
-           sendlog.warn(&quot;从黄金策拉的数据保存路径:&quot;+newFile.getPath());
-           return newFile.getPath();
-      } catch (Exception e) {
-           log.error(&quot;从黄金策拉取数据出错:&quot;+getString+&quot;[res:]&quot;+res, e);
-           return null;
-      }finally{
-           //释放连接
-           if(method!=null)
-                method.releaseConnection();
-      }
+<p>简单示例：</p>
+
+<pre><code>/**
+ *买票接口
+ *
+ */
+ pubic interface Ticket{
+    public void buyTicket();
+ }
 </code></pre>
 
-<p>将输入流写到输出流中使用了apache的IOUtils工具包，注意不要将服务端获取输入流单独提取方法，因为有个释放链接的过程，而对接的时候，连接是不能被关闭的。</p>
+<pre><code> /**
+ *真实买火车票类
+ *
+ */
+ public class TrainTicket implements Ticket{
+    @override
+    public void buyTicket(){
+        System.out.println(&quot;买火车票&quot;);
+    }
+ }
+</code></pre>
+
+<pre><code> /**
+ *真实买飞机票类
+ *
+ */
+  public class PlainTicket implements Ticket{
+    @override
+    public void buyTicket(){
+        System.out.println(&quot;买飞机票&quot;);
+    }
+ }
+</code></pre>
+
+<pre><code> /**
+ * 代理类
+ *
+ */
+ public class TicketProxy implements InvocationHandler{
+    private Object object=null;
+    public TicketProxy(Object o){
+        this.object = o;
+    }   
+    @override
+    public Object invoke(Object arg0, Method arg1, Object[] arg2){
+        Object result = null;
+        try{
+            System.out.println(&quot;我是票贩子，买票一律收20元手续费&quot;);
+            result = arg1.invoke(object , arg2);
+            System.out.println(&quot;挣钱了，买酒喝去。。。&quot;);
+        }catch(Exception ex){
+            System.exit(1);
+        }
+        return result;
+    }
+ }
+</code></pre>
+
+<pre><code> public class Client{
+    public static void main(String[] args){
+        Ticket t = new PlainTicket();
+        Ticket proxy = Proxy.newProxyInstance(t.getClass().getClassLoader() , t.getClass().getInterfaces() , new TicketProxy(t));
+        proxy.buyTicket();
+    }
+ } 
+</code></pre>
+
+<p>当需要增加买奶粉的时候，我们就不需要再增加一个代理类了，而只是需要创建相关买奶粉的接口，然后增加不同的实现类。</p>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
+            <li class="prev"><a href="/2013/笔记/restruct.html" title="《重构》笔记（更新中）">&larr; Previous</a></li>
           
-            <li class="prev disabled"><a>&larr; Previous</a></li>
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2013/生活/live.html" title="追女神日记（更新中）">Next &rarr;</a></li>
+            <li class="next"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">Next &rarr;</a></li>
           
           
         </ul>
@@ -164,7 +200,7 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-06-18</span></div>
+    <div class="date"><span>2012-09-08</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
@@ -179,7 +215,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#httpclient-ref">httpclient <span>1</span></a>
+  <a href="/tags/#%E4%BB%A3%E7%90%86-ref">代理 <span>1</span></a>
 </li>
     
     </ul>

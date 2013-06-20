@@ -3,12 +3,13 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-20 10:30:22 +0800</pubDate>
+    <pubDate>2013-06-20 10:54:25 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
       <pubDate>2013-06-18 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中&lt;/p&gt;
+      <description>&lt;p&gt;&lt;br /&gt;
+基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中&lt;/p&gt;
 
 &lt;p&gt;使用场景：大量数据传输，list或数组装不下的情况&lt;/p&gt;
 
@@ -53,7 +54,9 @@
       <title>追女神日记（更新中）</title>
       <link>http://bakky.github.io/2013/生活/live.html</link>
       <pubDate>2013-06-06 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;2013-06-06&lt;/p&gt;
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;2013-06-06&lt;/p&gt;
 
 &lt;p&gt;鼓起勇气找女神qq聊天，很平淡的说了些，女神用女神惯有的方式中断了聊天：我要去洗洗睡了&lt;/p&gt;
 
@@ -86,7 +89,9 @@
       <title>《effective java》笔记（更新中）</title>
       <link>http://bakky.github.io/2013/笔记/effective_java.html</link>
       <pubDate>2013-05-12 12:00:00 +0800</pubDate>
-      <description>&lt;h4&gt;第21条：用函数对象表示策略&lt;/h4&gt;
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4&gt;第21条：用函数对象表示策略&lt;/h4&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -130,7 +135,9 @@
       <title>《重构》笔记（更新中）</title>
       <link>http://bakky.github.io/2013/笔记/restruct.html</link>
       <pubDate>2013-05-08 12:00:00 +0800</pubDate>
-      <description>&lt;h4&gt;第1章&lt;/h4&gt;
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4&gt;第1章&lt;/h4&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -170,10 +177,93 @@
 </description>
     </item>
     <item>
+      <title>代理、动态代理</title>
+      <link>http://bakky.github.io/2012/工作/proxy.html</link>
+      <pubDate>2012-09-08 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;
+代理很容易理解，我们平时想要去买火车票，票贩子和代售点都可以理解为代理。
+代理的结构图也很简单，代理类中含有真实类的引用，客户端调用代理类的方法，实际上代理类会去调用真实类的真实方法。那么代理类的主要作用是什么呢？就是在执行真实类的真实方法时，额外做些事情。
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;那么动态代理呢，试想我们买火车票、买飞机票用代理了，如果我们想要买国外奶粉，我们可以用代购，那么这个时候我们又要创建一个代理，如果有很多这种情况而且我们额外要做的事情差不多，那么创建很多代理类就浪费了，动态代理就是解决这种情况的，允许运行时指定其为实现任意一种接口实现类的代理类。&lt;/p&gt;
+
+&lt;p&gt;简单示例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**
+ *买票接口
+ *
+ */
+ pubic interface Ticket{
+    public void buyTicket();
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt; /**
+ *真实买火车票类
+ *
+ */
+ public class TrainTicket implements Ticket{
+    @override
+    public void buyTicket(){
+        System.out.println(&amp;quot;买火车票&amp;quot;);
+    }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt; /**
+ *真实买飞机票类
+ *
+ */
+  public class PlainTicket implements Ticket{
+    @override
+    public void buyTicket(){
+        System.out.println(&amp;quot;买飞机票&amp;quot;);
+    }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt; /**
+ * 代理类
+ *
+ */
+ public class TicketProxy implements InvocationHandler{
+    private Object object=null;
+    public TicketProxy(Object o){
+        this.object = o;
+    }   
+    @override
+    public Object invoke(Object arg0, Method arg1, Object[] arg2){
+        Object result = null;
+        try{
+            System.out.println(&amp;quot;我是票贩子，买票一律收20元手续费&amp;quot;);
+            result = arg1.invoke(object , arg2);
+            System.out.println(&amp;quot;挣钱了，买酒喝去。。。&amp;quot;);
+        }catch(Exception ex){
+            System.exit(1);
+        }
+        return result;
+    }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt; public class Client{
+    public static void main(String[] args){
+        Ticket t = new PlainTicket();
+        Ticket proxy = Proxy.newProxyInstance(t.getClass().getClassLoader() , t.getClass().getInterfaces() , new TicketProxy(t));
+        proxy.buyTicket();
+    }
+ } 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当需要增加买奶粉的时候，我们就不需要再增加一个代理类了，而只是需要创建相关买奶粉的接口，然后增加不同的实现类。&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>String和StringUtil的判断为空区别</title>
       <link>http://bakky.github.io/2012/工作/empty.html</link>
       <pubDate>2012-08-29 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;1.&lt;code&gt;str.isEmpty();return str==null||str.length()==0&lt;/code&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;br /&gt;
+1.&lt;code&gt;str.isEmpty();return str==null||str.length()==0&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;str为null,则抛出空指针异常&lt;/p&gt;
 
@@ -185,10 +275,22 @@
 </description>
     </item>
     <item>
+      <title>数组的trimToSize方法</title>
+      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
+      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;
+- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
+- 代码洁癖的人适用&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>java自动装箱和拆箱</title>
       <link>http://bakky.github.io/2012/工作/box.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;如：&lt;/p&gt;
+      <description>&lt;p&gt;&lt;br /&gt;
+如：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;arrayList&amp;lt;Integer&amp;gt; list = new ArrayList&amp;lt;Integer&amp;gt;();
 list.add(3);    //1     自动打包（autowrapping）    
@@ -252,7 +354,9 @@ static {
       <title>map的遍历和排序</title>
       <link>http://bakky.github.io/2012/工作/map.html</link>
       <pubDate>2012-08-10 12:00:00 +0800</pubDate>
-      <description>&lt;h3&gt;map的遍历&lt;/h3&gt;
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3&gt;map的遍历&lt;/h3&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 

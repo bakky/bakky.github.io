@@ -94,7 +94,8 @@
 		<div class="post">
 		  <h3 class="title"><a href="/2013/工作/stream.html">输入流和输出流对接</a> <span class="date">2013-06-18</span></h3>
 
-		  <p>基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
+		  <p><br />
+基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
 
 <p>使用场景：大量数据传输，list或数组装不下的情况</p>
 
@@ -141,7 +142,9 @@
 		<div class="post">
 		  <h3 class="title"><a href="/2013/生活/live.html">追女神日记（更新中）</a> <span class="date">2013-06-06</span></h3>
 
-		  <p>2013-06-06</p>
+		  <p><br /></p>
+
+<p>2013-06-06</p>
 
 <p>鼓起勇气找女神qq聊天，很平淡的说了些，女神用女神惯有的方式中断了聊天：我要去洗洗睡了</p>
 
@@ -161,8 +164,6 @@
 
 <p>不知道什么意思，索性问了下，女神回答：额…</p>
 
-<p>以为女神会接着说的，但是没有了下文，过了一会，又扯了下其它的，女神仿佛不是很想和我说话。。。遂作罢</p>
-
 
 		  <div class="more">
 		    <a href="/2013/生活/live.html" class="btn">read more..</a>
@@ -172,7 +173,9 @@
 		<div class="post">
 		  <h3 class="title"><a href="/2013/笔记/effective_java.html">《effective java》笔记（更新中）</a> <span class="date">2013-05-12</span></h3>
 
-		  <h4>第21条：用函数对象表示策略</h4>
+		  <p><br /></p>
+
+<h4>第21条：用函数对象表示策略</h4>
 
 <p><br /></p>
 
@@ -201,7 +204,9 @@
 		<div class="post">
 		  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
 
-		  <h4>第1章</h4>
+		  <p><br /></p>
+
+<h4>第1章</h4>
 
 <p><br /></p>
 
@@ -232,9 +237,39 @@
 		</div>
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/proxy.html">代理、动态代理</a> <span class="date">2012-09-08</span></h3>
+
+		  <p><br />
+代理很容易理解，我们平时想要去买火车票，票贩子和代售点都可以理解为代理。
+代理的结构图也很简单，代理类中含有真实类的引用，客户端调用代理类的方法，实际上代理类会去调用真实类的真实方法。那么代理类的主要作用是什么呢？就是在执行真实类的真实方法时，额外做些事情。
+<br /></p>
+
+<p>那么动态代理呢，试想我们买火车票、买飞机票用代理了，如果我们想要买国外奶粉，我们可以用代购，那么这个时候我们又要创建一个代理，如果有很多这种情况而且我们额外要做的事情差不多，那么创建很多代理类就浪费了，动态代理就是解决这种情况的，允许运行时指定其为实现任意一种接口实现类的代理类。</p>
+
+<p>简单示例：</p>
+
+<pre><code>/**
+ *买票接口
+ *
+ */
+ pubic interface Ticket{
+    public void buyTicket();
+ }
+</code></pre>
+
+<p></p>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/proxy.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2012/工作/empty.html">String和StringUtil的判断为空区别</a> <span class="date">2012-08-29</span></h3>
 
-		  <p>1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
+		  <p><br />
+1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
 
 <p>str为null,则抛出空指针异常</p>
 
@@ -251,9 +286,25 @@
 		</div>
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/shuzu.html">数组的trimToSize方法</a> <span class="date">2012-08-23</span></h3>
+
+		  <p><br />
+- 一旦能确认数组列表的大小不再发生变化，就可以调用<code>trimToSize</code>方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用<code>trimToSize</code>.
+- 代码洁癖的人适用</p>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/shuzu.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2012/工作/box.html">java自动装箱和拆箱</a> <span class="date">2012-08-23</span></h3>
 
-		  <p>如：</p>
+		  <p><br />
+如：</p>
 
 <pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
 list.add(3);    //1     自动打包（autowrapping）    
@@ -285,7 +336,9 @@ System. out.println(m==n);
 		<div class="post">
 		  <h3 class="title"><a href="/2012/工作/map.html">map的遍历和排序</a> <span class="date">2012-08-10</span></h3>
 
-		  <h3>map的遍历</h3>
+		  <p><br /></p>
+
+<h3>map的遍历</h3>
 
 <p><br /></p>
 
