@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>String和StringUtil的判断为空区别</title>
+    <title>java自动装箱和拆箱</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,34 +80,83 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>String和StringUtil的判断为空区别 </h1>
+  <h1>java自动装箱和拆箱 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
+    <p>如：</p>
 
-<p>str为null,则抛出空指针异常</p>
+<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+list.add(3);    //1     自动打包（autowrapping）    
+int n = list.get(i)  //2   拆包
+</code></pre>
 
-<p>2.<code>StringUtils.isEmpty(str)</code>返回true的条件是<code>str==null</code> 或 <code>str.length()==0</code>    null安全</p>
+<p>步骤1，相当于list.add(new Integer(3))<br />
+步骤2，相当于nt n = list.get(i).intValue();</p>
 
-<p>3.<code>StringUtils.isBlank(str)</code>返回true的条件是<code>str==null</code> 或 <code>str.length()==0</code> 或 由空白符(whitespace) 构成</p>
+<p>对于封装类型的==比较 需要注意：</p>
 
-<p>4.<code>StringUtils.trimToNull(str)</code>、<code>StringUtils.trimToEmpty(str)</code>  去掉字符串两端的控制符(control characters, char &lt;= 32) ,如果变为 null 或&rdquo;&ldquo;，则返回 null、&rdquo;&rdquo;</p>
+<pre><code>Integer a =100;
+Integer b = 100;           
+Integer c = 1000;
+Integer d = 1000;           
+int m = 1000;
+int n = 1000;        
+System. out.println(a==b);
+System. out.println(c==d);           
+System. out.println(m==n);
+</code></pre>
+
+<p>如上，返回结果分别为：</p>
+
+<pre><code>true
+false
+true
+</code></pre>
+
+<p>为什么会出现这样的结果呢？</p>
+
+<p><strong><em>自动打包规范要求boolean、byte、char&lt;=127,介于-128~127之间的short和int被包装到固定的对象中去</em></strong></p>
+
+<p>看源码，拿Integer举例:</p>
+
+<p>平常我们使用<code>Integer a = xxx；</code>的时候，Integer类实际上是调用的是<code>public static Integer valueOf(int i)</code>方法。这个方法是这样的:</p>
+
+<pre><code>public static Integer valueOf(int i){
+     final int offset = 128;
+     if(i&gt;= -128 &amp;&amp; i&lt;= 127){
+          return IntegerCache.cache[i+offset];
+     }
+     return new Integer(i); 
+}
+</code></pre>
+
+<p><code>IntegerCache.class:</code></p>
+
+<pre><code>static final Integer cache[] = new Integer[-(-128)+127+1];
+static {
+     for(int i=0;i&lt;cache.length;i++){
+          cache[i] = new Integer(i - 128);
+     }
+}
+</code></pre>
+
+<p>也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。</p>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2013/笔记/restruct.html" title="《重构》笔记（更新中）">&larr; Previous</a></li>
+            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
           
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/box.html" title="java自动装箱和拆箱">Next &rarr;</a></li>
+            <li class="next"><a href="/2012/工作/map.html" title="map的遍历和排序">Next &rarr;</a></li>
           
           
         </ul>
@@ -133,13 +182,13 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-29</span></div>
+    <div class="date"><span>2012-08-23</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
     
       <li>
-  <a href="/categories/#%E5%B7%A5%E4%BD%9C%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98-ref">工作遇到问题 <span>1</span></a>
+  <a href="/categories/#java%E5%9F%BA%E7%A1%80-ref">java基础 <span>3</span></a>
 </li>
     
     </ul>
@@ -148,7 +197,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#String-ref">String <span>1</span></a>
+  <a href="/tags/#%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1-ref">装箱和拆箱 <span>1</span></a>
 </li>
     
     </ul>

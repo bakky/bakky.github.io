@@ -88,12 +88,13 @@
   <div class="span12">
     
 <h3>最近文章</h3>
+<div class="row">
+	<div class="span8">
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2013/工作/stream.html">输入流和输出流对接</a> <span class="date">2013-06-18</span></h3>
 
-
-<div class="post">
-  <h3 class="title"><a href="/2013/工作/stream.html">输入流和输出流对接</a> <span class="date">2013-06-18</span></h3>
-
-  <p>基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
+		  <p>基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
 
 <p>使用场景：大量数据传输，list或数组装不下的情况</p>
 
@@ -132,15 +133,15 @@
 </code></pre>
 
 
-  <div class="more">
-    <a href="/2013/工作/stream.html" class="btn">read more..</a>
-  </div>
-</div>
+		  <div class="more">
+		    <a href="/2013/工作/stream.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2013/生活/live.html">追女神日记（更新中）</a> <span class="date">2013-06-06</span></h3>
 
-<div class="post">
-  <h3 class="title"><a href="/2013/生活/live.html">追女神日记（更新中）</a> <span class="date">2013-06-06</span></h3>
-
-  <p>2013-06-06</p>
+		  <p>2013-06-06</p>
 
 <p>鼓起勇气找女神qq聊天，很平淡的说了些，女神用女神惯有的方式中断了聊天：我要去洗洗睡了</p>
 
@@ -163,15 +164,15 @@
 <p>以为女神会接着说的，但是没有了下文，过了一会，又扯了下其它的，女神仿佛不是很想和我说话。。。遂作罢</p>
 
 
-  <div class="more">
-    <a href="/2013/生活/live.html" class="btn">read more..</a>
-  </div>
-</div>
+		  <div class="more">
+		    <a href="/2013/生活/live.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2013/笔记/effective_java.html">《effective java》笔记（更新中）</a> <span class="date">2013-05-12</span></h3>
 
-<div class="post">
-  <h3 class="title"><a href="/2013/笔记/effective_java.html">《effective java》笔记（更新中）</a> <span class="date">2013-05-12</span></h3>
-
-  <h4>第21条：用函数对象表示策略</h4>
+		  <h4>第21条：用函数对象表示策略</h4>
 
 <p><br /></p>
 
@@ -192,15 +193,15 @@
 <p>每个比较器就是一个具体策略类，具体策略类往往使用匿名类声明（例如上面的例子），我们也可以声明一个普通的类实现Comparator接口。这个时候，我们可以考虑，因为用匿名类的话，每次执行调用的时候会生成一个新的对象实例，将这个函数对象存储在一个私有的静态final域中。</p>
 
 
-  <div class="more">
-    <a href="/2013/笔记/effective_java.html" class="btn">read more..</a>
-  </div>
-</div>
+		  <div class="more">
+		    <a href="/2013/笔记/effective_java.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
 
-<div class="post">
-  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
-
-  <h4>第1章</h4>
+		  <h4>第1章</h4>
 
 <p><br /></p>
 
@@ -225,15 +226,15 @@
 <p><br /></p>
 
 
-  <div class="more">
-    <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
-  </div>
-</div>
+		  <div class="more">
+		    <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/empty.html">String和StringUtil的判断为空区别</a> <span class="date">2012-08-29</span></h3>
 
-<div class="post">
-  <h3 class="title"><a href="/2012/工作/empty.html">String和StringUtil的判断为空区别</a> <span class="date">2012-08-29</span></h3>
-
-  <p>1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
+		  <p>1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
 
 <p>str为null,则抛出空指针异常</p>
 
@@ -244,15 +245,47 @@
 <p>4.<code>StringUtils.trimToNull(str)</code>、<code>StringUtils.trimToEmpty(str)</code>  去掉字符串两端的控制符(control characters, char &lt;= 32) ,如果变为 null 或&rdquo;&ldquo;，则返回 null、&rdquo;&rdquo;</p>
 
 
-  <div class="more">
-    <a href="/2012/工作/empty.html" class="btn">read more..</a>
-  </div>
-</div>
+		  <div class="more">
+		    <a href="/2012/工作/empty.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/box.html">java自动装箱和拆箱</a> <span class="date">2012-08-23</span></h3>
 
-<div class="post">
-  <h3 class="title"><a href="/2012/工作/map.html">map的遍历和排序</a> <span class="date">2012-08-10</span></h3>
+		  <p>如：</p>
 
-  <h3>map的遍历</h3>
+<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+list.add(3);    //1     自动打包（autowrapping）    
+int n = list.get(i)  //2   拆包
+</code></pre>
+
+<p>步骤1，相当于list.add(new Integer(3))<br />
+步骤2，相当于nt n = list.get(i).intValue();</p>
+
+<p>对于封装类型的==比较 需要注意：</p>
+
+<pre><code>Integer a =100;
+Integer b = 100;           
+Integer c = 1000;
+Integer d = 1000;           
+int m = 1000;
+int n = 1000;        
+System. out.println(a==b);
+System. out.println(c==d);           
+System. out.println(m==n);
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/box.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/map.html">map的遍历和排序</a> <span class="date">2012-08-10</span></h3>
+
+		  <h3>map的遍历</h3>
 
 <p><br /></p>
 
@@ -276,12 +309,16 @@
 <p></p>
 
 
-  <div class="more">
-    <a href="/2012/工作/map.html" class="btn">read more..</a>
-  </div>
+		  <div class="more">
+		    <a href="/2012/工作/map.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+	</div>
+	<div class="span4">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1846521517&verifier=0b6bb11b&dpc=1"></iframe>
+	</div>
 </div>
-
-
   </div>
 </div>
 

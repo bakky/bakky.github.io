@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-19 04:02:57 +0800</pubDate>
+    <pubDate>2013-06-20 10:30:22 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -182,6 +182,70 @@
 &lt;p&gt;3.&lt;code&gt;StringUtils.isBlank(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt; 或 由空白符(whitespace) 构成&lt;/p&gt;
 
 &lt;p&gt;4.&lt;code&gt;StringUtils.trimToNull(str)&lt;/code&gt;、&lt;code&gt;StringUtils.trimToEmpty(str)&lt;/code&gt;  去掉字符串两端的控制符(control characters, char &amp;lt;= 32) ,如果变为 null 或&amp;rdquo;&amp;ldquo;，则返回 null、&amp;rdquo;&amp;rdquo;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>java自动装箱和拆箱</title>
+      <link>http://bakky.github.io/2012/工作/box.html</link>
+      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;arrayList&amp;lt;Integer&amp;gt; list = new ArrayList&amp;lt;Integer&amp;gt;();
+list.add(3);    //1     自动打包（autowrapping）    
+int n = list.get(i)  //2   拆包
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;步骤1，相当于list.add(new Integer(3))&lt;br /&gt;
+步骤2，相当于nt n = list.get(i).intValue();&lt;/p&gt;
+
+&lt;p&gt;对于封装类型的==比较 需要注意：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Integer a =100;
+Integer b = 100;           
+Integer c = 1000;
+Integer d = 1000;           
+int m = 1000;
+int n = 1000;        
+System. out.println(a==b);
+System. out.println(c==d);           
+System. out.println(m==n);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如上，返回结果分别为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;true
+false
+true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么会出现这样的结果呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;自动打包规范要求boolean、byte、char&amp;lt;=127,介于-128~127之间的short和int被包装到固定的对象中去&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;看源码，拿Integer举例:&lt;/p&gt;
+
+&lt;p&gt;平常我们使用&lt;code&gt;Integer a = xxx；&lt;/code&gt;的时候，Integer类实际上是调用的是&lt;code&gt;public static Integer valueOf(int i)&lt;/code&gt;方法。这个方法是这样的:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static Integer valueOf(int i){
+     final int offset = 128;
+     if(i&amp;gt;= -128 &amp;amp;&amp;amp; i&amp;lt;= 127){
+          return IntegerCache.cache[i+offset];
+     }
+     return new Integer(i); 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;IntegerCache.class:&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static final Integer cache[] = new Integer[-(-128)+127+1];
+static {
+     for(int i=0;i&amp;lt;cache.length;i++){
+          cache[i] = new Integer(i - 128);
+     }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;
 </description>
     </item>
     <item>
