@@ -237,6 +237,73 @@
 		</div>
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/exception.html">异常</a> <span class="date">2012-09-13</span></h3>
+
+		  <ul>
+<li>异常都派生于Throwable类的一个实例。</li>
+<li>Throwable下有两个子类分支：Error和Exception</li>
+<li>Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现</li>
+<li>Exception下面又派生出两种异常分支：通常有程序导致的错误为RuntimeException，还有一类是IOException</li>
+</ul>
+
+<p>java可以声明已检查异常，告诉编译器可能会发生什么样的错误。例如读文件方法可以<code>throw FileNotFoundException</code>异常。已检查异常可以抛出多个。</p>
+
+<p>我们可以自定义一个派生于Exception或其子类的类</p>
+
+<p>再次抛出异常或异常链：</p>
+
+<p>这个可能大家在调用一些通用的模块的时候会发现它的异常信息是被包装了一层的，我们需要调用
+对象的<code>getCause()</code>方法才能得到异常信息。</p>
+
+<p>因为每个子系统可能会产生同样的异常，当我们的上层系统捕捉到这种异常时我们并不知道是哪个底层子系统抛出的。这个时候我们就可以将原是一场捕获后重新进行包装然后抛出代表这个子系统的异常，但是原始的异常信息也不会丢失。如：</p>
+
+<pre><code>try{
+   access db
+}catch(SQLException e){
+   Throwable se = new MyAppException(&quot;db error&quot;);
+    se.initCause(e);
+    throw se;
+}
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/exception.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/velocity.html">velocity渲染相关</a> <span class="date">2012-09-12</span></h3>
+
+		  <p><br /></p>
+
+<h4>velocity中对象field的渲染</h4>
+
+<p><br />
+没看源码，但经过实验得知：</p>
+
+<p>如:<code>$!xxx.name</code></p>
+
+<p>引擎渲染的时候先去调用xxx对象的<code>getName()</code>方法，如果有这个方法，就直接返回<code>getName()</code>的结果，
+如果没有的话就回去调用xxx对象的<code>get(&quot;name&quot;)</code>方法。</p>
+
+<h4>velocity判断为空和null</h4>
+
+<p><br />
+<code>$!item.name.isNull()</code>    是否为null</p>
+
+<p><code>$!item.name.isNotNull()</code>  是否不为null</p>
+
+<p><br />
+<code>#if(!$!item.name)</code>    如果不为空</p>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/velocity.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2012/工作/proxy.html">代理、动态代理</a> <span class="date">2012-09-08</span></h3>
 
 		  <p><br />
@@ -330,40 +397,6 @@ System. out.println(m==n);
 
 		  <div class="more">
 		    <a href="/2012/工作/box.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/map.html">map的遍历和排序</a> <span class="date">2012-08-10</span></h3>
-
-		  <p><br /></p>
-
-<h3>map的遍历</h3>
-
-<p><br /></p>
-
-<ul>
-<li>最常规的一种遍历方法：</li>
-</ul>
-
-<pre><code>public static void work(Map&lt;String, Student&gt; map) {
-    Collection&lt;Student&gt; c = map.values();
-    Iterator it = c.iterator();
-    for (; it.hasNext();) {
-        System.out.println(it.next());
-    }
-}
-</code></pre>
-
-<ul>
-<li>利用keyset进行遍历，它的优点在于可以根据你所想要的key值得到你想要的 values，更具灵活性！！</li>
-</ul>
-
-<p></p>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/map.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		

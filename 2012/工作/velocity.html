@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>数组的trimToSize方法</title>
+    <title>velocity渲染相关</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,30 +80,48 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>数组的trimToSize方法 </h1>
+  <h1>velocity渲染相关 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p><br />
-- 一旦能确认数组列表的大小不再发生变化，就可以调用<code>trimToSize</code>方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用<code>trimToSize</code>.
-- 代码洁癖的人适用</p>
+    <p><br /></p>
+
+<h4>velocity中对象field的渲染</h4>
+
+<p><br />
+没看源码，但经过实验得知：</p>
+
+<p>如:<code>$!xxx.name</code></p>
+
+<p>引擎渲染的时候先去调用xxx对象的<code>getName()</code>方法，如果有这个方法，就直接返回<code>getName()</code>的结果，
+如果没有的话就回去调用xxx对象的<code>get(&quot;name&quot;)</code>方法。</p>
+
+<h4>velocity判断为空和null</h4>
+
+<p><br />
+<code>$!item.name.isNull()</code>    是否为null</p>
+
+<p><code>$!item.name.isNotNull()</code>  是否不为null</p>
+
+<p><br />
+<code>#if(!$!item.name)</code>    如果不为空</p>
+
+<p><code>#if($!item.name)</code>     如果为空</p>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
+            <li class="prev"><a href="/2012/工作/exception.html" title="异常">&larr; Previous</a></li>
           
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/box.html" title="java自动装箱和拆箱">Next &rarr;</a></li>
+            <li class="next"><a href="/2012/工作/proxy.html" title="代理、动态代理">Next &rarr;</a></li>
           
           
         </ul>
@@ -129,13 +147,13 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-23</span></div>
+    <div class="date"><span>2012-09-12</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
     
       <li>
-  <a href="/categories/#java%E5%9F%BA%E7%A1%80-ref">java基础 <span>6</span></a>
+  <a href="/categories/#%E6%A8%A1%E6%9D%BF%E6%B8%B2%E6%9F%93-ref">模板渲染 <span>1</span></a>
 </li>
     
     </ul>
@@ -144,7 +162,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#%E6%95%B0%E7%BB%84-ref">数组 <span>1</span></a>
+  <a href="/tags/#velocity-ref">velocity <span>1</span></a>
 </li>
     
     </ul>

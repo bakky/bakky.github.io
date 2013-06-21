@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>数组的trimToSize方法</title>
+    <title>异常</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,30 +80,51 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>数组的trimToSize方法 </h1>
+  <h1>异常 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p><br />
-- 一旦能确认数组列表的大小不再发生变化，就可以调用<code>trimToSize</code>方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用<code>trimToSize</code>.
-- 代码洁癖的人适用</p>
+    <ul>
+<li>异常都派生于Throwable类的一个实例。</li>
+<li>Throwable下有两个子类分支：Error和Exception</li>
+<li>Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现</li>
+<li>Exception下面又派生出两种异常分支：通常有程序导致的错误为RuntimeException，还有一类是IOException</li>
+</ul>
+
+<p>java可以声明已检查异常，告诉编译器可能会发生什么样的错误。例如读文件方法可以<code>throw FileNotFoundException</code>异常。已检查异常可以抛出多个。</p>
+
+<p>我们可以自定义一个派生于Exception或其子类的类</p>
+
+<p>再次抛出异常或异常链：</p>
+
+<p>这个可能大家在调用一些通用的模块的时候会发现它的异常信息是被包装了一层的，我们需要调用
+对象的<code>getCause()</code>方法才能得到异常信息。</p>
+
+<p>因为每个子系统可能会产生同样的异常，当我们的上层系统捕捉到这种异常时我们并不知道是哪个底层子系统抛出的。这个时候我们就可以将原是一场捕获后重新进行包装然后抛出代表这个子系统的异常，但是原始的异常信息也不会丢失。如：</p>
+
+<pre><code>try{
+   access db
+}catch(SQLException e){
+   Throwable se = new MyAppException(&quot;db error&quot;);
+    se.initCause(e);
+    throw se;
+}
+</code></pre>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
+            <li class="prev"><a href="/2013/笔记/restruct.html" title="《重构》笔记（更新中）">&larr; Previous</a></li>
           
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/box.html" title="java自动装箱和拆箱">Next &rarr;</a></li>
+            <li class="next"><a href="/2012/工作/velocity.html" title="velocity渲染相关">Next &rarr;</a></li>
           
           
         </ul>
@@ -129,7 +150,7 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-23</span></div>
+    <div class="date"><span>2012-09-13</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
@@ -144,7 +165,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#%E6%95%B0%E7%BB%84-ref">数组 <span>1</span></a>
+  <a href="/tags/#exception-ref">exception <span>1</span></a>
 </li>
     
     </ul>

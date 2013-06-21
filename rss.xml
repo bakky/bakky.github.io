@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-20 10:54:25 +0800</pubDate>
+    <pubDate>2013-06-21 03:55:34 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -174,6 +174,67 @@
 &lt;ul&gt;
 &lt;li&gt;优秀的代码组织和性能间的权衡&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>异常</title>
+      <link>http://bakky.github.io/2012/工作/exception.html</link>
+      <pubDate>2012-09-13 12:00:00 +0800</pubDate>
+      <description>&lt;ul&gt;
+&lt;li&gt;异常都派生于Throwable类的一个实例。&lt;/li&gt;
+&lt;li&gt;Throwable下有两个子类分支：Error和Exception&lt;/li&gt;
+&lt;li&gt;Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现&lt;/li&gt;
+&lt;li&gt;Exception下面又派生出两种异常分支：通常有程序导致的错误为RuntimeException，还有一类是IOException&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;java可以声明已检查异常，告诉编译器可能会发生什么样的错误。例如读文件方法可以&lt;code&gt;throw FileNotFoundException&lt;/code&gt;异常。已检查异常可以抛出多个。&lt;/p&gt;
+
+&lt;p&gt;我们可以自定义一个派生于Exception或其子类的类&lt;/p&gt;
+
+&lt;p&gt;再次抛出异常或异常链：&lt;/p&gt;
+
+&lt;p&gt;这个可能大家在调用一些通用的模块的时候会发现它的异常信息是被包装了一层的，我们需要调用
+对象的&lt;code&gt;getCause()&lt;/code&gt;方法才能得到异常信息。&lt;/p&gt;
+
+&lt;p&gt;因为每个子系统可能会产生同样的异常，当我们的上层系统捕捉到这种异常时我们并不知道是哪个底层子系统抛出的。这个时候我们就可以将原是一场捕获后重新进行包装然后抛出代表这个子系统的异常，但是原始的异常信息也不会丢失。如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try{
+   access db
+}catch(SQLException e){
+   Throwable se = new MyAppException(&amp;quot;db error&amp;quot;);
+    se.initCause(e);
+    throw se;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
+      <title>velocity渲染相关</title>
+      <link>http://bakky.github.io/2012/工作/velocity.html</link>
+      <pubDate>2012-09-12 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4&gt;velocity中对象field的渲染&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;
+没看源码，但经过实验得知：&lt;/p&gt;
+
+&lt;p&gt;如:&lt;code&gt;$!xxx.name&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;引擎渲染的时候先去调用xxx对象的&lt;code&gt;getName()&lt;/code&gt;方法，如果有这个方法，就直接返回&lt;code&gt;getName()&lt;/code&gt;的结果，
+如果没有的话就回去调用xxx对象的&lt;code&gt;get(&amp;quot;name&amp;quot;)&lt;/code&gt;方法。&lt;/p&gt;
+
+&lt;h4&gt;velocity判断为空和null&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;code&gt;$!item.name.isNull()&lt;/code&gt;    是否为null&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$!item.name.isNotNull()&lt;/code&gt;  是否不为null&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;code&gt;#if(!$!item.name)&lt;/code&gt;    如果不为空&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;#if($!item.name)&lt;/code&gt;     如果为空&lt;/p&gt;
 </description>
     </item>
     <item>
