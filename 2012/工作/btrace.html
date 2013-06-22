@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>java自动装箱和拆箱</title>
+    <title>btrace用法补充</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,84 +80,112 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>java自动装箱和拆箱 </h1>
+  <h1>btrace用法补充 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p><br />
-如：</p>
+    <p><br /></p>
 
-<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
-list.add(3);    //1     自动打包（autowrapping）    
-int n = list.get(i)  //2   拆包
-</code></pre>
+<p>下载btrace并安装，将bin目录加入到path路径下
+/builder 文件夹下为类文件 ，最好反编译下，因为写脚本的过程中只能用里面提供的api</p>
 
-<p>步骤1，相当于list.add(new Integer(3))<br />
-步骤2，相当于nt n = list.get(i).intValue();</p>
+<p>/samples 文件夹下为一些例子，各种标签和属性的用法可以用来参考</p>
 
-<p>对于封装类型的==比较 需要注意：</p>
+<p><a href="http://kenai.com/projects/btrace/pages/UserGuide">btrace user guide</a></p>
 
-<pre><code>Integer a =100;
-Integer b = 100;           
-Integer c = 1000;
-Integer d = 1000;           
-int m = 1000;
-int n = 1000;        
-System. out.println(a==b);
-System. out.println(c==d);           
-System. out.println(m==n);
-</code></pre>
+<p>自己写了个统计在一段时间内方法执行时间的脚本：</p>
 
-<p>如上，返回结果分别为：</p>
+<p>运行类：</p>
 
-<pre><code>true
-false
-true
-</code></pre>
-
-<p>为什么会出现这样的结果呢？</p>
-
-<p><strong><em>自动打包规范要求boolean、byte、char&lt;=127,介于-128~127之间的short和int被包装到固定的对象中去</em></strong></p>
-
-<p>看源码，拿Integer举例:</p>
-
-<p>平常我们使用<code>Integer a = xxx；</code>的时候，Integer类实际上是调用的是<code>public static Integer valueOf(int i)</code>方法。这个方法是这样的:</p>
-
-<pre><code>public static Integer valueOf(int i){
-     final int offset = 128;
-     if(i&gt;= -128 &amp;&amp; i&lt;= 127){
-          return IntegerCache.cache[i+offset];
-     }
-     return new Integer(i); 
-}
-</code></pre>
-
-<p><code>IntegerCache.class:</code></p>
-
-<pre><code>static final Integer cache[] = new Integer[-(-128)+127+1];
-static {
-     for(int i=0;i&lt;cache.length;i++){
-          cache[i] = new Integer(i - 128);
+<pre><code>import java. util. Random;
+public class CaseObject {
+      private static int sleepTotalTime= 0;    
+      public boolean execute(int sleepTime) throws Exception {
+          System. out. println( &quot;sleep: &quot;+sleepTime );
+          sleepTotalTime+=sleepTime ;
+          Thread. sleep(sleepTime );
+          return true ;
+      }
+      public static void main(String [] args ) throws Exception {
+           Random random =new Random();
+           CaseObject object =new CaseObject();
+           boolean result=true ;
+           while(result ){
+              result= object. execute( random. nextInt( 1000));
+              Thread. sleep(1000 );
+           }
      }
 }
 </code></pre>
 
-<p>也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。</p>
+<p>btrace脚本：</p>
+
+<pre><code>import static com. sun. btrace. BTraceUtils.println ;
+import static com. sun. btrace. BTraceUtils.str ;
+import static com. sun. btrace. BTraceUtils.strcat ;
+import static com. sun. btrace. BTraceUtils.timeMillis ;
+import java. util. concurrent. atomic. AtomicInteger;
+import com. sun. btrace. BTraceUtils;
+import com. sun. btrace. annotations.BTrace ;
+import com. sun. btrace. annotations.Kind ;
+import com. sun. btrace. annotations.Location ;
+import com. sun. btrace. annotations.OnMethod ;
+import com. sun. btrace. annotations.OnTimer ;
+import com. sun. btrace. annotations.Return ;
+import com. sun. btrace. annotations.Self ;
+import com. sun. btrace. annotations.TLS;
+@BTrace
+public class TraceMethodArgsAndReturn {
+     private static Long total_time = 0L;
+     private static AtomicInteger ato = BTraceUtils.newAtomicInteger (0 );    
+     @TLS static long beginTime;
+       @OnMethod(
+          clazz= &quot;CaseObject&quot;,
+          method= &quot;execute&quot;
+       )
+       public static void traceExecuteBegin(){
+          beginTime=timeMillis ();
+       }     
+       @OnMethod(
+          clazz= &quot;CaseObject&quot;,
+          method= &quot;execute&quot;,
+          location= @Location( Kind. RETURN)
+       )
+       public static void traceExecute(@Self CaseObject object,int sleepTime , @Return boolean result){
+             println( strcat(&quot;sleepTime is:&quot; ,str(sleepTime)));
+             BTraceUtils.getAndIncrement (ato);
+             println( strcat(&quot;第&quot; ,strcat(str( BTraceUtils.get (ato)),&quot;次执行&quot;)));
+             total_time += timeMillis()-beginTime ;
+             println( strcat(strcat (&quot;此次执行时间是:&quot; ,str(timeMillis()- beginTime)),&quot;ms&quot; ));
+     }   
+       @OnTimer( 4000)
+       public static void print(){
+             println( strcat(&quot;总共耗时：&quot; ,str(total_time)));
+             println( strcat(&quot;总共执行&quot; ,strcat(str( BTraceUtils.get (ato)),&quot;次&quot;)));
+             float average = total_time.floatValue ()/BTraceUtils .get(ato);
+             println( strcat(&quot;平均执行时间:&quot; ,str(average)));
+       }
+}
+</code></pre>
+
+<p>记住，btrace脚本中只能用btrace提供的api，可能会有些不适应，所以需要反编译类文件查看用法。</p>
+
+<p>@TLS：标记为静态属性且为thread local</p>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
+            <li class="prev"><a href="/2013/笔记/restruct.html" title="《重构》笔记（更新中）">&larr; Previous</a></li>
           
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/shuzu.html" title="数组的trimToSize方法">Next &rarr;</a></li>
+            <li class="next"><a href="/2012/工作/result.html" title="定义一种返回结果">Next &rarr;</a></li>
           
           
         </ul>
@@ -183,13 +211,13 @@ static {
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-23</span></div>
+    <div class="date"><span>2012-10-25</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
     
       <li>
-  <a href="/categories/#java%E5%9F%BA%E7%A1%80-ref">java基础 <span>6</span></a>
+  <a href="/categories/#java%E5%B7%A5%E5%85%B7-ref">java工具 <span>1</span></a>
 </li>
     
     </ul>
@@ -198,7 +226,7 @@ static {
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1-ref">装箱和拆箱 <span>1</span></a>
+  <a href="/tags/#btrace-ref">btrace <span>1</span></a>
 </li>
     
     </ul>

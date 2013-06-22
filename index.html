@@ -237,9 +237,153 @@
 		</div>
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/btrace.html">btrace用法补充</a> <span class="date">2012-10-25</span></h3>
+
+		  <p><br /></p>
+
+<p>下载btrace并安装，将bin目录加入到path路径下
+/builder 文件夹下为类文件 ，最好反编译下，因为写脚本的过程中只能用里面提供的api</p>
+
+<p>/samples 文件夹下为一些例子，各种标签和属性的用法可以用来参考</p>
+
+<p><a href="http://kenai.com/projects/btrace/pages/UserGuide">btrace user guide</a></p>
+
+<p>自己写了个统计在一段时间内方法执行时间的脚本：</p>
+
+<p>运行类：</p>
+
+<pre><code>import java. util. Random;
+public class CaseObject {
+      private static int sleepTotalTime= 0;    
+      public boolean execute(int sleepTime) throws Exception {
+          System. out. println( &quot;sleep: &quot;+sleepTime );
+          sleepTotalTime+=sleepTime ;
+          Thread. sleep(sleepTime );
+          return true ;
+      }
+      public static void main(String [] args ) throws Exception {
+           Random random =new Random();
+           CaseObject object =new CaseObject();
+           boolean result=true ;
+           while(result ){
+              result= object. execute( random. nextInt( 1000));
+              Thread. sleep(1000 );
+           }
+     }
+}
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/btrace.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/result.html">定义一种返回结果</a> <span class="date">2012-10-11</span></h3>
+
+		  <p><br /></p>
+
+<pre><code>public class Result &lt;T&gt; {
+     private boolean isSuccess ;
+     private String message;
+     private T result ;     
+     /**
+      * 创建一个只包含结果的result
+      * @param isSuccess
+      */
+     public Result( boolean isSuccess){
+            this.setSuccess (isSuccess );
+     }     
+     /**
+      * 创建一个不带返回对象的result
+      * @param isSuccess
+      * @param message
+      */
+     public Result( boolean isSuccess, String message) {
+            this.isSuccess = isSuccess;
+            this.message = message;
+     }     
+     /**
+      * 创建一个带返回对象的result
+      * @param isSuccess
+      * @param message
+      */
+     public Result( boolean isSuccess, String message, T result ) {
+            this.isSuccess = isSuccess;
+            this.message = message;
+            this.result = result;
+     }     
+     /**
+      * 返回一个成功的result，包含要返回的对象
+      * @param result 结果对象
+      */
+     public Result( T result ){
+            this.isSuccess =true;
+            this.setResult (result );
+     }
+     /**
+      * 创建一个失败的result，不包含返回对象
+      * @param msg
+      * @return
+      */
+     public static Result &lt;Boolean &gt; fail( String msg ){
+            return new Result &lt;Boolean &gt;(false, msg);
+     }   
+     /**
+      * 创建一个成功的result，不包含返回对象
+      * @param msg
+      * @return
+      */
+     public static Result &lt;Boolean &gt; succeed( String msg ){
+            return new Result &lt;Boolean &gt;(true, msg);
+     }     
+     /**
+      * 创建一个成功的result，不包含返回对象
+      * @return
+      */
+     public static Result &lt;Boolean &gt; succeed(){
+            return new Result &lt;Boolean &gt;(true);
+     }     
+     public boolean isSuccess () {
+            return isSuccess ;
+     }
+     public Result&lt; T&gt; setSuccess(boolean isSuccess) {
+            this.isSuccess = isSuccess;
+            return this ;
+     }
+     public boolean isFailed (){
+            return !isSuccess;
+     }
+     public String getMessage() {
+            return message ;
+     }
+     public Result&lt; T&gt; setMessage(String message) {
+            this.message = message;
+            return this ;
+     }
+     public T getResult() {
+            return result ;
+     }
+     public Result&lt; T&gt; setResult(T result) {
+            this.result = result;
+            return this ;
+     }
+}
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/result.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2012/工作/exception.html">异常</a> <span class="date">2012-09-13</span></h3>
 
-		  <ul>
+		  <p><br /></p>
+
+<ul>
 <li>异常都派生于Throwable类的一个实例。</li>
 <li>Throwable下有两个子类分支：Error和Exception</li>
 <li>Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现</li>
@@ -257,14 +401,7 @@
 
 <p>因为每个子系统可能会产生同样的异常，当我们的上层系统捕捉到这种异常时我们并不知道是哪个底层子系统抛出的。这个时候我们就可以将原是一场捕获后重新进行包装然后抛出代表这个子系统的异常，但是原始的异常信息也不会丢失。如：</p>
 
-<pre><code>try{
-   access db
-}catch(SQLException e){
-   Throwable se = new MyAppException(&quot;db error&quot;);
-    se.initCause(e);
-    throw se;
-}
-</code></pre>
+<p></p>
 
 
 		  <div class="more">
@@ -349,54 +486,6 @@
 
 		  <div class="more">
 		    <a href="/2012/工作/empty.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/shuzu.html">数组的trimToSize方法</a> <span class="date">2012-08-23</span></h3>
-
-		  <p><br />
-- 一旦能确认数组列表的大小不再发生变化，就可以调用<code>trimToSize</code>方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用<code>trimToSize</code>.
-- 代码洁癖的人适用</p>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/shuzu.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/box.html">java自动装箱和拆箱</a> <span class="date">2012-08-23</span></h3>
-
-		  <p><br />
-如：</p>
-
-<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
-list.add(3);    //1     自动打包（autowrapping）    
-int n = list.get(i)  //2   拆包
-</code></pre>
-
-<p>步骤1，相当于list.add(new Integer(3))<br />
-步骤2，相当于nt n = list.get(i).intValue();</p>
-
-<p>对于封装类型的==比较 需要注意：</p>
-
-<pre><code>Integer a =100;
-Integer b = 100;           
-Integer c = 1000;
-Integer d = 1000;           
-int m = 1000;
-int n = 1000;        
-System. out.println(a==b);
-System. out.println(c==d);           
-System. out.println(m==n);
-</code></pre>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/box.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		

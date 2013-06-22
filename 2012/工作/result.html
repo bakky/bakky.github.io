@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>java自动装箱和拆箱</title>
+    <title>定义一种返回结果</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,84 +80,114 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>java自动装箱和拆箱 </h1>
+  <h1>定义一种返回结果 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p><br />
-如：</p>
+    <p><br /></p>
 
-<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
-list.add(3);    //1     自动打包（autowrapping）    
-int n = list.get(i)  //2   拆包
-</code></pre>
-
-<p>步骤1，相当于list.add(new Integer(3))<br />
-步骤2，相当于nt n = list.get(i).intValue();</p>
-
-<p>对于封装类型的==比较 需要注意：</p>
-
-<pre><code>Integer a =100;
-Integer b = 100;           
-Integer c = 1000;
-Integer d = 1000;           
-int m = 1000;
-int n = 1000;        
-System. out.println(a==b);
-System. out.println(c==d);           
-System. out.println(m==n);
-</code></pre>
-
-<p>如上，返回结果分别为：</p>
-
-<pre><code>true
-false
-true
-</code></pre>
-
-<p>为什么会出现这样的结果呢？</p>
-
-<p><strong><em>自动打包规范要求boolean、byte、char&lt;=127,介于-128~127之间的short和int被包装到固定的对象中去</em></strong></p>
-
-<p>看源码，拿Integer举例:</p>
-
-<p>平常我们使用<code>Integer a = xxx；</code>的时候，Integer类实际上是调用的是<code>public static Integer valueOf(int i)</code>方法。这个方法是这样的:</p>
-
-<pre><code>public static Integer valueOf(int i){
-     final int offset = 128;
-     if(i&gt;= -128 &amp;&amp; i&lt;= 127){
-          return IntegerCache.cache[i+offset];
+<pre><code>public class Result &lt;T&gt; {
+     private boolean isSuccess ;
+     private String message;
+     private T result ;     
+     /**
+      * 创建一个只包含结果的result
+      * @param isSuccess
+      */
+     public Result( boolean isSuccess){
+            this.setSuccess (isSuccess );
+     }     
+     /**
+      * 创建一个不带返回对象的result
+      * @param isSuccess
+      * @param message
+      */
+     public Result( boolean isSuccess, String message) {
+            this.isSuccess = isSuccess;
+            this.message = message;
+     }     
+     /**
+      * 创建一个带返回对象的result
+      * @param isSuccess
+      * @param message
+      */
+     public Result( boolean isSuccess, String message, T result ) {
+            this.isSuccess = isSuccess;
+            this.message = message;
+            this.result = result;
+     }     
+     /**
+      * 返回一个成功的result，包含要返回的对象
+      * @param result 结果对象
+      */
+     public Result( T result ){
+            this.isSuccess =true;
+            this.setResult (result );
      }
-     return new Integer(i); 
+     /**
+      * 创建一个失败的result，不包含返回对象
+      * @param msg
+      * @return
+      */
+     public static Result &lt;Boolean &gt; fail( String msg ){
+            return new Result &lt;Boolean &gt;(false, msg);
+     }   
+     /**
+      * 创建一个成功的result，不包含返回对象
+      * @param msg
+      * @return
+      */
+     public static Result &lt;Boolean &gt; succeed( String msg ){
+            return new Result &lt;Boolean &gt;(true, msg);
+     }     
+     /**
+      * 创建一个成功的result，不包含返回对象
+      * @return
+      */
+     public static Result &lt;Boolean &gt; succeed(){
+            return new Result &lt;Boolean &gt;(true);
+     }     
+     public boolean isSuccess () {
+            return isSuccess ;
+     }
+     public Result&lt; T&gt; setSuccess(boolean isSuccess) {
+            this.isSuccess = isSuccess;
+            return this ;
+     }
+     public boolean isFailed (){
+            return !isSuccess;
+     }
+     public String getMessage() {
+            return message ;
+     }
+     public Result&lt; T&gt; setMessage(String message) {
+            this.message = message;
+            return this ;
+     }
+     public T getResult() {
+            return result ;
+     }
+     public Result&lt; T&gt; setResult(T result) {
+            this.result = result;
+            return this ;
+     }
 }
 </code></pre>
-
-<p><code>IntegerCache.class:</code></p>
-
-<pre><code>static final Integer cache[] = new Integer[-(-128)+127+1];
-static {
-     for(int i=0;i&lt;cache.length;i++){
-          cache[i] = new Integer(i - 128);
-     }
-}
-</code></pre>
-
-<p>也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。</p>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
+            <li class="prev"><a href="/2012/工作/btrace.html" title="btrace用法补充">&larr; Previous</a></li>
           
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/shuzu.html" title="数组的trimToSize方法">Next &rarr;</a></li>
+            <li class="next"><a href="/2012/工作/exception.html" title="异常">Next &rarr;</a></li>
           
           
         </ul>
@@ -183,13 +213,13 @@ static {
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-23</span></div>
+    <div class="date"><span>2012-10-11</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
     
       <li>
-  <a href="/categories/#java%E5%9F%BA%E7%A1%80-ref">java基础 <span>6</span></a>
+  <a href="/categories/#%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83-ref">代码规范 <span>1</span></a>
 </li>
     
     </ul>
@@ -198,7 +228,7 @@ static {
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1-ref">装箱和拆箱 <span>1</span></a>
+  <a href="/tags/#clean-code-ref">clean code <span>1</span></a>
 </li>
     
     </ul>

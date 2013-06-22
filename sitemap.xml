@@ -24,6 +24,16 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
+		<loc>http://bakky.github.io/2012/工作/btrace.html</loc>
+		<lastmod>2012-10-25</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://bakky.github.io/2012/工作/result.html</loc>
+		<lastmod>2012-10-11</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://bakky.github.io/2012/工作/exception.html</loc>
 		<lastmod>2012-09-13</lastmod>
 		<changefreq>weekly</changefreq>
@@ -44,12 +54,12 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://bakky.github.io/2012/工作/shuzu.html</loc>
+		<loc>http://bakky.github.io/2012/工作/box.html</loc>
 		<lastmod>2012-08-23</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://bakky.github.io/2012/工作/box.html</loc>
+		<loc>http://bakky.github.io/2012/工作/shuzu.html</loc>
 		<lastmod>2012-08-23</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>

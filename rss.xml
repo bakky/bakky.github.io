@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-21 03:55:34 +0800</pubDate>
+    <pubDate>2013-06-22 07:23:10 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -177,10 +177,200 @@
 </description>
     </item>
     <item>
+      <title>btrace用法补充</title>
+      <link>http://bakky.github.io/2012/工作/btrace.html</link>
+      <pubDate>2012-10-25 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;下载btrace并安装，将bin目录加入到path路径下
+/builder 文件夹下为类文件 ，最好反编译下，因为写脚本的过程中只能用里面提供的api&lt;/p&gt;
+
+&lt;p&gt;/samples 文件夹下为一些例子，各种标签和属性的用法可以用来参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://kenai.com/projects/btrace/pages/UserGuide&#34;&gt;btrace user guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;自己写了个统计在一段时间内方法执行时间的脚本：&lt;/p&gt;
+
+&lt;p&gt;运行类：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import java. util. Random;
+public class CaseObject {
+      private static int sleepTotalTime= 0;    
+      public boolean execute(int sleepTime) throws Exception {
+          System. out. println( &amp;quot;sleep: &amp;quot;+sleepTime );
+          sleepTotalTime+=sleepTime ;
+          Thread. sleep(sleepTime );
+          return true ;
+      }
+      public static void main(String [] args ) throws Exception {
+           Random random =new Random();
+           CaseObject object =new CaseObject();
+           boolean result=true ;
+           while(result ){
+              result= object. execute( random. nextInt( 1000));
+              Thread. sleep(1000 );
+           }
+     }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;btrace脚本：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import static com. sun. btrace. BTraceUtils.println ;
+import static com. sun. btrace. BTraceUtils.str ;
+import static com. sun. btrace. BTraceUtils.strcat ;
+import static com. sun. btrace. BTraceUtils.timeMillis ;
+import java. util. concurrent. atomic. AtomicInteger;
+import com. sun. btrace. BTraceUtils;
+import com. sun. btrace. annotations.BTrace ;
+import com. sun. btrace. annotations.Kind ;
+import com. sun. btrace. annotations.Location ;
+import com. sun. btrace. annotations.OnMethod ;
+import com. sun. btrace. annotations.OnTimer ;
+import com. sun. btrace. annotations.Return ;
+import com. sun. btrace. annotations.Self ;
+import com. sun. btrace. annotations.TLS;
+@BTrace
+public class TraceMethodArgsAndReturn {
+     private static Long total_time = 0L;
+     private static AtomicInteger ato = BTraceUtils.newAtomicInteger (0 );    
+     @TLS static long beginTime;
+       @OnMethod(
+          clazz= &amp;quot;CaseObject&amp;quot;,
+          method= &amp;quot;execute&amp;quot;
+       )
+       public static void traceExecuteBegin(){
+          beginTime=timeMillis ();
+       }     
+       @OnMethod(
+          clazz= &amp;quot;CaseObject&amp;quot;,
+          method= &amp;quot;execute&amp;quot;,
+          location= @Location( Kind. RETURN)
+       )
+       public static void traceExecute(@Self CaseObject object,int sleepTime , @Return boolean result){
+             println( strcat(&amp;quot;sleepTime is:&amp;quot; ,str(sleepTime)));
+             BTraceUtils.getAndIncrement (ato);
+             println( strcat(&amp;quot;第&amp;quot; ,strcat(str( BTraceUtils.get (ato)),&amp;quot;次执行&amp;quot;)));
+             total_time += timeMillis()-beginTime ;
+             println( strcat(strcat (&amp;quot;此次执行时间是:&amp;quot; ,str(timeMillis()- beginTime)),&amp;quot;ms&amp;quot; ));
+     }   
+       @OnTimer( 4000)
+       public static void print(){
+             println( strcat(&amp;quot;总共耗时：&amp;quot; ,str(total_time)));
+             println( strcat(&amp;quot;总共执行&amp;quot; ,strcat(str( BTraceUtils.get (ato)),&amp;quot;次&amp;quot;)));
+             float average = total_time.floatValue ()/BTraceUtils .get(ato);
+             println( strcat(&amp;quot;平均执行时间:&amp;quot; ,str(average)));
+       }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;记住，btrace脚本中只能用btrace提供的api，可能会有些不适应，所以需要反编译类文件查看用法。&lt;/p&gt;
+
+&lt;p&gt;@TLS：标记为静态属性且为thread local&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>定义一种返回结果</title>
+      <link>http://bakky.github.io/2012/工作/result.html</link>
+      <pubDate>2012-10-11 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Result &amp;lt;T&amp;gt; {
+     private boolean isSuccess ;
+     private String message;
+     private T result ;     
+     /**
+      * 创建一个只包含结果的result
+      * @param isSuccess
+      */
+     public Result( boolean isSuccess){
+            this.setSuccess (isSuccess );
+     }     
+     /**
+      * 创建一个不带返回对象的result
+      * @param isSuccess
+      * @param message
+      */
+     public Result( boolean isSuccess, String message) {
+            this.isSuccess = isSuccess;
+            this.message = message;
+     }     
+     /**
+      * 创建一个带返回对象的result
+      * @param isSuccess
+      * @param message
+      */
+     public Result( boolean isSuccess, String message, T result ) {
+            this.isSuccess = isSuccess;
+            this.message = message;
+            this.result = result;
+     }     
+     /**
+      * 返回一个成功的result，包含要返回的对象
+      * @param result 结果对象
+      */
+     public Result( T result ){
+            this.isSuccess =true;
+            this.setResult (result );
+     }
+     /**
+      * 创建一个失败的result，不包含返回对象
+      * @param msg
+      * @return
+      */
+     public static Result &amp;lt;Boolean &amp;gt; fail( String msg ){
+            return new Result &amp;lt;Boolean &amp;gt;(false, msg);
+     }   
+     /**
+      * 创建一个成功的result，不包含返回对象
+      * @param msg
+      * @return
+      */
+     public static Result &amp;lt;Boolean &amp;gt; succeed( String msg ){
+            return new Result &amp;lt;Boolean &amp;gt;(true, msg);
+     }     
+     /**
+      * 创建一个成功的result，不包含返回对象
+      * @return
+      */
+     public static Result &amp;lt;Boolean &amp;gt; succeed(){
+            return new Result &amp;lt;Boolean &amp;gt;(true);
+     }     
+     public boolean isSuccess () {
+            return isSuccess ;
+     }
+     public Result&amp;lt; T&amp;gt; setSuccess(boolean isSuccess) {
+            this.isSuccess = isSuccess;
+            return this ;
+     }
+     public boolean isFailed (){
+            return !isSuccess;
+     }
+     public String getMessage() {
+            return message ;
+     }
+     public Result&amp;lt; T&amp;gt; setMessage(String message) {
+            this.message = message;
+            return this ;
+     }
+     public T getResult() {
+            return result ;
+     }
+     public Result&amp;lt; T&amp;gt; setResult(T result) {
+            this.result = result;
+            return this ;
+     }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
       <title>异常</title>
       <link>http://bakky.github.io/2012/工作/exception.html</link>
       <pubDate>2012-09-13 12:00:00 +0800</pubDate>
-      <description>&lt;ul&gt;
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
 &lt;li&gt;异常都派生于Throwable类的一个实例。&lt;/li&gt;
 &lt;li&gt;Throwable下有两个子类分支：Error和Exception&lt;/li&gt;
 &lt;li&gt;Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现&lt;/li&gt;
@@ -336,17 +526,6 @@
 </description>
     </item>
     <item>
-      <title>数组的trimToSize方法</title>
-      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
-      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
-- 代码洁癖的人适用&lt;/p&gt;
-</description>
-    </item>
-    <item>
       <title>java自动装箱和拆箱</title>
       <link>http://bakky.github.io/2012/工作/box.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
@@ -409,6 +588,17 @@ static {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>数组的trimToSize方法</title>
+      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
+      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;
+- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
+- 代码洁癖的人适用&lt;/p&gt;
 </description>
     </item>
     <item>
