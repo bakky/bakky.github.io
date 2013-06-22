@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-23 12:05:22 +0800</pubDate>
+    <pubDate>2013-06-23 12:11:11 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -86,7 +86,7 @@
 
 &lt;p&gt;2013-06-23&lt;/p&gt;
 
-&lt;p&gt;半夜，女神在线，又去聊她，说了两句后，女神又以“下了 我去洗洗睡了”结束了&lt;/p&gt;
+&lt;p&gt;半夜，女神在线，又去聊她，说了两句后，女神又以“下了 我去洗洗睡了”结束了,随机QQ头像黑了，过了一会，竟然发现女神的微博还是在线的。。。呵呵 看来女神真是不想和我多说话了。。。&lt;/p&gt;
 
 &lt;p&gt;呵呵。。。呵呵。。。&lt;/p&gt;
 </description>
@@ -532,6 +532,17 @@ public class TraceMethodArgsAndReturn {
 </description>
     </item>
     <item>
+      <title>数组的trimToSize方法</title>
+      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
+      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;
+- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
+- 代码洁癖的人适用&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>java自动装箱和拆箱</title>
       <link>http://bakky.github.io/2012/工作/box.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
@@ -594,17 +605,6 @@ static {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>数组的trimToSize方法</title>
-      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
-      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
-- 代码洁癖的人适用&lt;/p&gt;
 </description>
     </item>
     <item>
