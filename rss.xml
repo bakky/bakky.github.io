@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-23 12:13:37 +0800</pubDate>
+    <pubDate>2013-06-23 11:37:22 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -48,6 +48,47 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;将输入流写到输出流中使用了apache的IOUtils工具包，注意不要将服务端获取输入流单独提取方法，因为有个释放链接的过程，而对接的时候，连接是不能被关闭的。&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>追女神日记（更新中）</title>
+      <link>http://bakky.github.io/2013/生活/live.html</link>
+      <pubDate>2013-06-06 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;2013-06-06&lt;/p&gt;
+
+&lt;p&gt;鼓起勇气找女神qq聊天，很平淡的说了些，女神用女神惯有的方式中断了聊天：我要去洗洗睡了&lt;/p&gt;
+
+&lt;p&gt;呵呵 呵呵…(悲剧了)&lt;/p&gt;
+
+&lt;p&gt;2013-06-07&lt;/p&gt;
+
+&lt;p&gt;继续厚着脸皮找女神聊天，刚开始聊的挺严肃的，后来直入主题：你有男朋友么？女神扭扭捏捏，我猜说没有，女神说是准的，我以为说我猜准了，就说那可以追她了。结果女神的意思是准男朋友的阶段，囧，心理很失落，但还是向她表达喜欢之情，女神说谢谢。然后我呢 迅速转变角色，以一个过来人身份告诉了些爱情中应该注意的（我特么真贱啊），女神夸我人真好，（哭），事后想起来，准的又不是真的，tnnd，看来厚脸皮神功还没练到位。。。&lt;/p&gt;
+
+&lt;p&gt;2013-06-14&lt;/p&gt;
+
+&lt;p&gt;中间聊了两次，每次一问一答收场，昨天女神豆瓣发了一条心情：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;不得已撒的谎越来越大，逞强显得再怎么无力也得兜住，不管怎样先熬过这阵再说。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;不知道什么意思，索性问了下，女神回答：额…&lt;/p&gt;
+
+&lt;p&gt;以为女神会接着说的，但是没有了下文，过了一会，又扯了下其它的，女神仿佛不是很想和我说话。。。遂作罢&lt;/p&gt;
+
+&lt;p&gt;2013-06-15&lt;/p&gt;
+
+&lt;p&gt;女神这几天由于毕业来临 会传很多照片 总有一大帮男的在下面留言 今天不知道为什么淡然了 感觉急也急不来的 等女神过了毕业季再说吧 专心工作&lt;/p&gt;
+
+&lt;p&gt;晚上收拾东西，看到和前任女友在一起时玩时留下来的一大堆火车票、电影票、飞机票 突然莫名的特别感伤。。。&lt;/p&gt;
+
+&lt;p&gt;2013-06-23&lt;/p&gt;
+
+&lt;p&gt;半夜，女神在线，又去聊她，说了两句后，女神又以“下了 我去洗洗睡了”结束了,随机QQ头像黑了，过了一会，竟然发现女神的微博还是在线的。。。呵呵 看来女神真是不想和我多说话了。。。&lt;/p&gt;
+
+&lt;p&gt;呵呵。。。呵呵。。。&lt;/p&gt;
 </description>
     </item>
     <item>
@@ -491,6 +532,17 @@ public class TraceMethodArgsAndReturn {
 </description>
     </item>
     <item>
+      <title>数组的trimToSize方法</title>
+      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
+      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;
+- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
+- 代码洁癖的人适用&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>java自动装箱和拆箱</title>
       <link>http://bakky.github.io/2012/工作/box.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
@@ -553,17 +605,6 @@ static {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>数组的trimToSize方法</title>
-      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
-      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
-- 代码洁癖的人适用&lt;/p&gt;
 </description>
     </item>
     <item>
