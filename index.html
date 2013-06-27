@@ -104,27 +104,20 @@
       HttpMethod method = null;
       HttpResponse response;
       JSONObject res = null;
-      int start = creator.indexOf(&quot;(&quot;);
-      int end = creator.indexOf(&quot;)&quot;);
-      String workId = creator.substring(start+1,end);
       try {
-           getString.append(applyManager.getGoldServiceApi())
-                .append(&quot;getUserGroupList.do?appName=hermes&amp;appPassword=xxx&quot;)
-                .append(&quot;&amp;groupId=&quot;).append(groupid)
-                .append(&quot;&amp;workId=&quot;).append(workId);
+            //url拼接
+
            //发起请求
            String url = getString.toString();
            HttpGet get = new HttpGet(url);
-           sendlog.warn(&quot;请求黄金策url:&quot;+url);
            response = client.execute(get);
            InputStream input = response.getEntity().getContent();
            File newFile = new File(tfsPath+&quot;/&quot;+new Date().getTime()+&quot;_&quot;+groupid+&quot;.txt&quot;);
            OutputStream output = new FileOutputStream(newFile);
            IOUtils.copy(input, output);
-           sendlog.warn(&quot;从黄金策拉的数据保存路径:&quot;+newFile.getPath());
            return newFile.getPath();
       } catch (Exception e) {
-           log.error(&quot;从黄金策拉取数据出错:&quot;+getString+&quot;[res:]&quot;+res, e);
+           log.error(&quot;error:&quot;+getString+&quot;[res:]&quot;+res, e);
            return null;
       }finally{
            //释放连接
@@ -136,37 +129,6 @@
 
 		  <div class="more">
 		    <a href="/2013/工作/stream.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2013/生活/live.html">追女神日记（更新中）</a> <span class="date">2013-06-06</span></h3>
-
-		  <p><br /></p>
-
-<p>2013-06-06</p>
-
-<p>鼓起勇气找女神qq聊天，很平淡的说了些，女神用女神惯有的方式中断了聊天：我要去洗洗睡了</p>
-
-<p>呵呵 呵呵…(悲剧了)</p>
-
-<p>2013-06-07</p>
-
-<p>继续厚着脸皮找女神聊天，刚开始聊的挺严肃的，后来直入主题：你有男朋友么？女神扭扭捏捏，我猜说没有，女神说是准的，我以为说我猜准了，就说那可以追她了。结果女神的意思是准男朋友的阶段，囧，心理很失落，但还是向她表达喜欢之情，女神说谢谢。然后我呢 迅速转变角色，以一个过来人身份告诉了些爱情中应该注意的（我特么真贱啊），女神夸我人真好，（哭），事后想起来，准的又不是真的，tnnd，看来厚脸皮神功还没练到位。。。</p>
-
-<p>2013-06-14</p>
-
-<p>中间聊了两次，每次一问一答收场，昨天女神豆瓣发了一条心情：</p>
-
-<blockquote>
-<p>不得已撒的谎越来越大，逞强显得再怎么无力也得兜住，不管怎样先熬过这阵再说。</p>
-</blockquote>
-
-<p>不知道什么意思，索性问了下，女神回答：额…</p>
-
-
-		  <div class="more">
-		    <a href="/2013/生活/live.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		
@@ -486,6 +448,39 @@ public class CaseObject {
 
 		  <div class="more">
 		    <a href="/2012/工作/empty.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2012/工作/box.html">java自动装箱和拆箱</a> <span class="date">2012-08-23</span></h3>
+
+		  <p><br />
+如：</p>
+
+<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+list.add(3);    //1     自动打包（autowrapping）    
+int n = list.get(i)  //2   拆包
+</code></pre>
+
+<p>步骤1，相当于list.add(new Integer(3))<br />
+步骤2，相当于nt n = list.get(i).intValue();</p>
+
+<p>对于封装类型的==比较 需要注意：</p>
+
+<pre><code>Integer a =100;
+Integer b = 100;           
+Integer c = 1000;
+Integer d = 1000;           
+int m = 1000;
+int n = 1000;        
+System. out.println(a==b);
+System. out.println(c==d);           
+System. out.println(m==n);
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2012/工作/box.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		

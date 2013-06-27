@@ -95,27 +95,20 @@
       HttpMethod method = null;
       HttpResponse response;
       JSONObject res = null;
-      int start = creator.indexOf(&quot;(&quot;);
-      int end = creator.indexOf(&quot;)&quot;);
-      String workId = creator.substring(start+1,end);
       try {
-           getString.append(applyManager.getGoldServiceApi())
-                .append(&quot;getUserGroupList.do?appName=hermes&amp;appPassword=xxx&quot;)
-                .append(&quot;&amp;groupId=&quot;).append(groupid)
-                .append(&quot;&amp;workId=&quot;).append(workId);
+            //url拼接
+
            //发起请求
            String url = getString.toString();
            HttpGet get = new HttpGet(url);
-           sendlog.warn(&quot;请求黄金策url:&quot;+url);
            response = client.execute(get);
            InputStream input = response.getEntity().getContent();
            File newFile = new File(tfsPath+&quot;/&quot;+new Date().getTime()+&quot;_&quot;+groupid+&quot;.txt&quot;);
            OutputStream output = new FileOutputStream(newFile);
            IOUtils.copy(input, output);
-           sendlog.warn(&quot;从黄金策拉的数据保存路径:&quot;+newFile.getPath());
            return newFile.getPath();
       } catch (Exception e) {
-           log.error(&quot;从黄金策拉取数据出错:&quot;+getString+&quot;[res:]&quot;+res, e);
+           log.error(&quot;error:&quot;+getString+&quot;[res:]&quot;+res, e);
            return null;
       }finally{
            //释放连接
@@ -138,7 +131,7 @@
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2013/生活/live.html" title="追女神日记（更新中）">Next &rarr;</a></li>
+            <li class="next"><a href="/2013/笔记/effective_java.html" title="《effective java》笔记（更新中）">Next &rarr;</a></li>
           
           
         </ul>
