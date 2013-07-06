@@ -173,30 +173,19 @@
     </ul>
     <br>
     <ul>
-      <script type="text/javascript" charset="utf-8">
-      (function(){
-        var _w = 16 , _h = 16;
-        var param = {
-          url:location.href,
-          type:'3',
-          count:'', /**是否显示分享数，1显示(可选)*/
-          appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-          title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
-          pic:'', /**分享图片的路径(可选)*/
-          ralateUid:'', /**关联用户的UID，分享微博会@该用户(可选)*/
-          language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
-          dpc:1
-        }
-        var temp = [];
-        for( var p in param ){
-          temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
-        }
-        document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://service.weibo.com/staticjs/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
-      })()
-      </script>
-    </ul>
-    <ul>
-      <a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><img src="http://img2.douban.com/pics/fw2douban_s.png" alt="分享到豆瓣" /></a>
+     <!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+    <!-- <span class="bds_more">分享到：</span> -->
+    <a class="bds_tsina"></a>
+    <a class="bds_qzone"></a>
+    <a class="bds_douban"></a>
+    </div>
+    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6751105" ></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+    </script>
+<!-- Baidu Button END -->
     </ul>
   </div>
 </div>

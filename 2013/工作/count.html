@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>定义一种返回结果</title>
+    <title>CountDownLatch与CyclicBarrier的使用和区别</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,114 +80,99 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>定义一种返回结果 </h1>
+  <h1>CountDownLatch与CyclicBarrier的使用和区别 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
     <p><br /></p>
 
-<pre><code>public class Result &lt;T&gt; {
-     private boolean isSuccess ;
-     private String message;
-     private T result ;     
-     /**
-      * 创建一个只包含结果的result
-      * @param isSuccess
-      */
-     public Result( boolean isSuccess){
-            this.setSuccess (isSuccess );
-     }     
-     /**
-      * 创建一个不带返回对象的result
-      * @param isSuccess
-      * @param message
-      */
-     public Result( boolean isSuccess, String message) {
-            this.isSuccess = isSuccess;
-            this.message = message;
-     }     
-     /**
-      * 创建一个带返回对象的result
-      * @param isSuccess
-      * @param message
-      */
-     public Result( boolean isSuccess, String message, T result ) {
-            this.isSuccess = isSuccess;
-            this.message = message;
-            this.result = result;
-     }     
-     /**
-      * 返回一个成功的result，包含要返回的对象
-      * @param result 结果对象
-      */
-     public Result( T result ){
-            this.isSuccess =true;
-            this.setResult (result );
-     }
-     /**
-      * 创建一个失败的result，不包含返回对象
-      * @param msg
-      * @return
-      */
-     public static Result &lt;Boolean &gt; fail( String msg ){
-            return new Result &lt;Boolean &gt;(false, msg);
-     }   
-     /**
-      * 创建一个成功的result，不包含返回对象
-      * @param msg
-      * @return
-      */
-     public static Result &lt;Boolean &gt; succeed( String msg ){
-            return new Result &lt;Boolean &gt;(true, msg);
-     }     
-     /**
-      * 创建一个成功的result，不包含返回对象
-      * @return
-      */
-     public static Result &lt;Boolean &gt; succeed(){
-            return new Result &lt;Boolean &gt;(true);
-     }     
-     public boolean isSuccess () {
-            return isSuccess ;
-     }
-     public Result&lt; T&gt; setSuccess(boolean isSuccess) {
-            this.isSuccess = isSuccess;
-            return this ;
-     }
-     public boolean isFailed (){
-            return !isSuccess;
-     }
-     public String getMessage() {
-            return message ;
-     }
-     public Result&lt; T&gt; setMessage(String message) {
-            this.message = message;
-            return this ;
-     }
-     public T getResult() {
-            return result ;
-     }
-     public Result&lt; T&gt; setResult(T result) {
-            this.result = result;
-            return this ;
-     }
+<h2><a style="display: block;" name="`countdownlatch`" href="#`countdownlatch`"></a><code>CountDownLatch</code></h2>
+
+<p><br>
+应用场景：有一个任务A想要往下执行，但必须要等到其他的任务B、C执行完毕后才可以继续往下执行。</p>
+
+<p>使用方式：让任务A调用一个CountDownLatch对象的<code>await()</code>方法，其他的任务执行完自己的任务后调用同一个CountDownLatch对象上的<code>countDown()</code>方法，任务A将一直阻塞等待，直到这个CountDownLatch对象的计数值减到0为止。</p>
+
+<p>那么CountDownLatch内部是如何实现让这个任务一直阻塞等待一直到所有其它任务执行完的呢？</p>
+
+<p>粗略的想下，原理可能是初始化一个值为所有任务个数的原子计数器，当前线程一直循环等待，执行下去的条件是全局计数器值为0，其它任务线程执行完后全局计数器减1</p>
+
+<p>来看看其源码：<code>await()</code>方法和<code>countDown()</code>方法</p>
+
+<pre><code>private final Sync sync;
+public void await()
+            throws InterruptedException {
+    sync.acquireSharedInterruptibly(1);
+}
+public void countDown() {
+    sync.releaseShared(1);
 }
 </code></pre>
+
+<p>可以看到主要依赖sync这个对象，Sync是个内部类，其继承于<code>AbstractQueuedSynchronizer</code></p>
+
+<pre><code>private static final class Sync extends AbstractQueuedSynchronizer {
+    int getCount() {
+        return getState();
+    }
+    public int tryAcquireShared(int i) {
+        return getState() != 0 ? -1 : 1;
+    }
+    public boolean tryReleaseShared(int i) {
+        int j;
+        int k;
+        do {
+            j = getState();
+            if (j == 0)
+                return false;
+            k = j - 1;
+        } while (!compareAndSetState(j, k));
+        return k == 0;        
+        private static final long serialVersionUID = -1739299674L;
+        Sync(int i) {
+            setState(i);
+        }
+    }
+</code></pre>
+
+<p>阻塞的逻辑都在<code>AbstractQueuedSynchronizer</code>中，原理就是<code>await</code>时比较一下<code>state</code>（相当于count），如果满足了，则不阻塞（返回1），如果不满足，阻塞（返回-1）</p>
+
+<p><code>AbstractQueuedSynchronizer</code>没有用正常的<code>wait</code>，<code>notifyAll</code>，<code>lock</code>的阻塞等方法，阻塞做法需要深入研究，详情可以参看<a href="http://www.blogjava.net/xylz/archive/2010/07/09/325612.html">这篇博客</a></p>
+
+<p><code>tryReleaseShared</code>中采用CAS的操作减少计数</p>
+
+<h2><a style="display: block;" name="`cyclicbarrier`" href="#`cyclicbarrier`"></a><code>CyclicBarrier</code></h2>
+
+<p><br>
+使用和原理解析详见<a href="http://yhjhappy234.blog.163.com/blog/static/316328322013514112247947/">这篇博客</a></p>
+
+<h3>区别</h3>
+
+<p><br>
+<code>CountDownLatch</code> :</p>
+
+<p>一个线程(或者多个)， 等待另外N个线程完成某个事情之后才能执行。</p>
+
+<p><code>CyclicBarrier</code> :</p>
+
+<p>N个线程相互等待，任何一个线程完成之前，所有的线程都必须等待。</p>
+
+<p>对于<code>CountDownLatch</code>来说，重点是那个“一个线程”, 是它在等待， 而另外那N的线程在把“某个事情”做完之后可以继续等待，可以终止。而对于<code>CyclicBarrier</code>来说，重点是那N个线程，他们之间任何一个没有完成，所有的线程都必须等待。</p>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2012/工作/btrace.html" title="btrace用法补充">&larr; Previous</a></li>
           
+            <li class="prev disabled"><a>&larr; Previous</a></li>
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/exception.html" title="异常">Next &rarr;</a></li>
+            <li class="next"><a href="/2013/工作/stream.html" title="输入流和输出流对接">Next &rarr;</a></li>
           
           
         </ul>
@@ -213,13 +198,13 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-10-11</span></div>
+    <div class="date"><span>2013-07-06</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
     
       <li>
-  <a href="/categories/#%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83-ref">代码规范 <span>1</span></a>
+  <a href="/categories/#java%E5%9F%BA%E7%A1%80-%E5%A4%9A%E7%BA%BF%E7%A8%8B-ref">java基础 多线程 <span>1</span></a>
 </li>
     
     </ul>
@@ -228,7 +213,11 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#clean-code-ref">clean code <span>1</span></a>
+  <a href="/tags/#CountDownLatch-ref">CountDownLatch <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#CyclicBarrier-ref">CyclicBarrier <span>1</span></a>
 </li>
     
     </ul>

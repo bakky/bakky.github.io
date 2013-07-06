@@ -92,6 +92,40 @@
 	<div class="span8">
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2013/工作/count.html">CountDownLatch与CyclicBarrier的使用和区别</a> <span class="date">2013-07-06</span></h3>
+
+		  <p><br /></p>
+
+<h2><a style="display: block;" name="`countdownlatch`" href="#`countdownlatch`"></a><code>CountDownLatch</code></h2>
+
+<p><br>
+应用场景：有一个任务A想要往下执行，但必须要等到其他的任务B、C执行完毕后才可以继续往下执行。</p>
+
+<p>使用方式：让任务A调用一个CountDownLatch对象的<code>await()</code>方法，其他的任务执行完自己的任务后调用同一个CountDownLatch对象上的<code>countDown()</code>方法，任务A将一直阻塞等待，直到这个CountDownLatch对象的计数值减到0为止。</p>
+
+<p>那么CountDownLatch内部是如何实现让这个任务一直阻塞等待一直到所有其它任务执行完的呢？</p>
+
+<p>粗略的想下，原理可能是初始化一个值为所有任务个数的原子计数器，当前线程一直循环等待，执行下去的条件是全局计数器值为0，其它任务线程执行完后全局计数器减1</p>
+
+<p>来看看其源码：<code>await()</code>方法和<code>countDown()</code>方法</p>
+
+<pre><code>private final Sync sync;
+public void await()
+            throws InterruptedException {
+    sync.acquireSharedInterruptibly(1);
+}
+public void countDown() {
+    sync.releaseShared(1);
+}
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2013/工作/count.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2013/工作/stream.html">输入流和输出流对接</a> <span class="date">2013-06-18</span></h3>
 
 		  <p><br />
@@ -455,26 +489,6 @@ public class CaseObject {
 
 		  <div class="more">
 		    <a href="/2012/工作/proxy.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/empty.html">String和StringUtil的判断为空区别</a> <span class="date">2012-08-29</span></h3>
-
-		  <p><br />
-1.<code>str.isEmpty();return str==null||str.length()==0</code></p>
-
-<p>str为null,则抛出空指针异常</p>
-
-<p>2.<code>StringUtils.isEmpty(str)</code>返回true的条件是<code>str==null</code> 或 <code>str.length()==0</code>    null安全</p>
-
-<p>3.<code>StringUtils.isBlank(str)</code>返回true的条件是<code>str==null</code> 或 <code>str.length()==0</code> 或 由空白符(whitespace) 构成</p>
-
-<p>4.<code>StringUtils.trimToNull(str)</code>、<code>StringUtils.trimToEmpty(str)</code>  去掉字符串两端的控制符(control characters, char &lt;= 32) ,如果变为 null 或&rdquo;&ldquo;，则返回 null、&rdquo;&rdquo;</p>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/empty.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		
