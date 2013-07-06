@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-06-27 11:14:32 +0800</pubDate>
+    <pubDate>2013-07-06 02:11:25 +0800</pubDate>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
@@ -132,6 +132,29 @@
 &lt;ul&gt;
 &lt;li&gt;优秀的代码组织和性能间的权衡&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>【转】关于java中的移位操作 - 红旗飘飘 - 博客频道 - CSDN.NET</title>
+      <link>http://bakky.github.io/2013/工作/shift.html</link>
+      <pubDate>2013-05-07 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;在Think in Java中有这么一段话“对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。只有右侧的5个低位才会有用。这样可防止我们在一个int数里移动不切实际的位数。若对一个long值进行处理，最后得到的结果也是long。此时只会用到右侧的6个低位，防止移动超过long值里现成的位数。”&lt;/p&gt;
+
+&lt;p&gt;对上面那段话的理解是：移位操作符操作的运算对象是二进制的“位”，int类型是32位也就是2的5次幂 ！如果移32位以上，那么原来的数的信息会全部丢失，这样也就没有什么意义了！所以上面的“只有右侧的5个低位才会有用”说的是：移位操作符右端的那个数（化成二进制）的低5位才有用，即 X &amp;lt; &amp;lt;y; 是指y的低5位才有用，即不能大于32。 而对于long型也是同样的道理！&lt;/p&gt;
+
+&lt;p&gt;因此，如果对一个int 型，进行移位，X &amp;lt; &amp;lt;y; 当y小于32时，移位后的结果一般都在我们的预料当中；而如果y大于32时，由于移位超出了int所能表示的范围，这时就先把y化成二进制数，然后取该二进制数右端的低5位，再把这5位化成十进制，此时的这个十进制就是要对X移动的位数。&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int a=140;   
+a &amp;lt;&amp;lt; 34
+System.out.println(Integer.toBinaryString(a &amp;lt;&amp;lt; 34));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面那两个语句的执行过程是：先把a化成二进制数：10001100
+执行语句 a &amp;lt;&amp;lt; 34   对a左移32位时，先把 34化成二进制：100010，对该二进制数取右边5位，即00010，化成十进制数为2，所以实际上是对a左移两位。现在，地球人都会知道上面程序的输出结果是：1000110000&lt;/p&gt;
 </description>
     </item>
     <item>
@@ -484,6 +507,17 @@ public class TraceMethodArgsAndReturn {
 </description>
     </item>
     <item>
+      <title>数组的trimToSize方法</title>
+      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
+      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;
+- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
+法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
+- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
+- 代码洁癖的人适用&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>java自动装箱和拆箱</title>
       <link>http://bakky.github.io/2012/工作/box.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
@@ -546,17 +580,6 @@ static {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>数组的trimToSize方法</title>
-      <link>http://bakky.github.io/2012/工作/shuzu.html</link>
-      <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
-- 代码洁癖的人适用&lt;/p&gt;
 </description>
     </item>
     <item>

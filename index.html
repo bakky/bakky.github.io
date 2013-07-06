@@ -199,6 +199,33 @@
 		</div>
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2013/工作/shift.html">【转】关于java中的移位操作 - 红旗飘飘 - 博客频道 - CSDN.NET</a> <span class="date">2013-05-07</span></h3>
+
+		  <p><br /></p>
+
+<p>在Think in Java中有这么一段话“对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。只有右侧的5个低位才会有用。这样可防止我们在一个int数里移动不切实际的位数。若对一个long值进行处理，最后得到的结果也是long。此时只会用到右侧的6个低位，防止移动超过long值里现成的位数。”</p>
+
+<p>对上面那段话的理解是：移位操作符操作的运算对象是二进制的“位”，int类型是32位也就是2的5次幂 ！如果移32位以上，那么原来的数的信息会全部丢失，这样也就没有什么意义了！所以上面的“只有右侧的5个低位才会有用”说的是：移位操作符右端的那个数（化成二进制）的低5位才有用，即 X &lt; &lt;y; 是指y的低5位才有用，即不能大于32。 而对于long型也是同样的道理！</p>
+
+<p>因此，如果对一个int 型，进行移位，X &lt; &lt;y; 当y小于32时，移位后的结果一般都在我们的预料当中；而如果y大于32时，由于移位超出了int所能表示的范围，这时就先把y化成二进制数，然后取该二进制数右端的低5位，再把这5位化成十进制，此时的这个十进制就是要对X移动的位数。</p>
+
+<p>例如：</p>
+
+<pre><code>int a=140;   
+a &lt;&lt; 34
+System.out.println(Integer.toBinaryString(a &lt;&lt; 34));
+</code></pre>
+
+<p>上面那两个语句的执行过程是：先把a化成二进制数：10001100
+执行语句 a &lt;&lt; 34   对a左移32位时，先把 34化成二进制：100010，对该二进制数取右边5位，即00010，化成十进制数为2，所以实际上是对a左移两位。现在，地球人都会知道上面程序的输出结果是：1000110000</p>
+
+
+		  <div class="more">
+		    <a href="/2013/工作/shift.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2012/工作/btrace.html">btrace用法补充</a> <span class="date">2012-10-25</span></h3>
 
 		  <p><br /></p>
@@ -448,39 +475,6 @@ public class CaseObject {
 
 		  <div class="more">
 		    <a href="/2012/工作/empty.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/box.html">java自动装箱和拆箱</a> <span class="date">2012-08-23</span></h3>
-
-		  <p><br />
-如：</p>
-
-<pre><code>arrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
-list.add(3);    //1     自动打包（autowrapping）    
-int n = list.get(i)  //2   拆包
-</code></pre>
-
-<p>步骤1，相当于list.add(new Integer(3))<br />
-步骤2，相当于nt n = list.get(i).intValue();</p>
-
-<p>对于封装类型的==比较 需要注意：</p>
-
-<pre><code>Integer a =100;
-Integer b = 100;           
-Integer c = 1000;
-Integer d = 1000;           
-int m = 1000;
-int n = 1000;        
-System. out.println(a==b);
-System. out.println(c==d);           
-System. out.println(m==n);
-</code></pre>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/box.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		
