@@ -4,6 +4,11 @@
 		<loc>http://bakky.github.io/</loc>
 	</url>
 	<url>
+		<loc>http://bakky.github.io/2013/工作/generic.html</loc>
+		<lastmod>2013-07-17</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://bakky.github.io/2013/工作/count.html</loc>
 		<lastmod>2013-07-06</lastmod>
 		<changefreq>weekly</changefreq>
@@ -59,12 +64,12 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://bakky.github.io/2012/工作/box.html</loc>
+		<loc>http://bakky.github.io/2012/工作/shuzu.html</loc>
 		<lastmod>2012-08-23</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>http://bakky.github.io/2012/工作/shuzu.html</loc>
+		<loc>http://bakky.github.io/2012/工作/box.html</loc>
 		<lastmod>2012-08-23</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>

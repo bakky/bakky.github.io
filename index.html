@@ -92,6 +92,54 @@
 	<div class="span8">
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2013/工作/generic.html">泛型相关知识整理</a> <span class="date">2013-07-17</span></h3>
+
+		  <p><br /></p>
+
+<ol>
+<li><h4>why generic programming?</h4>
+
+<ul>
+<li>代码重用</li>
+<li>类型安全，编译时期发现错误</li>
+</ul></li>
+
+<li><h4>what is generic programming?</h4>
+
+<ul>
+<li>泛型分为泛型类和泛型方法。</li>
+<li>泛型处理几乎全在编译器中进行，Java编译器通过Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。这就是通过擦除实现的</li>
+</ul></li>
+
+<li><h4>why type erasue?</h4>
+
+<ul>
+<li>将泛型类型实例关联到同一份字节码上。</li>
+<li>编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。</li>
+<li>避免浪费空间</li>
+</ul></li>
+
+<li><h4>what is the type erasue?</h4>
+
+<ul>
+<li>简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。</li>
+<li>类型擦除的主要过程如下：
+
+<ol>
+<li>将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。</li>
+<li>移除所有的类型参数。</li>
+</ol></li>
+<li>对于泛型编译器还做了适当优化，会在编译期间对于插除后带来的问题尽可能的处理，例如通过桥接，插入相关字节码，保证正常执行，在进行翻译泛型变量的时候自动插入强制转换字节码<br /></li>
+</ul></li>
+</ol>
+
+
+		  <div class="more">
+		    <a href="/2013/工作/generic.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2013/工作/count.html">CountDownLatch与CyclicBarrier的使用和区别</a> <span class="date">2013-07-06</span></h3>
 
 		  <p><br /></p>
@@ -460,35 +508,6 @@ public class CaseObject {
 
 		  <div class="more">
 		    <a href="/2012/工作/velocity.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/proxy.html">代理、动态代理</a> <span class="date">2012-09-08</span></h3>
-
-		  <p><br />
-代理很容易理解，我们平时想要去买火车票，票贩子和代售点都可以理解为代理。
-代理的结构图也很简单，代理类中含有真实类的引用，客户端调用代理类的方法，实际上代理类会去调用真实类的真实方法。那么代理类的主要作用是什么呢？就是在执行真实类的真实方法时，额外做些事情。
-<br /></p>
-
-<p>那么动态代理呢，试想我们买火车票、买飞机票用代理了，如果我们想要买国外奶粉，我们可以用代购，那么这个时候我们又要创建一个代理，如果有很多这种情况而且我们额外要做的事情差不多，那么创建很多代理类就浪费了，动态代理就是解决这种情况的，允许运行时指定其为实现任意一种接口实现类的代理类。</p>
-
-<p>简单示例：</p>
-
-<pre><code>/**
- *买票接口
- *
- */
- pubic interface Ticket{
-    public void buyTicket();
- }
-</code></pre>
-
-<p></p>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/proxy.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		

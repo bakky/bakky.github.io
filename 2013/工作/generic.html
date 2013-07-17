@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>数组的trimToSize方法</title>
+    <title>泛型相关知识整理</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,30 +80,122 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>数组的trimToSize方法 </h1>
+  <h1>泛型相关知识整理 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p><br />
-- 一旦能确认数组列表的大小不再发生变化，就可以调用<code>trimToSize</code>方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用<code>trimToSize</code>.
-- 代码洁癖的人适用</p>
+    <p><br /></p>
+
+<ol>
+<li><h4>why generic programming?</h4>
+
+<ul>
+<li>代码重用</li>
+<li>类型安全，编译时期发现错误</li>
+</ul></li>
+
+<li><h4>what is generic programming?</h4>
+
+<ul>
+<li>泛型分为泛型类和泛型方法。</li>
+<li>泛型处理几乎全在编译器中进行，Java编译器通过Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。这就是通过擦除实现的</li>
+</ul></li>
+
+<li><h4>why type erasue?</h4>
+
+<ul>
+<li>将泛型类型实例关联到同一份字节码上。</li>
+<li>编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。</li>
+<li>避免浪费空间</li>
+</ul></li>
+
+<li><h4>what is the type erasue?</h4>
+
+<ul>
+<li>简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。</li>
+<li>类型擦除的主要过程如下：
+
+<ol>
+<li>将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。</li>
+<li>移除所有的类型参数。</li>
+</ol></li>
+<li>对于泛型编译器还做了适当优化，会在编译期间对于插除后带来的问题尽可能的处理，例如通过桥接，插入相关字节码，保证正常执行，在进行翻译泛型变量的时候自动插入强制转换字节码<br /></li>
+</ul></li>
+
+<li><h4>what&rsquo;s the problems of erasue brings?</h4>
+
+<ul>
+<li>Q1.用同一泛型类的实例区分方法签名？——NO！</li>
+</ul>
+
+<pre><code>import java.util.*;    
+   public class Erasure{   
+       public void test(List&lt;String&gt; ls){  
+           System.out.println(&quot;Sting&quot;);  
+       }  
+       public void test(List&lt;Integer&gt; li){  
+           System.out.println(&quot;Integer&quot;);  
+       }  
+  }  
+</code></pre>
+
+<p>编译该类，参数类型明明不一样啊，一个<code>List&lt;String&gt;</code>，一个是<code>List&lt;Integer&gt;</code>，但是，偷偷的说，type erasure之后，它就都是List了⋯⋯</p>
+
+<ul>
+<li>Q2.同时catch同一个泛型异常类的多个实例？——NO！</li>
+</ul>
+
+<p>同理，如果定义了一个泛型一场类<code>GenericException&lt;T&gt;</code>，千万别同时<code>catch GenericException&lt;Integer&gt;</code>和<code>GenericException&lt;String&gt;</code>，因为他们是一样一样滴⋯⋯</p>
+
+<ul>
+<li>Q3.泛型类的静态变量是共享的？——Yes！</li>
+</ul>
+
+<p>猜猜这段代码的输出是什么？</p>
+
+<pre><code>import java.util.*;   
+public class StaticTest{  
+    public static void main(String[] args){  
+        GT&lt;Integer&gt; gti = new GT&lt;Integer&gt;();  
+        gti.var=1;  
+        GT&lt;String&gt; gts = new GT&lt;String&gt;();  
+        gts.var=2;  
+        System.out.println(gti.var);  
+    }  
+}  
+class GT&lt;T&gt;{  
+    public static int var=0;  
+    public void nothing(T x){}  
+}  
+</code></pre>
+
+<p>答案是——2！由于经过类型擦除，所有的泛型类实例都关联到同一份字节码上，泛型类的所有静态变量是共享的。</p></li>
+
+<li><h4>just remember</h4>
+
+<ul>
+<li>虚拟机中没有泛型，只有普通类和普通方法</li>
+<li>所有泛型类的类型参数在编译时都会被擦除</li>
+<li>创建泛型对象时请指明类型，让编译器尽早的做参数检查（Effective Java，第23条：请不要在新代码中使用原生态类型）</li>
+<li>不要忽略编译器的警告信息，那意味着潜在的<code>ClassCastException</code>等着你</li>
+<li>不可协变(<code>List&lt;Integer&gt;</code>不能赋值给<code>List&lt;Number&gt;</code>)</li>
+</ul></li>
+</ol>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2012/工作/empty.html" title="String和StringUtil的判断为空区别">&larr; Previous</a></li>
           
+            <li class="prev disabled"><a>&larr; Previous</a></li>
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/工作/box.html" title="java自动装箱和拆箱">Next &rarr;</a></li>
+            <li class="next"><a href="/2013/工作/count.html" title="CountDownLatch与CyclicBarrier的使用和区别">Next &rarr;</a></li>
           
           
         </ul>
@@ -129,7 +221,7 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-23</span></div>
+    <div class="date"><span>2013-07-17</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
@@ -144,7 +236,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#%E6%95%B0%E7%BB%84-ref">数组 <span>1</span></a>
+  <a href="/tags/#%E6%B3%9B%E5%9E%8B-ref">泛型 <span>1</span></a>
 </li>
     
     </ul>
