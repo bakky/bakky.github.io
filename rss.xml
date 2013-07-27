@@ -3,7 +3,55 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-07-17 05:18:03 +0800</pubDate>
+    <pubDate>2013-07-27 10:14:44 +0800</pubDate>
+    <item>
+      <title>对象排序</title>
+      <link>http://bakky.github.io/2013/工作/sort.html</link>
+      <pubDate>2013-07-27 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;提起java对象排序，大家首先会想到的是&lt;code&gt;Comparator&lt;/code&gt;和&lt;code&gt;Comparable&lt;/code&gt;,在《Thinking in Java》中是这样说明二者的区别的：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Comparable 是一个对象本身就已经支持自比较所需要实现的接口（如 String、Integer 自己就可以完成比较大小操作）&lt;/li&gt;
+&lt;li&gt;Comparator 是一个专用的比较器，当这个对象不支持自比较或者自比较函数不能满足你的要求时，你可以写一个比较器来完成两个对象之间大小的比较。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;想象这么一个场景，商品对象&lt;code&gt;Item&lt;/code&gt;有价格、销量、评分等属性，不同的业务需要根据不同的属性排序，大部分是根据商品销量排序，那么如何用这个排序比较器呢？&lt;/p&gt;
+
+&lt;p&gt;很容易想到，让商品这个类实现&lt;code&gt;Comparable&lt;/code&gt;接口，在&lt;code&gt;compareTo&lt;/code&gt;方法中比较商品销量，那么对于按销量排序的时候，只需要简单的利用&lt;code&gt;Collections.sort(itemList)&lt;/code&gt;就可以达到效果,对于其它字段的排序，我们可以在需要的时候利用匿名类的方式，简化代码，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Collections.sort(itemList, new Comparator&amp;lt;Item&amp;gt;() {
+    @Override
+    public int compare(Item o1, Item o2) {
+        return o2.getPrice()-o1.getPrice();
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是呢，这样每次用到比较器的时候都要写一遍，而且会创建一个新的实例，对于有代码洁癖的人来说这样是不行的，于是乎，尝试将每种比较器生成一个类，这个类只有一个&lt;code&gt;Compare()&lt;/code&gt;方法，每次新增一个比较字段的时候就增加一个类，这样也可以解决问题，但是好像也不太优雅，于是进一步改进，将这些排序比较器对象存储到一个私有的静态&lt;code&gt;final&lt;/code&gt;域，然后在宿主类中导出共有的静态域，这样既可以做到重用，而且也优雅，每次增加一种比较器的时候，在宿主类中增加一个静态域即可。如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class SortComparator {
+    public static final Comparator&amp;lt;Item&amp;gt; ITEM_PRICE_COMPARATOR = new ItemPriceComparator();   //按销量排序 
+    public static final Comparator&amp;lt;Item&amp;gt; ITEM_SCORE_COMPARATOR = new ItemScoreComparator();   //按评分排序
+    private static class ItemPriceComparator implements Comparator&amp;lt;Item&amp;gt; {
+        @Override
+        public int compare(Item item1, Item item2) {
+            return item2.getPrice()-item1.getPrice();
+        }
+    }
+    private static class ItemScoreComparator implements Comparator&amp;lt;Item&amp;gt; {
+        @Override
+        public int compare(Item item1, Item item2) {
+            return (item2.getItemScore()-item1.getItemScore());
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     <item>
       <title>泛型相关知识整理</title>
       <link>http://bakky.github.io/2013/工作/generic.html</link>

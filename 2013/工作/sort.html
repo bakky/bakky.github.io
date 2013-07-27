@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>输入流和输出流对接</title>
+    <title>对象排序</title>
   
     <meta name="author" content="霸小奇">
 
@@ -80,58 +80,67 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>输入流和输出流对接 </h1>
+  <h1>对象排序 </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p><br />
-基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中</p>
+    <p><br /></p>
 
-<p>使用场景：大量数据传输，list或数组装不下的情况</p>
+<p>提起java对象排序，大家首先会想到的是<code>Comparator</code>和<code>Comparable</code>,在《Thinking in Java》中是这样说明二者的区别的：</p>
 
-<pre><code>      DefaultHttpClient client = new DefaultHttpClient();
-      StringBuffer getString = new StringBuffer();
-      HttpMethod method = null;
-      HttpResponse response;
-      JSONObject res = null;
-      try {
-            //url拼接
+<blockquote>
+<ul>
+<li>Comparable 是一个对象本身就已经支持自比较所需要实现的接口（如 String、Integer 自己就可以完成比较大小操作）</li>
+<li>Comparator 是一个专用的比较器，当这个对象不支持自比较或者自比较函数不能满足你的要求时，你可以写一个比较器来完成两个对象之间大小的比较。</li>
+</ul>
+</blockquote>
 
-           //发起请求
-           String url = getString.toString();
-           HttpGet get = new HttpGet(url);
-           response = client.execute(get);
-           InputStream input = response.getEntity().getContent();
-           File newFile = new File(tfsPath+&quot;/&quot;+new Date().getTime()+&quot;_&quot;+groupid+&quot;.txt&quot;);
-           OutputStream output = new FileOutputStream(newFile);
-           IOUtils.copy(input, output);
-           return newFile.getPath();
-      } catch (Exception e) {
-           log.error(&quot;error:&quot;+getString+&quot;[res:]&quot;+res, e);
-           return null;
-      }finally{
-           //释放连接
-           if(method!=null)
-                method.releaseConnection();
-      }
+<p>想象这么一个场景，商品对象<code>Item</code>有价格、销量、评分等属性，不同的业务需要根据不同的属性排序，大部分是根据商品销量排序，那么如何用这个排序比较器呢？</p>
+
+<p>很容易想到，让商品这个类实现<code>Comparable</code>接口，在<code>compareTo</code>方法中比较商品销量，那么对于按销量排序的时候，只需要简单的利用<code>Collections.sort(itemList)</code>就可以达到效果,对于其它字段的排序，我们可以在需要的时候利用匿名类的方式，简化代码，如下：</p>
+
+<pre><code>Collections.sort(itemList, new Comparator&lt;Item&gt;() {
+    @Override
+    public int compare(Item o1, Item o2) {
+        return o2.getPrice()-o1.getPrice();
+    }
+});
 </code></pre>
 
-<p>将输入流写到输出流中使用了apache的IOUtils工具包，注意不要将服务端获取输入流单独提取方法，因为有个释放链接的过程，而对接的时候，连接是不能被关闭的。</p>
+<p>但是呢，这样每次用到比较器的时候都要写一遍，而且会创建一个新的实例，对于有代码洁癖的人来说这样是不行的，于是乎，尝试将每种比较器生成一个类，这个类只有一个<code>Compare()</code>方法，每次新增一个比较字段的时候就增加一个类，这样也可以解决问题，但是好像也不太优雅，于是进一步改进，将这些排序比较器对象存储到一个私有的静态<code>final</code>域，然后在宿主类中导出共有的静态域，这样既可以做到重用，而且也优雅，每次增加一种比较器的时候，在宿主类中增加一个静态域即可。如下：</p>
+
+<pre><code>public class SortComparator {
+    public static final Comparator&lt;Item&gt; ITEM_PRICE_COMPARATOR = new ItemPriceComparator();   //按销量排序 
+    public static final Comparator&lt;Item&gt; ITEM_SCORE_COMPARATOR = new ItemScoreComparator();   //按评分排序
+    private static class ItemPriceComparator implements Comparator&lt;Item&gt; {
+        @Override
+        public int compare(Item item1, Item item2) {
+            return item2.getPrice()-item1.getPrice();
+        }
+    }
+    private static class ItemScoreComparator implements Comparator&lt;Item&gt; {
+        @Override
+        public int compare(Item item1, Item item2) {
+            return (item2.getItemScore()-item1.getItemScore());
+        }
+    }
+}
+</code></pre>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2013/工作/count.html" title="CountDownLatch与CyclicBarrier的使用和区别">&larr; Previous</a></li>
           
+            <li class="prev disabled"><a>&larr; Previous</a></li>
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2013/笔记/effective_java.html" title="《effective java》笔记（更新中）">Next &rarr;</a></li>
+            <li class="next"><a href="/2013/工作/generic.html" title="泛型相关知识整理">Next &rarr;</a></li>
           
           
         </ul>
@@ -157,7 +166,7 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-06-18</span></div>
+    <div class="date"><span>2013-07-27</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
@@ -172,7 +181,7 @@
     <ul class="tag_box">
     
       <li>
-  <a href="/tags/#httpclient-ref">httpclient <span>1</span></a>
+  <a href="/tags/#%E6%8E%92%E5%BA%8F-ref">排序 <span>1</span></a>
 </li>
     
     </ul>

@@ -92,6 +92,38 @@
 	<div class="span8">
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2013/工作/sort.html">对象排序</a> <span class="date">2013-07-27</span></h3>
+
+		  <p><br /></p>
+
+<p>提起java对象排序，大家首先会想到的是<code>Comparator</code>和<code>Comparable</code>,在《Thinking in Java》中是这样说明二者的区别的：</p>
+
+<blockquote>
+<ul>
+<li>Comparable 是一个对象本身就已经支持自比较所需要实现的接口（如 String、Integer 自己就可以完成比较大小操作）</li>
+<li>Comparator 是一个专用的比较器，当这个对象不支持自比较或者自比较函数不能满足你的要求时，你可以写一个比较器来完成两个对象之间大小的比较。</li>
+</ul>
+</blockquote>
+
+<p>想象这么一个场景，商品对象<code>Item</code>有价格、销量、评分等属性，不同的业务需要根据不同的属性排序，大部分是根据商品销量排序，那么如何用这个排序比较器呢？</p>
+
+<p>很容易想到，让商品这个类实现<code>Comparable</code>接口，在<code>compareTo</code>方法中比较商品销量，那么对于按销量排序的时候，只需要简单的利用<code>Collections.sort(itemList)</code>就可以达到效果,对于其它字段的排序，我们可以在需要的时候利用匿名类的方式，简化代码，如下：</p>
+
+<pre><code>Collections.sort(itemList, new Comparator&lt;Item&gt;() {
+    @Override
+    public int compare(Item o1, Item o2) {
+        return o2.getPrice()-o1.getPrice();
+    }
+});
+</code></pre>
+
+
+		  <div class="more">
+		    <a href="/2013/工作/sort.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2013/工作/generic.html">泛型相关知识整理</a> <span class="date">2013-07-17</span></h3>
 
 		  <p><br /></p>
@@ -477,37 +509,6 @@ public class CaseObject {
 
 		  <div class="more">
 		    <a href="/2012/工作/exception.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/velocity.html">velocity渲染相关</a> <span class="date">2012-09-12</span></h3>
-
-		  <p><br /></p>
-
-<h4>velocity中对象field的渲染</h4>
-
-<p><br />
-没看源码，但经过实验得知：</p>
-
-<p>如:<code>$!xxx.name</code></p>
-
-<p>引擎渲染的时候先去调用xxx对象的<code>getName()</code>方法，如果有这个方法，就直接返回<code>getName()</code>的结果，
-如果没有的话就回去调用xxx对象的<code>get(&quot;name&quot;)</code>方法。</p>
-
-<h4>velocity判断为空和null</h4>
-
-<p><br />
-<code>$!item.name.isNull()</code>    是否为null</p>
-
-<p><code>$!item.name.isNotNull()</code>  是否不为null</p>
-
-<p><br />
-<code>#if(!$!item.name)</code>    如果不为空</p>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/velocity.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		
