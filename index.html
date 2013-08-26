@@ -91,6 +91,17 @@
 	<div class="span8">
 		
 		<div class="post">
+		  <h3 class="title"><a href="/2013/笔记/test.html">test</a> <span class="date">2013-08-26</span></h3>
+
+		  <p>doubanclaima58f107d1a3fecc5</p>
+
+
+		  <div class="more">
+		    <a href="/2013/笔记/test.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
 		  <h3 class="title"><a href="/2013/工作/list_remove.html">ArrayList的删除操作</a> <span class="date">2013-08-17</span></h3>
 
 		  <p><br /></p>
@@ -412,105 +423,6 @@ public class CaseObject {
 
 		  <div class="more">
 		    <a href="/2012/工作/btrace.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2012/工作/result.html">定义一种返回结果</a> <span class="date">2012-10-11</span></h3>
-
-		  <p><br /></p>
-
-<pre><code>public class Result &lt;T&gt; {
-     private boolean isSuccess ;
-     private String message;
-     private T result ;     
-     /**
-      * 创建一个只包含结果的result
-      * @param isSuccess
-      */
-     public Result( boolean isSuccess){
-            this.setSuccess (isSuccess );
-     }     
-     /**
-      * 创建一个不带返回对象的result
-      * @param isSuccess
-      * @param message
-      */
-     public Result( boolean isSuccess, String message) {
-            this.isSuccess = isSuccess;
-            this.message = message;
-     }     
-     /**
-      * 创建一个带返回对象的result
-      * @param isSuccess
-      * @param message
-      */
-     public Result( boolean isSuccess, String message, T result ) {
-            this.isSuccess = isSuccess;
-            this.message = message;
-            this.result = result;
-     }     
-     /**
-      * 返回一个成功的result，包含要返回的对象
-      * @param result 结果对象
-      */
-     public Result( T result ){
-            this.isSuccess =true;
-            this.setResult (result );
-     }
-     /**
-      * 创建一个失败的result，不包含返回对象
-      * @param msg
-      * @return
-      */
-     public static Result &lt;Boolean &gt; fail( String msg ){
-            return new Result &lt;Boolean &gt;(false, msg);
-     }   
-     /**
-      * 创建一个成功的result，不包含返回对象
-      * @param msg
-      * @return
-      */
-     public static Result &lt;Boolean &gt; succeed( String msg ){
-            return new Result &lt;Boolean &gt;(true, msg);
-     }     
-     /**
-      * 创建一个成功的result，不包含返回对象
-      * @return
-      */
-     public static Result &lt;Boolean &gt; succeed(){
-            return new Result &lt;Boolean &gt;(true);
-     }     
-     public boolean isSuccess () {
-            return isSuccess ;
-     }
-     public Result&lt; T&gt; setSuccess(boolean isSuccess) {
-            this.isSuccess = isSuccess;
-            return this ;
-     }
-     public boolean isFailed (){
-            return !isSuccess;
-     }
-     public String getMessage() {
-            return message ;
-     }
-     public Result&lt; T&gt; setMessage(String message) {
-            this.message = message;
-            return this ;
-     }
-     public T getResult() {
-            return result ;
-     }
-     public Result&lt; T&gt; setResult(T result) {
-            this.result = result;
-            return this ;
-     }
-}
-</code></pre>
-
-
-		  <div class="more">
-		    <a href="/2012/工作/result.html" class="btn">read more..</a>
 		  </div>
 		</div>
 		
