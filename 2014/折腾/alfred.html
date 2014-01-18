@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>基于有道翻译API的alfred workflow</title>
+  
+    <meta name="author" content="霸小奇">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <link rel="shortcut icon" href="https://tfsimg.alipay.com/images/partner/T1NZtaXdJcXXXXXXXX">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/" style="padding-left:46px;">霸小奇的博客</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/blogs">Blogs</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About Me</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>基于有道翻译API的alfred workflow </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><br /></p>
+
+<p>自从用了Alfred后，每天用的频率越来越高，也被其强大和方便深深吸引，早就想研究下其workflow机制，然后自己写几个workflow玩玩。</p>
+
+<p>之前一直苦于经常因为英译汉或者汉译英需要打开浏览器输入有道翻译或者谷歌翻译，打开他们的网址，然后再输入想翻译的词语，这个过程很繁琐，特别是还增加浏览器的标签页（标签多了浏览器越来越慢 -_-||）,而自己又不愿意下载个有道词典，况且打开有道词典也费时间，这个时候alfred好处就来了，你只需要按<code>alt</code>+空格键 呼出alfred,再输入框输入youdao+翻译词，翻译结果立马出现在alfred中，哈哈 方便的狠啊！</p>
+
+<p>动手之前，看了下<a href="http://www.alfredforum.com/">alfred官网</a>关于workflow的介绍，又下载了@池建强 写的<a href="https://github.com/jackychi/FindYYeTs">人人影视最近更新电影</a>的workflow就大致知道了我这个有道翻译的workflow该怎样写了，另外也发现了一个维护workflows的<a href="http://www.alfredworkflow.com/">网站</a>,这里面已经有人写了有道翻译的workflow了，看了下使用php写的，好吧我承认我看不懂，虽说我们不要重复造轮子，但是非常想自己动手用python写一个，另外也熟悉下，好让下次有想法能快速写一个。这个网站还有其它好多好玩的workflows,想豆瓣电影、音乐、书的查询、各个城市天气状况、pm2.5查询等。</p>
+
+<p>准备工作：</p>
+
+<ul>
+<li><p>有道翻译OPEN API &ndash;&gt; <a href="http://fanyi.youdao.com/openapi?path=data-mode">http://fanyi.youdao.com/openapi?path=data-mode</a></p></li>
+
+<li><p>能被alfred识别的输出格式 &ndash;&gt; <a href="http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/">http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/</a></p></li>
+</ul>
+
+<p>剩下的编码就好说了，特别注意有道翻译API里面明确说了查询词要用utf-8编码，我写的时候刚开始用的是urllib2模块，然后英译汉成功，汉译英死活不成功，返回 &lsquo;无法进行有效的翻译&rsquo; 的错误，检查了下编码神马的都没有问题，最后没择了，偶然把urllib2换成urllib模块竟然就成功了，查了下它俩的区别，还是不知道为啥。-_-||</p>
+
+<p>贴2张效果图：
+<img src="../media/ch_en.png" alt="" />
+
+<img src="../media/en_ch.png" alt="" />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+          
+            <li class="prev disabled"><a>&larr; Previous</a></li>
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2013/资料/ioc.html" title="【转】IoC/DIP 其实是一种管理思想">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'bakky'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2014-01-18</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%8A%98%E8%85%BE-ref">折腾 <span>1</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#alfred-ref">alfred <span>1</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <ul>
+     <!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+    <!-- <span class="bds_more">分享到：</span> -->
+    <a class="bds_tsina"></a>
+    <a class="bds_qzone"></a>
+    <a class="bds_douban"></a>
+    </div>
+    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6751105" ></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+    </script>
+<!-- Baidu Button END -->
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 霸小奇 2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script>
+    var _gaq=[['_setAccount','UA-43190712-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+  </body>
+</html>

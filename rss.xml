@@ -3,7 +3,36 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2013-09-25 10:46:53 +0800</pubDate>
+    <pubDate>2014-01-19 01:16:13 +0800</pubDate>
+    <item>
+      <title>基于有道翻译API的alfred workflow</title>
+      <link>http://bakky.github.io/2014/折腾/alfred.html</link>
+      <pubDate>2014-01-18 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;自从用了Alfred后，每天用的频率越来越高，也被其强大和方便深深吸引，早就想研究下其workflow机制，然后自己写几个workflow玩玩。&lt;/p&gt;
+
+&lt;p&gt;之前一直苦于经常因为英译汉或者汉译英需要打开浏览器输入有道翻译或者谷歌翻译，打开他们的网址，然后再输入想翻译的词语，这个过程很繁琐，特别是还增加浏览器的标签页（标签多了浏览器越来越慢 -_-||）,而自己又不愿意下载个有道词典，况且打开有道词典也费时间，这个时候alfred好处就来了，你只需要按&lt;code&gt;alt&lt;/code&gt;+空格键 呼出alfred,再输入框输入youdao+翻译词，翻译结果立马出现在alfred中，哈哈 方便的狠啊！&lt;/p&gt;
+
+&lt;p&gt;动手之前，看了下&lt;a href=&#34;http://www.alfredforum.com/&#34;&gt;alfred官网&lt;/a&gt;关于workflow的介绍，又下载了@池建强 写的&lt;a href=&#34;https://github.com/jackychi/FindYYeTs&#34;&gt;人人影视最近更新电影&lt;/a&gt;的workflow就大致知道了我这个有道翻译的workflow该怎样写了，另外也发现了一个维护workflows的&lt;a href=&#34;http://www.alfredworkflow.com/&#34;&gt;网站&lt;/a&gt;,这里面已经有人写了有道翻译的workflow了，看了下使用php写的，好吧我承认我看不懂，虽说我们不要重复造轮子，但是非常想自己动手用python写一个，另外也熟悉下，好让下次有想法能快速写一个。这个网站还有其它好多好玩的workflows,想豆瓣电影、音乐、书的查询、各个城市天气状况、pm2.5查询等。&lt;/p&gt;
+
+&lt;p&gt;准备工作：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;有道翻译OPEN API &amp;ndash;&amp;gt; &lt;a href=&#34;http://fanyi.youdao.com/openapi?path=data-mode&#34;&gt;http://fanyi.youdao.com/openapi?path=data-mode&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;能被alfred识别的输出格式 &amp;ndash;&amp;gt; &lt;a href=&#34;http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/&#34;&gt;http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;剩下的编码就好说了，特别注意有道翻译API里面明确说了查询词要用utf-8编码，我写的时候刚开始用的是urllib2模块，然后英译汉成功，汉译英死活不成功，返回 &amp;lsquo;无法进行有效的翻译&amp;rsquo; 的错误，检查了下编码神马的都没有问题，最后没择了，偶然把urllib2换成urllib模块竟然就成功了，查了下它俩的区别，还是不知道为啥。-_-||&lt;/p&gt;
+
+&lt;p&gt;贴2张效果图：
+&lt;img src=&#34;../media/ch_en.png&#34; alt=&#34;&#34; /&gt;
+
+&lt;img src=&#34;../media/en_ch.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>【转】IoC/DIP 其实是一种管理思想</title>
       <link>http://bakky.github.io/2013/资料/ioc.html</link>
