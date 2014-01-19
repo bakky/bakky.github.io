@@ -3,7 +3,7 @@
   <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2014-01-19 01:23:44 +0800</pubDate>
+    <pubDate>2014-01-19 12:00:38 +0800</pubDate>
     <item>
       <title>基于有道翻译API的alfred workflow</title>
       <link>http://bakky.github.io/2014/折腾/alfred.html</link>
@@ -25,6 +25,10 @@
 &lt;/ul&gt;
 
 &lt;p&gt;剩下的编码就好说了，特别注意有道翻译API里面明确说了查询词要用utf-8编码，我写的时候刚开始用的是urllib2模块，然后英译汉成功，汉译英死活不成功，返回 &amp;lsquo;无法进行有效的翻译&amp;rsquo; 的错误，检查了下编码神马的都没有问题，最后没择了，偶然把urllib2换成urllib模块竟然就成功了，查了下它俩的区别，还是不知道为啥。-_-||&lt;/p&gt;
+
+&lt;p&gt;git地址：http://bakky.github.io/2014/%E6%8A%98%E8%85%BE/alfred.html&lt;/p&gt;
+
+&lt;p&gt;后续有时间再增强下，比如加入action，选中回车后将结果加入剪贴板等。&lt;/p&gt;
 
 &lt;p&gt;贴2张效果图：
 &lt;img src=&#34;/assets/media/ch_en.png&#34; alt=&#34;&#34; /&gt;
