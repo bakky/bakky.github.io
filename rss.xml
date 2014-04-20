@@ -1,1024 +1,121 @@
 <?xml version="1.0"?>
-<rss version="2.0">
-  <channel>
+<rss version="2.0">  <channel>
     <title>霸小奇的博客</title>
     <link>http://bakky.github.io</link>
-    <pubDate>2014-01-19 12:00:38 +0800</pubDate>
+    <pubDate>20 Apr 14 18:21 CST</pubDate>
     <item>
       <title>基于有道翻译API的alfred workflow</title>
       <link>http://bakky.github.io/2014/折腾/alfred.html</link>
       <pubDate>2014-01-18 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;自从用了Alfred后，每天用的频率越来越高，也被其强大和方便深深吸引，早就想研究下其workflow机制，然后自己写几个workflow玩玩。&lt;/p&gt;
-
-&lt;p&gt;之前一直苦于经常因为英译汉或者汉译英需要打开浏览器输入有道翻译或者谷歌翻译，打开他们的网址，然后再输入想翻译的词语，这个过程很繁琐，特别是还增加浏览器的标签页（标签多了浏览器越来越慢 -_-||）,而自己又不愿意下载个有道词典，况且打开有道词典也费时间，这个时候alfred好处就来了，你只需要按&lt;code&gt;alt&lt;/code&gt;+空格键 呼出alfred,再输入框输入youdao+翻译词，翻译结果立马出现在alfred中，哈哈 方便的狠啊！&lt;/p&gt;
-
-&lt;p&gt;动手之前，看了下&lt;a href=&#34;http://www.alfredforum.com/&#34;&gt;alfred官网&lt;/a&gt;关于workflow的介绍，又下载了@池建强 写的&lt;a href=&#34;https://github.com/jackychi/FindYYeTs&#34;&gt;人人影视最近更新电影&lt;/a&gt;的workflow就大致知道了我这个有道翻译的workflow该怎样写了，另外也发现了一个维护workflows的&lt;a href=&#34;http://www.alfredworkflow.com/&#34;&gt;网站&lt;/a&gt;,这里面已经有人写了有道翻译的workflow了，看了下使用php写的，好吧我承认我看不懂，虽说我们不要重复造轮子，但是非常想自己动手用python写一个，另外也熟悉下，好让下次有想法能快速写一个。这个网站还有其它好多好玩的workflows,想豆瓣电影、音乐、书的查询、各个城市天气状况、pm2.5查询等。&lt;/p&gt;
-
-&lt;p&gt;准备工作：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;有道翻译OPEN API &amp;ndash;&amp;gt; &lt;a href=&#34;http://fanyi.youdao.com/openapi?path=data-mode&#34;&gt;http://fanyi.youdao.com/openapi?path=data-mode&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;能被alfred识别的输出格式 &amp;ndash;&amp;gt; &lt;a href=&#34;http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/&#34;&gt;http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;剩下的编码就好说了，特别注意有道翻译API里面明确说了查询词要用utf-8编码，我写的时候刚开始用的是urllib2模块，然后英译汉成功，汉译英死活不成功，返回 &amp;lsquo;无法进行有效的翻译&amp;rsquo; 的错误，检查了下编码神马的都没有问题，最后没择了，偶然把urllib2换成urllib模块竟然就成功了，查了下它俩的区别，还是不知道为啥。-_-||&lt;/p&gt;
-
-&lt;p&gt;git地址：http://bakky.github.io/2014/%E6%8A%98%E8%85%BE/alfred.html&lt;/p&gt;
-
-&lt;p&gt;后续有时间再增强下，比如加入action，选中回车后将结果加入剪贴板等。&lt;/p&gt;
-
-&lt;p&gt;贴2张效果图：
-&lt;img src=&#34;/assets/media/ch_en.png&#34; alt=&#34;&#34; /&gt;
-
-&lt;img src=&#34;/assets/media/en_ch.png&#34; alt=&#34;&#34; /&gt;
-&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;自从用了Alfred后，每天用的频率越来越高，也被其强大和方便深深吸引，早就想研究下其workflow机制，然后自己写几个workflow玩玩。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之前一直苦于经常因为英译汉或者汉译英需要打开浏览器输入有道翻译或者谷歌翻译，打开他们的网址，然后再输入想翻译的词语，这个过程很繁琐，特别是还增加浏览器的标签页（标签多了浏览器越来越慢 -_-||）,而自己又不愿意下载个有道词典，况且打开有道词典也费时间，这个时候alfred好处就来了，你只需要按&lt;code&gt;alt&lt;/code&gt;+空格键 呼出alfred,再输入框输入youdao+翻译词，翻译结果立马出现在alfred中，哈哈 方便的狠啊！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;动手之前，看了下&lt;a href=&#34;http://www.alfredforum.com/&#34;&gt;alfred官网&lt;/a&gt;关于workflow的介绍，又下载了@池建强 写的&lt;a href=&#34;https://github.com/jackychi/FindYYeTs&#34;&gt;人人影视最近更新电影&lt;/a&gt;的workflow就大致知道了我这个有道翻译的workflow该怎样写了，另外也发现了一个维护workflows的&lt;a href=&#34;http://www.alfredworkflow.com/&#34;&gt;网站&lt;/a&gt;,这里面已经有人写了有道翻译的workflow了，看了下使用php写的，好吧我承认我看不懂，虽说我们不要重复造轮子，但是非常想自己动手用python写一个，另外也熟悉下，好让下次有想法能快速写一个。这个网站还有其它好多好玩的workflows,想豆瓣电影、音乐、书的查询、各个城市天气状况、pm2.5查询等。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;准备工作：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;p&gt;有道翻译OPEN API &amp;ndash;&amp;gt; &lt;a href=&#34;http://fanyi.youdao.com/openapi?path=data-mode&#34;&gt;http://fanyi.youdao.com/openapi?path=data-mode&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;能被alfred识别的输出格式 &amp;ndash;&amp;gt; &lt;a href=&#34;http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/&#34;&gt;http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;剩下的编码就好说了，特别注意有道翻译API里面明确说了查询词要用utf-8编码，我写的时候刚开始用的是urllib2模块，然后英译汉成功，汉译英死活不成功，返回 &amp;lsquo;无法进行有效的翻译&amp;rsquo; 的错误，检查了下编码神马的都没有问题，最后没择了，偶然把urllib2换成urllib模块竟然就成功了，查了下它俩的区别，还是不知道为啥。-_-||&lt;/p&gt;&#xA;&#xA;&lt;p&gt;git地址：http://bakky.github.io/2014/%E6%8A%98%E8%85%BE/alfred.html&lt;/p&gt;&#xA;&#xA;&lt;p&gt;后续有时间再增强下，比如加入action，选中回车后将结果加入剪贴板等。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;贴2张效果图：&#xA;&lt;img src=&#34;/assets/media/ch_en.png&#34; alt=&#34;&#34; /&gt;&#xA;&#xA;&lt;img src=&#34;/assets/media/en_ch.png&#34; alt=&#34;&#34; /&gt;&#xA;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>【转】IoC/DIP 其实是一种管理思想</title>
       <link>http://bakky.github.io/2013/资料/ioc.html</link>
       <pubDate>2013-09-25 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;center&gt;2013年7月5日 陈皓 coolshell.cn&lt;/center&gt;
-&lt;/br&gt;&lt;/p&gt;
-
-&lt;p&gt;关于IoC的的概念提出来已经很多年了，其被用于一种面象对像的设计。我在这里再简单的回顾一下这个概念。我先谈技术，再说管理。&lt;/p&gt;
-
-&lt;p&gt;话说，我们有一个开关要控制一个灯的开和关这两个动作，最常见也是最没有技术含量的实现会是这个样子：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://coolshell.cn//wp-content/uploads/2013/07/IoC1.jpg&#34; alt=&#34;&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;然后，有一天，我们发现需要对灯泡扩展一下，于是我们做了个抽象类：&lt;/p&gt;
-
-&lt;p&gt;但是，如果有一天，我们发现这个开关可能还要控制别的不单单是灯泡的东西，我们就发现这个开关耦合了灯泡这种类别，非常不利于我们的扩展，于是反转控制出现了。&lt;/p&gt;
-
-&lt;p&gt;就像现实世界一样，造开关的工厂根本不关心要控制的东西是什么，它只做一个开关应该做好的事，就是把电接通，把电断开（不管是手动的，还是声控的，还是光控，还是遥控的），而我们的造各种各样的灯泡（不管是日关灯，白炽灯）的工厂也不关心你用什么样的开关，反正我只管把灯的电源接口给做出来，然后，开关厂和电灯厂依赖于一个标准的通电和断电的接口。于是产生了IoC控制反转，如下图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://coolshell.cn//wp-content/uploads/2013/07/IoC1.jpg&#34; alt=&#34;&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;所谓控制反转的意思是，开关从以前的设备的专用开关，转变到了控制电源的开关，而以前的设备要反过来依赖于开关厂声明的电源连接接口。只要符合开关厂定义的电源连接的接口，这个开关可以控制所有符合这个电源连接接口的设备。也就是说，开关从依赖设备这种情况，变成了，设备反过来依赖于开关所定义的接口。&lt;/p&gt;
-
-&lt;p&gt;只要你看过我的那篇《面向对象设计其实和面象对象一点关系也没有》，你就知道这样的例子在生活中太多见了。比如说：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;在交易的过程中，卖家向买家卖东西，一手交钱一手交货，所以，基本上来说卖家和买家必需强耦合（必需见面）。这个时候，银行出来做担保，买家把钱先垫到银行，银行让卖家发货，买家验货后，银行再把钱打给卖家。这就是反转控制。买卖双方把对对方的直接控制，反转到了让对方来依赖一个标准的交易模型的接口。股票交易也是一样的，证交所就是买卖双方的标准交易模型接口。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;上面这个例子，可能还不明显，再举一个例子。海尔公司作为一个电器制商需要把自己的商品分销到全国各地，但是发现，不同的分销渠道有不同的玩法，于是派出了各种销售代表玩不同的玩法，随着渠道越来越多，发现，每增加一个渠道就要新增一批人和一个新的流程，严重耦合并依赖各渠道商的玩法。实在受不了了，于是制定业务标准，开发分销信息化系统，只有符合这个标准的渠道商才能成为海尔的分销商。让各个渠道商反过来依赖自己标准。反转了控制，倒置了依赖。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;可见，控制反转和依赖倒置不单单的一种设计模式，反而更是一种管理模式。&lt;/p&gt;
-
-&lt;p&gt;在大公司中，有很多很多的团队，这些团队开发的软件有很多依赖，跨团队合作是一件挺麻烦的事情，下面是一些比较真实的示例：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;一个网页会有很多频道，于是，我们的前端工程师进入到各个页面为各种频道开发他们的页面，随着频道越来越多，前端开发工程师的人数也越来越多，每增加一个频道，就要增加一个为这个频道服务的前端团队，于是，人数越来越多，干成了劳动密集型。为什么不反转控制，倒置依赖呢？前端的同学完全可以开发出各种页面的标准组件，布局，模板，以前与后端交互框架，然后，让后端的同学反过来依赖于前端的标准，使用前端的框架，前端的布局，模板，和组件，以向前端接入后端的模块。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;一个平台需要接入各种各样的业务系统，这些垂直业务系统都有自己的账号体系，于是这个平台为了要兼这些垂直系统的账号体系以做到权限控制，需要做各个系统和自己系统中的账号映射，并为账号和分配出来的资源设置各垂直系统的标识，还要在自己的代码中要写很多很多的依赖于各种账号体系的代码。其实，一个依赖倒置和反转控制就很简单。开发一个权限体系标准，让接入方的账号系统反过来依赖并控制这个标准的权限系统，从而做出一个干净的系统。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;还有一个云平台中的管理模式，一些底层服务的开发团队只管开发底层的技术，然后什么也不管了，就交给上层的开发人员，在底层团队的开发出来的产品上面开发各种管理这个底层资源的东西，比如：生产底层资源的业务，底层资源的控制台，底层资源的监控系统。这个让底层团队只干纯技术，不干与底层技术无关的东西，看似很科学，其实是做错了。因为，上层为各个云资源控制生产，开发控制台和监控的团队，随着接入的资源的越来越多，完全干不过来了，苦逼得一塌糊涂，因为底层的资源千差百怪，每接一个就要开发一堆这个产品的代码。这个时候依赖倒置和反转控制又可以解决问题了。很简单，上层为各个云资源控制生产，开发控制台，和监控的团队应该制定一个标准，让底层的IaaS云资源开发团队反过来依赖这个标准，统一接入方式，如果开发的云资源不符我的生产控制模型，没有控制台，不把监控数据喂入我的监控系统，对不起，请不要接入我这个PaaS平台。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;一个集中式的处理电子商务中的订单的流程。各个垂直业务线都需要通过这个平台来处理自己的交易业务，但是垂直业务线上的个性化需求太多。于是，这个技术平台开始出现了黑魔法——“为了害怕改变数据库表结构，不得不在数据库中预留一些字段，里面存把业务方的个性化字段存成如JSON这样的东西”，并为之自豪认为可以快速解决业务问题（WTF）。然而，恶梦并没就此结束，管理这个技术平台的小组开始发现，对来自各个业务方的需求应接不暇，各种变态需求严重干扰系统，各种技术决定越来越不好做，导致需求排期排不过来。于是，不单单得到了各个业务方的各种抱怨，最可怕的是还有高层老大们压过来的Deadline，加班加点，苦逼之极，最后业务方自己要去一个自己的平台。为什么不用依赖倒置和反转控制的思想呢？开发一个插件模型、工作流引擎和Pub/Sub系统，让业务方的个性化需求可以以插件的方式插入我的订单流程中，业务方自的数据存在自己的库中，业务逻辑也不要侵入我的系统，并可以使用工作流引擎或Pub/Sub的协义标准来自己定义工作流的各个步骤（甚至把工作流引擎的各个步骤的Decider交给各个业务方自行处理）。让各个业务方来依赖于我的标准插件和工作流接口，反转迭控制，让他们来控制我的系统，依赖倒置，让他们来依赖我的标准。（这个团队想过把自己的系统内部开源出去让别的团队也进来参与，可以是可以，但一定要用Linux/Git这种方式，允许出现多个分支，多个发行版。但多个版本又造成了多个业务平台，这会上上层垂直业务不知所措）&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;看过《SteveY对Amazon和Google平台的吐槽》的人都知道，Amazon内部系统的SOA架构（这个SOA架构离IBM定义的那个非常变态的SOA还有一定距离），但是这基本上都是依赖倒置和控制反转的思路了—— 与其让我来帮你实现你的业务逻辑，不如把我的业务逻辑开放成服务的方式让你来控制。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;再说一个我在Amazon经历的例子。有一个项目是在给Amazon的各个商区（Marketplace）做国际出口的业务，我们先把Media类的产品（书，DVD之类的）做国际出口开放，项目不难，就是让商家同意一个法律协议（上传自己的签名），然后后台小改一下。美国的，欧洲的做的都没有问题，物流团队在出口报关单上打的都是Amazon仓库的地址和商家的签名（本来这就是错的，打的应该是商家的地址和商家的签名），但是到了日本，就出了问题，因为日本海关即要日文信息，也要商家的英文名和英文地址，而我们的系统里面只有商家的日文信息。本来，这是一个挺简单的事——数据库里加两个字段，在那个同意条款的网页上收集一下商家的英文名和地址，然后把这些信息传给后面的物流团队。物流团队一看这个，发现搞不了，因为他还要传给仓库，N多的地方都要加这两个字段，还要写下各种if (site == JP)这样的判断。物流团队不蛮干，重新设计自己的系统。做一个Document Template的东西，这个就是那个那个要贴在物流盒子上的单子。再也不让各个业务团队把那些信息传过来，而是把这个Document Template的东西传给上面的业务方，他们想怎么写就怎么写， 写完后，把这个东西传回来。于是，大家依赖了一个标准的协议，而不是一其字段。（当然，这个改动过多，为此改了半年多，不过非常值）&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;所以说啊，在跨团队的工作中，&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果依赖和控制的东西过多了，就需要制定标准，倒置依赖，反转控制。&lt;/li&gt;
-&lt;li&gt;控制欲望最好不要太强，不要想着能干所有的事情，要学会控制反转和依赖倒置原则。否则只会引火烧身。&lt;/li&gt;
-&lt;li&gt;反转控制和依赖倒置是一种智慧。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（全文完）&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;center&gt;2013年7月5日 陈皓 coolshell.cn&lt;/center&gt;&#xA;&lt;/br&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;关于IoC的的概念提出来已经很多年了，其被用于一种面象对像的设计。我在这里再简单的回顾一下这个概念。我先谈技术，再说管理。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;话说，我们有一个开关要控制一个灯的开和关这两个动作，最常见也是最没有技术含量的实现会是这个样子：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;http://coolshell.cn//wp-content/uploads/2013/07/IoC1.jpg&#34; alt=&#34;&#34; /&gt;&#xA;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然后，有一天，我们发现需要对灯泡扩展一下，于是我们做了个抽象类：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是，如果有一天，我们发现这个开关可能还要控制别的不单单是灯泡的东西，我们就发现这个开关耦合了灯泡这种类别，非常不利于我们的扩展，于是反转控制出现了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;就像现实世界一样，造开关的工厂根本不关心要控制的东西是什么，它只做一个开关应该做好的事，就是把电接通，把电断开（不管是手动的，还是声控的，还是光控，还是遥控的），而我们的造各种各样的灯泡（不管是日关灯，白炽灯）的工厂也不关心你用什么样的开关，反正我只管把灯的电源接口给做出来，然后，开关厂和电灯厂依赖于一个标准的通电和断电的接口。于是产生了IoC控制反转，如下图：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;http://coolshell.cn//wp-content/uploads/2013/07/IoC1.jpg&#34; alt=&#34;&#34; /&gt;&#xA;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;所谓控制反转的意思是，开关从以前的设备的专用开关，转变到了控制电源的开关，而以前的设备要反过来依赖于开关厂声明的电源连接接口。只要符合开关厂定义的电源连接的接口，这个开关可以控制所有符合这个电源连接接口的设备。也就是说，开关从依赖设备这种情况，变成了，设备反过来依赖于开关所定义的接口。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;只要你看过我的那篇《面向对象设计其实和面象对象一点关系也没有》，你就知道这样的例子在生活中太多见了。比如说：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;在交易的过程中，卖家向买家卖东西，一手交钱一手交货，所以，基本上来说卖家和买家必需强耦合（必需见面）。这个时候，银行出来做担保，买家把钱先垫到银行，银行让卖家发货，买家验货后，银行再把钱打给卖家。这就是反转控制。买卖双方把对对方的直接控制，反转到了让对方来依赖一个标准的交易模型的接口。股票交易也是一样的，证交所就是买卖双方的标准交易模型接口。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;上面这个例子，可能还不明显，再举一个例子。海尔公司作为一个电器制商需要把自己的商品分销到全国各地，但是发现，不同的分销渠道有不同的玩法，于是派出了各种销售代表玩不同的玩法，随着渠道越来越多，发现，每增加一个渠道就要新增一批人和一个新的流程，严重耦合并依赖各渠道商的玩法。实在受不了了，于是制定业务标准，开发分销信息化系统，只有符合这个标准的渠道商才能成为海尔的分销商。让各个渠道商反过来依赖自己标准。反转了控制，倒置了依赖。&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;可见，控制反转和依赖倒置不单单的一种设计模式，反而更是一种管理模式。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在大公司中，有很多很多的团队，这些团队开发的软件有很多依赖，跨团队合作是一件挺麻烦的事情，下面是一些比较真实的示例：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;一个网页会有很多频道，于是，我们的前端工程师进入到各个页面为各种频道开发他们的页面，随着频道越来越多，前端开发工程师的人数也越来越多，每增加一个频道，就要增加一个为这个频道服务的前端团队，于是，人数越来越多，干成了劳动密集型。为什么不反转控制，倒置依赖呢？前端的同学完全可以开发出各种页面的标准组件，布局，模板，以前与后端交互框架，然后，让后端的同学反过来依赖于前端的标准，使用前端的框架，前端的布局，模板，和组件，以向前端接入后端的模块。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;一个平台需要接入各种各样的业务系统，这些垂直业务系统都有自己的账号体系，于是这个平台为了要兼这些垂直系统的账号体系以做到权限控制，需要做各个系统和自己系统中的账号映射，并为账号和分配出来的资源设置各垂直系统的标识，还要在自己的代码中要写很多很多的依赖于各种账号体系的代码。其实，一个依赖倒置和反转控制就很简单。开发一个权限体系标准，让接入方的账号系统反过来依赖并控制这个标准的权限系统，从而做出一个干净的系统。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;还有一个云平台中的管理模式，一些底层服务的开发团队只管开发底层的技术，然后什么也不管了，就交给上层的开发人员，在底层团队的开发出来的产品上面开发各种管理这个底层资源的东西，比如：生产底层资源的业务，底层资源的控制台，底层资源的监控系统。这个让底层团队只干纯技术，不干与底层技术无关的东西，看似很科学，其实是做错了。因为，上层为各个云资源控制生产，开发控制台和监控的团队，随着接入的资源的越来越多，完全干不过来了，苦逼得一塌糊涂，因为底层的资源千差百怪，每接一个就要开发一堆这个产品的代码。这个时候依赖倒置和反转控制又可以解决问题了。很简单，上层为各个云资源控制生产，开发控制台，和监控的团队应该制定一个标准，让底层的IaaS云资源开发团队反过来依赖这个标准，统一接入方式，如果开发的云资源不符我的生产控制模型，没有控制台，不把监控数据喂入我的监控系统，对不起，请不要接入我这个PaaS平台。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;一个集中式的处理电子商务中的订单的流程。各个垂直业务线都需要通过这个平台来处理自己的交易业务，但是垂直业务线上的个性化需求太多。于是，这个技术平台开始出现了黑魔法——“为了害怕改变数据库表结构，不得不在数据库中预留一些字段，里面存把业务方的个性化字段存成如JSON这样的东西”，并为之自豪认为可以快速解决业务问题（WTF）。然而，恶梦并没就此结束，管理这个技术平台的小组开始发现，对来自各个业务方的需求应接不暇，各种变态需求严重干扰系统，各种技术决定越来越不好做，导致需求排期排不过来。于是，不单单得到了各个业务方的各种抱怨，最可怕的是还有高层老大们压过来的Deadline，加班加点，苦逼之极，最后业务方自己要去一个自己的平台。为什么不用依赖倒置和反转控制的思想呢？开发一个插件模型、工作流引擎和Pub/Sub系统，让业务方的个性化需求可以以插件的方式插入我的订单流程中，业务方自的数据存在自己的库中，业务逻辑也不要侵入我的系统，并可以使用工作流引擎或Pub/Sub的协义标准来自己定义工作流的各个步骤（甚至把工作流引擎的各个步骤的Decider交给各个业务方自行处理）。让各个业务方来依赖于我的标准插件和工作流接口，反转迭控制，让他们来控制我的系统，依赖倒置，让他们来依赖我的标准。（这个团队想过把自己的系统内部开源出去让别的团队也进来参与，可以是可以，但一定要用Linux/Git这种方式，允许出现多个分支，多个发行版。但多个版本又造成了多个业务平台，这会上上层垂直业务不知所措）&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;看过《SteveY对Amazon和Google平台的吐槽》的人都知道，Amazon内部系统的SOA架构（这个SOA架构离IBM定义的那个非常变态的SOA还有一定距离），但是这基本上都是依赖倒置和控制反转的思路了—— 与其让我来帮你实现你的业务逻辑，不如把我的业务逻辑开放成服务的方式让你来控制。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;再说一个我在Amazon经历的例子。有一个项目是在给Amazon的各个商区（Marketplace）做国际出口的业务，我们先把Media类的产品（书，DVD之类的）做国际出口开放，项目不难，就是让商家同意一个法律协议（上传自己的签名），然后后台小改一下。美国的，欧洲的做的都没有问题，物流团队在出口报关单上打的都是Amazon仓库的地址和商家的签名（本来这就是错的，打的应该是商家的地址和商家的签名），但是到了日本，就出了问题，因为日本海关即要日文信息，也要商家的英文名和英文地址，而我们的系统里面只有商家的日文信息。本来，这是一个挺简单的事——数据库里加两个字段，在那个同意条款的网页上收集一下商家的英文名和地址，然后把这些信息传给后面的物流团队。物流团队一看这个，发现搞不了，因为他还要传给仓库，N多的地方都要加这两个字段，还要写下各种if (site == JP)这样的判断。物流团队不蛮干，重新设计自己的系统。做一个Document Template的东西，这个就是那个那个要贴在物流盒子上的单子。再也不让各个业务团队把那些信息传过来，而是把这个Document Template的东西传给上面的业务方，他们想怎么写就怎么写， 写完后，把这个东西传回来。于是，大家依赖了一个标准的协议，而不是一其字段。（当然，这个改动过多，为此改了半年多，不过非常值）&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;所以说啊，在跨团队的工作中，&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果依赖和控制的东西过多了，就需要制定标准，倒置依赖，反转控制。&lt;/li&gt;&#xA;&lt;li&gt;控制欲望最好不要太强，不要想着能干所有的事情，要学会控制反转和依赖倒置原则。否则只会引火烧身。&lt;/li&gt;&#xA;&lt;li&gt;反转控制和依赖倒置是一种智慧。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;（全文完）&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>ArrayList的删除操作</title>
       <link>http://bakky.github.io/2013/工作/list_remove.html</link>
       <pubDate>2013-08-17 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;上周在写代码的时候，需要遍历&lt;code&gt;arraylist&lt;/code&gt;，然后找出不符合条件的对象删除，顺手就写成这样：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for(Object o : arraylist){
-    if(xxx){     //逻辑代码
-        arraylist.remove(o);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;结果运行的时候，出错了：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.util.ConcurrentModificationException
-    at java.util.AbstractList$Itr.checkForComodification(AbstractList.java:372)
-    at java.util.AbstractList$Itr.next(AbstractList.java:343)
-    at Test.main(Test.java:84)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-    at java.lang.reflect.Method.invoke(Method.java:597)
-    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;看错误堆栈，原因是&lt;code&gt;for&lt;/code&gt;循环的时候,&lt;code&gt;list&lt;/code&gt;调用&lt;code&gt;next()&lt;/code&gt;即遍历下一个对象时方，会去检查&lt;code&gt;list&lt;/code&gt;有没有被修改，如果被修改了就会报&lt;code&gt;ConcurrentModificationException&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;细细想了下，for循环遍历的时候，内部会有个index，如果遍历过程中，有对象删除的时候，就可能会造成数据下标越界的错误，同样如果遍历过程中有增加对象的话，可能就会有的对象不回去遍历到。&lt;/p&gt;
-
-&lt;p&gt;那么该如何解决这个问题呢？google了一番，发现了一些其它的收获，&lt;a href=&#34;http://sundful.iteye.com/blog/379520&#34;&gt;这篇博客&lt;/a&gt;中解释得很清楚，而且也给了解决办法，里面特别提到&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;如果你的 &lt;code&gt;Collection / Map&lt;/code&gt; 对象实际只有一个元素的时候， &lt;code&gt;ConcurrentModificationException&lt;/code&gt; 异常并不会被抛出。这也就是为什么在 javadoc 里面指出： it would be wrong to write a program that depended on this exception for its correctness: ConcurrentModificationException should be used only to detect bugs.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;切记在&lt;code&gt;Collection&lt;/code&gt;和&lt;code&gt;Map&lt;/code&gt;中使用其API中的remove方法时要谨慎！除了博客中提到的用&lt;code&gt;iterator&lt;/code&gt;外，还可以将要删除的对象先加到另外一个&lt;code&gt;list&lt;/code&gt;中，然后再使用&lt;code&gt;removeAll(Collection&amp;lt;?&amp;gt; c)&lt;/code&gt;&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;上周在写代码的时候，需要遍历&lt;code&gt;arraylist&lt;/code&gt;，然后找出不符合条件的对象删除，顺手就写成这样：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;for(Object o : arraylist){&#xA;    if(xxx){     //逻辑代码&#xA;        arraylist.remove(o);&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;结果运行的时候，出错了：&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.util.ConcurrentModificationException&#xA;    at java.util.AbstractList$Itr.checkForComodification(AbstractList.java:372)&#xA;    at java.util.AbstractList$Itr.next(AbstractList.java:343)&#xA;    at Test.main(Test.java:84)&#xA;    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#xA;    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)&#xA;    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)&#xA;    at java.lang.reflect.Method.invoke(Method.java:597)&#xA;    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;看错误堆栈，原因是&lt;code&gt;for&lt;/code&gt;循环的时候,&lt;code&gt;list&lt;/code&gt;调用&lt;code&gt;next()&lt;/code&gt;即遍历下一个对象时方，会去检查&lt;code&gt;list&lt;/code&gt;有没有被修改，如果被修改了就会报&lt;code&gt;ConcurrentModificationException&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;细细想了下，for循环遍历的时候，内部会有个index，如果遍历过程中，有对象删除的时候，就可能会造成数据下标越界的错误，同样如果遍历过程中有增加对象的话，可能就会有的对象不回去遍历到。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;那么该如何解决这个问题呢？google了一番，发现了一些其它的收获，&lt;a href=&#34;http://sundful.iteye.com/blog/379520&#34;&gt;这篇博客&lt;/a&gt;中解释得很清楚，而且也给了解决办法，里面特别提到&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果你的 &lt;code&gt;Collection / Map&lt;/code&gt; 对象实际只有一个元素的时候， &lt;code&gt;ConcurrentModificationException&lt;/code&gt; 异常并不会被抛出。这也就是为什么在 javadoc 里面指出： it would be wrong to write a program that depended on this exception for its correctness: ConcurrentModificationException should be used only to detect bugs.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;切记在&lt;code&gt;Collection&lt;/code&gt;和&lt;code&gt;Map&lt;/code&gt;中使用其API中的remove方法时要谨慎！除了博客中提到的用&lt;code&gt;iterator&lt;/code&gt;外，还可以将要删除的对象先加到另外一个&lt;code&gt;list&lt;/code&gt;中，然后再使用&lt;code&gt;removeAll(Collection&amp;lt;?&amp;gt; c)&lt;/code&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>对象排序</title>
       <link>http://bakky.github.io/2013/工作/sort.html</link>
       <pubDate>2013-07-27 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;提起java对象排序，大家首先会想到的是&lt;code&gt;Comparator&lt;/code&gt;和&lt;code&gt;Comparable&lt;/code&gt;,在《Thinking in Java》中是这样说明二者的区别的：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Comparable 是一个对象本身就已经支持自比较所需要实现的接口（如 String、Integer 自己就可以完成比较大小操作）&lt;/li&gt;
-&lt;li&gt;Comparator 是一个专用的比较器，当这个对象不支持自比较或者自比较函数不能满足你的要求时，你可以写一个比较器来完成两个对象之间大小的比较。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;想象这么一个场景，商品对象&lt;code&gt;Item&lt;/code&gt;有价格、销量、评分等属性，不同的业务需要根据不同的属性排序，大部分是根据商品销量排序，那么如何用这个排序比较器呢？&lt;/p&gt;
-
-&lt;p&gt;很容易想到，让商品这个类实现&lt;code&gt;Comparable&lt;/code&gt;接口，在&lt;code&gt;compareTo&lt;/code&gt;方法中比较商品销量，那么对于按销量排序的时候，只需要简单的利用&lt;code&gt;Collections.sort(itemList)&lt;/code&gt;就可以达到效果,对于其它字段的排序，我们可以在需要的时候利用匿名类的方式，简化代码，如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Collections.sort(itemList, new Comparator&amp;lt;Item&amp;gt;() {
-    @Override
-    public int compare(Item o1, Item o2) {
-        return o2.getPrice()-o1.getPrice();
-    }
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;但是呢，这样每次用到比较器的时候都要写一遍，而且会创建一个新的实例，对于有代码洁癖的人来说这样是不行的，于是乎，尝试将每种比较器生成一个类，这个类只有一个&lt;code&gt;Compare()&lt;/code&gt;方法，每次新增一个比较字段的时候就增加一个类，这样也可以解决问题，但是好像也不太优雅，于是进一步改进，将这些排序比较器对象存储到一个私有的静态&lt;code&gt;final&lt;/code&gt;域，然后在宿主类中导出共有的静态域，这样既可以做到重用，而且也优雅，每次增加一种比较器的时候，在宿主类中增加一个静态域即可。如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class SortComparator {
-    public static final Comparator&amp;lt;Item&amp;gt; ITEM_PRICE_COMPARATOR = new ItemPriceComparator();   //按销量排序 
-    public static final Comparator&amp;lt;Item&amp;gt; ITEM_SCORE_COMPARATOR = new ItemScoreComparator();   //按评分排序
-    private static class ItemPriceComparator implements Comparator&amp;lt;Item&amp;gt; {
-        @Override
-        public int compare(Item item1, Item item2) {
-            return item2.getPrice()-item1.getPrice();
-        }
-    }
-    private static class ItemScoreComparator implements Comparator&amp;lt;Item&amp;gt; {
-        @Override
-        public int compare(Item item1, Item item2) {
-            return (item2.getItemScore()-item1.getItemScore());
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提起java对象排序，大家首先会想到的是&lt;code&gt;Comparator&lt;/code&gt;和&lt;code&gt;Comparable&lt;/code&gt;,在《Thinking in Java》中是这样说明二者的区别的：&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Comparable 是一个对象本身就已经支持自比较所需要实现的接口（如 String、Integer 自己就可以完成比较大小操作）&lt;/li&gt;&#xA;&lt;li&gt;Comparator 是一个专用的比较器，当这个对象不支持自比较或者自比较函数不能满足你的要求时，你可以写一个比较器来完成两个对象之间大小的比较。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;想象这么一个场景，商品对象&lt;code&gt;Item&lt;/code&gt;有价格、销量、评分等属性，不同的业务需要根据不同的属性排序，大部分是根据商品销量排序，那么如何用这个排序比较器呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;很容易想到，让商品这个类实现&lt;code&gt;Comparable&lt;/code&gt;接口，在&lt;code&gt;compareTo&lt;/code&gt;方法中比较商品销量，那么对于按销量排序的时候，只需要简单的利用&lt;code&gt;Collections.sort(itemList)&lt;/code&gt;就可以达到效果,对于其它字段的排序，我们可以在需要的时候利用匿名类的方式，简化代码，如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;Collections.sort(itemList, new Comparator&amp;lt;Item&amp;gt;() {&#xA;    @Override&#xA;    public int compare(Item o1, Item o2) {&#xA;        return o2.getPrice()-o1.getPrice();&#xA;    }&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;但是呢，这样每次用到比较器的时候都要写一遍，而且会创建一个新的实例，对于有代码洁癖的人来说这样是不行的，于是乎，尝试将每种比较器生成一个类，这个类只有一个&lt;code&gt;Compare()&lt;/code&gt;方法，每次新增一个比较字段的时候就增加一个类，这样也可以解决问题，但是好像也不太优雅，于是进一步改进，将这些排序比较器对象存储到一个私有的静态&lt;code&gt;final&lt;/code&gt;域，然后在宿主类中导出共有的静态域，这样既可以做到重用，而且也优雅，每次增加一种比较器的时候，在宿主类中增加一个静态域即可。如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;public class SortComparator {&#xA;    public static final Comparator&amp;lt;Item&amp;gt; ITEM_PRICE_COMPARATOR = new ItemPriceComparator();   //按销量排序 &#xA;    public static final Comparator&amp;lt;Item&amp;gt; ITEM_SCORE_COMPARATOR = new ItemScoreComparator();   //按评分排序&#xA;    private static class ItemPriceComparator implements Comparator&amp;lt;Item&amp;gt; {&#xA;        @Override&#xA;        public int compare(Item item1, Item item2) {&#xA;            return item2.getPrice()-item1.getPrice();&#xA;        }&#xA;    }&#xA;    private static class ItemScoreComparator implements Comparator&amp;lt;Item&amp;gt; {&#xA;        @Override&#xA;        public int compare(Item item1, Item item2) {&#xA;            return (item2.getItemScore()-item1.getItemScore());&#xA;        }&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>泛型相关知识整理</title>
       <link>http://bakky.github.io/2013/工作/generic.html</link>
       <pubDate>2013-07-17 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;h4&gt;why generic programming?&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;代码重用&lt;/li&gt;
-&lt;li&gt;类型安全，编译时期发现错误&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h4&gt;what is generic programming?&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;泛型分为泛型类和泛型方法。&lt;/li&gt;
-&lt;li&gt;泛型处理几乎全在编译器中进行，Java编译器通过Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。这就是通过擦除实现的&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h4&gt;why type erasue?&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;将泛型类型实例关联到同一份字节码上。&lt;/li&gt;
-&lt;li&gt;编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。&lt;/li&gt;
-&lt;li&gt;避免浪费空间&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h4&gt;what is the type erasue?&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。&lt;/li&gt;
-&lt;li&gt;类型擦除的主要过程如下：
-
-&lt;ol&gt;
-&lt;li&gt;将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。&lt;/li&gt;
-&lt;li&gt;移除所有的类型参数。&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;对于泛型编译器还做了适当优化，会在编译期间对于插除后带来的问题尽可能的处理，例如通过桥接，插入相关字节码，保证正常执行，在进行翻译泛型变量的时候自动插入强制转换字节码&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h4&gt;what&amp;rsquo;s the problems of erasue brings?&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Q1.用同一泛型类的实例区分方法签名？——NO！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;import java.util.*;    
-   public class Erasure{   
-       public void test(List&amp;lt;String&amp;gt; ls){  
-           System.out.println(&amp;quot;Sting&amp;quot;);  
-       }  
-       public void test(List&amp;lt;Integer&amp;gt; li){  
-           System.out.println(&amp;quot;Integer&amp;quot;);  
-       }  
-  }  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;编译该类，参数类型明明不一样啊，一个&lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;，一个是&lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;，但是，偷偷的说，type erasure之后，它就都是List了⋯⋯&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Q2.同时catch同一个泛型异常类的多个实例？——NO！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;同理，如果定义了一个泛型一场类&lt;code&gt;GenericException&amp;lt;T&amp;gt;&lt;/code&gt;，千万别同时&lt;code&gt;catch GenericException&amp;lt;Integer&amp;gt;&lt;/code&gt;和&lt;code&gt;GenericException&amp;lt;String&amp;gt;&lt;/code&gt;，因为他们是一样一样滴⋯⋯&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Q3.泛型类的静态变量是共享的？——Yes！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;猜猜这段代码的输出是什么？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import java.util.*;   
-public class StaticTest{  
-    public static void main(String[] args){  
-        GT&amp;lt;Integer&amp;gt; gti = new GT&amp;lt;Integer&amp;gt;();  
-        gti.var=1;  
-        GT&amp;lt;String&amp;gt; gts = new GT&amp;lt;String&amp;gt;();  
-        gts.var=2;  
-        System.out.println(gti.var);  
-    }  
-}  
-class GT&amp;lt;T&amp;gt;{  
-    public static int var=0;  
-    public void nothing(T x){}  
-}  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;答案是——2！由于经过类型擦除，所有的泛型类实例都关联到同一份字节码上，泛型类的所有静态变量是共享的。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h4&gt;just remember&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;虚拟机中没有泛型，只有普通类和普通方法&lt;/li&gt;
-&lt;li&gt;所有泛型类的类型参数在编译时都会被擦除&lt;/li&gt;
-&lt;li&gt;创建泛型对象时请指明类型，让编译器尽早的做参数检查（Effective Java，第23条：请不要在新代码中使用原生态类型）&lt;/li&gt;
-&lt;li&gt;不要忽略编译器的警告信息，那意味着潜在的&lt;code&gt;ClassCastException&lt;/code&gt;等着你&lt;/li&gt;
-&lt;li&gt;不可协变(&lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;不能赋值给&lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;h4&gt;why generic programming?&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;代码重用&lt;/li&gt;&#xA;&lt;li&gt;类型安全，编译时期发现错误&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;h4&gt;what is generic programming?&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;泛型分为泛型类和泛型方法。&lt;/li&gt;&#xA;&lt;li&gt;泛型处理几乎全在编译器中进行，Java编译器通过Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。这就是通过擦除实现的&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;h4&gt;why type erasue?&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;将泛型类型实例关联到同一份字节码上。&lt;/li&gt;&#xA;&lt;li&gt;编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。&lt;/li&gt;&#xA;&lt;li&gt;避免浪费空间&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;h4&gt;what is the type erasue?&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。&lt;/li&gt;&#xA;&lt;li&gt;类型擦除的主要过程如下：&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。&lt;/li&gt;&#xA;&lt;li&gt;移除所有的类型参数。&lt;/li&gt;&#xA;&lt;/ol&gt;&lt;/li&gt;&#xA;&lt;li&gt;对于泛型编译器还做了适当优化，会在编译期间对于插除后带来的问题尽可能的处理，例如通过桥接，插入相关字节码，保证正常执行，在进行翻译泛型变量的时候自动插入强制转换字节码&lt;br /&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;h4&gt;what&amp;rsquo;s the problems of erasue brings?&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Q1.用同一泛型类的实例区分方法签名？——NO！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;import java.util.*;    &#xA;   public class Erasure{   &#xA;       public void test(List&amp;lt;String&amp;gt; ls){  &#xA;           System.out.println(&amp;quot;Sting&amp;quot;);  &#xA;       }  &#xA;       public void test(List&amp;lt;Integer&amp;gt; li){  &#xA;           System.out.println(&amp;quot;Integer&amp;quot;);  &#xA;       }  &#xA;  }  &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;编译该类，参数类型明明不一样啊，一个&lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;，一个是&lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;，但是，偷偷的说，type erasure之后，它就都是List了⋯⋯&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Q2.同时catch同一个泛型异常类的多个实例？——NO！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;同理，如果定义了一个泛型一场类&lt;code&gt;GenericException&amp;lt;T&amp;gt;&lt;/code&gt;，千万别同时&lt;code&gt;catch GenericException&amp;lt;Integer&amp;gt;&lt;/code&gt;和&lt;code&gt;GenericException&amp;lt;String&amp;gt;&lt;/code&gt;，因为他们是一样一样滴⋯⋯&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Q3.泛型类的静态变量是共享的？——Yes！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;猜猜这段代码的输出是什么？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;import java.util.*;   &#xA;public class StaticTest{  &#xA;    public static void main(String[] args){  &#xA;        GT&amp;lt;Integer&amp;gt; gti = new GT&amp;lt;Integer&amp;gt;();  &#xA;        gti.var=1;  &#xA;        GT&amp;lt;String&amp;gt; gts = new GT&amp;lt;String&amp;gt;();  &#xA;        gts.var=2;  &#xA;        System.out.println(gti.var);  &#xA;    }  &#xA;}  &#xA;class GT&amp;lt;T&amp;gt;{  &#xA;    public static int var=0;  &#xA;    public void nothing(T x){}  &#xA;}  &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;答案是——2！由于经过类型擦除，所有的泛型类实例都关联到同一份字节码上，泛型类的所有静态变量是共享的。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;h4&gt;just remember&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;虚拟机中没有泛型，只有普通类和普通方法&lt;/li&gt;&#xA;&lt;li&gt;所有泛型类的类型参数在编译时都会被擦除&lt;/li&gt;&#xA;&lt;li&gt;创建泛型对象时请指明类型，让编译器尽早的做参数检查（Effective Java，第23条：请不要在新代码中使用原生态类型）&lt;/li&gt;&#xA;&lt;li&gt;不要忽略编译器的警告信息，那意味着潜在的&lt;code&gt;ClassCastException&lt;/code&gt;等着你&lt;/li&gt;&#xA;&lt;li&gt;不可协变(&lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;不能赋值给&lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
     </item>
     <item>
       <title>CountDownLatch与CyclicBarrier的使用和区别</title>
       <link>http://bakky.github.io/2013/工作/count.html</link>
       <pubDate>2013-07-06 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;`countdownlatch`&#34; href=&#34;#`countdownlatch`&#34;&gt;&lt;/a&gt;&lt;code&gt;CountDownLatch&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;br&gt;
-应用场景：有一个任务A想要往下执行，但必须要等到其他的任务B、C执行完毕后才可以继续往下执行。&lt;/p&gt;
-
-&lt;p&gt;使用方式：让任务A调用一个CountDownLatch对象的&lt;code&gt;await()&lt;/code&gt;方法，其他的任务执行完自己的任务后调用同一个CountDownLatch对象上的&lt;code&gt;countDown()&lt;/code&gt;方法，任务A将一直阻塞等待，直到这个CountDownLatch对象的计数值减到0为止。&lt;/p&gt;
-
-&lt;p&gt;那么CountDownLatch内部是如何实现让这个任务一直阻塞等待一直到所有其它任务执行完的呢？&lt;/p&gt;
-
-&lt;p&gt;粗略的想下，原理可能是初始化一个值为所有任务个数的原子计数器，当前线程一直循环等待，执行下去的条件是全局计数器值为0，其它任务线程执行完后全局计数器减1&lt;/p&gt;
-
-&lt;p&gt;来看看其源码：&lt;code&gt;await()&lt;/code&gt;方法和&lt;code&gt;countDown()&lt;/code&gt;方法&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;private final Sync sync;
-public void await()
-            throws InterruptedException {
-    sync.acquireSharedInterruptibly(1);
-}
-public void countDown() {
-    sync.releaseShared(1);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;可以看到主要依赖sync这个对象，Sync是个内部类，其继承于&lt;code&gt;AbstractQueuedSynchronizer&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;private static final class Sync extends AbstractQueuedSynchronizer {
-    int getCount() {
-        return getState();
-    }
-    public int tryAcquireShared(int i) {
-        return getState() != 0 ? -1 : 1;
-    }
-    public boolean tryReleaseShared(int i) {
-        int j;
-        int k;
-        do {
-            j = getState();
-            if (j == 0)
-                return false;
-            k = j - 1;
-        } while (!compareAndSetState(j, k));
-        return k == 0;        
-        private static final long serialVersionUID = -1739299674L;
-        Sync(int i) {
-            setState(i);
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;阻塞的逻辑都在&lt;code&gt;AbstractQueuedSynchronizer&lt;/code&gt;中，原理就是&lt;code&gt;await&lt;/code&gt;时比较一下&lt;code&gt;state&lt;/code&gt;（相当于count），如果满足了，则不阻塞（返回1），如果不满足，阻塞（返回-1）&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;AbstractQueuedSynchronizer&lt;/code&gt;没有用正常的&lt;code&gt;wait&lt;/code&gt;，&lt;code&gt;notifyAll&lt;/code&gt;，&lt;code&gt;lock&lt;/code&gt;的阻塞等方法，阻塞做法需要深入研究，详情可以参看&lt;a href=&#34;http://www.blogjava.net/xylz/archive/2010/07/09/325612.html&#34;&gt;这篇博客&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;tryReleaseShared&lt;/code&gt;中采用CAS的操作减少计数&lt;/p&gt;
-
-&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;`cyclicbarrier`&#34; href=&#34;#`cyclicbarrier`&#34;&gt;&lt;/a&gt;&lt;code&gt;CyclicBarrier&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;br&gt;
-使用和原理解析详见&lt;a href=&#34;http://yhjhappy234.blog.163.com/blog/static/316328322013514112247947/&#34;&gt;这篇博客&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3&gt;区别&lt;/h3&gt;
-
-&lt;p&gt;&lt;br&gt;
-&lt;code&gt;CountDownLatch&lt;/code&gt; :&lt;/p&gt;
-
-&lt;p&gt;一个线程(或者多个)， 等待另外N个线程完成某个事情之后才能执行。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;CyclicBarrier&lt;/code&gt; :&lt;/p&gt;
-
-&lt;p&gt;N个线程相互等待，任何一个线程完成之前，所有的线程都必须等待。&lt;/p&gt;
-
-&lt;p&gt;对于&lt;code&gt;CountDownLatch&lt;/code&gt;来说，重点是那个“一个线程”, 是它在等待， 而另外那N的线程在把“某个事情”做完之后可以继续等待，可以终止。而对于&lt;code&gt;CyclicBarrier&lt;/code&gt;来说，重点是那N个线程，他们之间任何一个没有完成，所有的线程都必须等待。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;`countdownlatch`&#34; href=&#34;#`countdownlatch`&#34;&gt;&lt;/a&gt;&lt;code&gt;CountDownLatch&lt;/code&gt;&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;br&gt;&#xA;应用场景：有一个任务A想要往下执行，但必须要等到其他的任务B、C执行完毕后才可以继续往下执行。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用方式：让任务A调用一个CountDownLatch对象的&lt;code&gt;await()&lt;/code&gt;方法，其他的任务执行完自己的任务后调用同一个CountDownLatch对象上的&lt;code&gt;countDown()&lt;/code&gt;方法，任务A将一直阻塞等待，直到这个CountDownLatch对象的计数值减到0为止。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;那么CountDownLatch内部是如何实现让这个任务一直阻塞等待一直到所有其它任务执行完的呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;粗略的想下，原理可能是初始化一个值为所有任务个数的原子计数器，当前线程一直循环等待，执行下去的条件是全局计数器值为0，其它任务线程执行完后全局计数器减1&lt;/p&gt;&#xA;&#xA;&lt;p&gt;来看看其源码：&lt;code&gt;await()&lt;/code&gt;方法和&lt;code&gt;countDown()&lt;/code&gt;方法&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;private final Sync sync;&#xA;public void await()&#xA;            throws InterruptedException {&#xA;    sync.acquireSharedInterruptibly(1);&#xA;}&#xA;public void countDown() {&#xA;    sync.releaseShared(1);&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;可以看到主要依赖sync这个对象，Sync是个内部类，其继承于&lt;code&gt;AbstractQueuedSynchronizer&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;private static final class Sync extends AbstractQueuedSynchronizer {&#xA;    int getCount() {&#xA;        return getState();&#xA;    }&#xA;    public int tryAcquireShared(int i) {&#xA;        return getState() != 0 ? -1 : 1;&#xA;    }&#xA;    public boolean tryReleaseShared(int i) {&#xA;        int j;&#xA;        int k;&#xA;        do {&#xA;            j = getState();&#xA;            if (j == 0)&#xA;                return false;&#xA;            k = j - 1;&#xA;        } while (!compareAndSetState(j, k));&#xA;        return k == 0;        &#xA;        private static final long serialVersionUID = -1739299674L;&#xA;        Sync(int i) {&#xA;            setState(i);&#xA;        }&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;阻塞的逻辑都在&lt;code&gt;AbstractQueuedSynchronizer&lt;/code&gt;中，原理就是&lt;code&gt;await&lt;/code&gt;时比较一下&lt;code&gt;state&lt;/code&gt;（相当于count），如果满足了，则不阻塞（返回1），如果不满足，阻塞（返回-1）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;AbstractQueuedSynchronizer&lt;/code&gt;没有用正常的&lt;code&gt;wait&lt;/code&gt;，&lt;code&gt;notifyAll&lt;/code&gt;，&lt;code&gt;lock&lt;/code&gt;的阻塞等方法，阻塞做法需要深入研究，详情可以参看&lt;a href=&#34;http://www.blogjava.net/xylz/archive/2010/07/09/325612.html&#34;&gt;这篇博客&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;tryReleaseShared&lt;/code&gt;中采用CAS的操作减少计数&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;`cyclicbarrier`&#34; href=&#34;#`cyclicbarrier`&#34;&gt;&lt;/a&gt;&lt;code&gt;CyclicBarrier&lt;/code&gt;&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;br&gt;&#xA;使用和原理解析详见&lt;a href=&#34;http://yhjhappy234.blog.163.com/blog/static/316328322013514112247947/&#34;&gt;这篇博客&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;区别&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;br&gt;&#xA;&lt;code&gt;CountDownLatch&lt;/code&gt; :&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个线程(或者多个)， 等待另外N个线程完成某个事情之后才能执行。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;CyclicBarrier&lt;/code&gt; :&lt;/p&gt;&#xA;&#xA;&lt;p&gt;N个线程相互等待，任何一个线程完成之前，所有的线程都必须等待。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;对于&lt;code&gt;CountDownLatch&lt;/code&gt;来说，重点是那个“一个线程”, 是它在等待， 而另外那N的线程在把“某个事情”做完之后可以继续等待，可以终止。而对于&lt;code&gt;CyclicBarrier&lt;/code&gt;来说，重点是那N个线程，他们之间任何一个没有完成，所有的线程都必须等待。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>输入流和输出流对接</title>
       <link>http://bakky.github.io/2013/工作/stream.html</link>
       <pubDate>2013-06-18 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中&lt;/p&gt;
-
-&lt;p&gt;使用场景：大量数据传输，list或数组装不下的情况&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;      DefaultHttpClient client = new DefaultHttpClient();
-      StringBuffer getString = new StringBuffer();
-      HttpMethod method = null;
-      HttpResponse response;
-      JSONObject res = null;
-      try {
-            //url拼接
-
-           //发起请求
-           String url = getString.toString();
-           HttpGet get = new HttpGet(url);
-           response = client.execute(get);
-           InputStream input = response.getEntity().getContent();
-           File newFile = new File(tfsPath+&amp;quot;/&amp;quot;+new Date().getTime()+&amp;quot;_&amp;quot;+groupid+&amp;quot;.txt&amp;quot;);
-           OutputStream output = new FileOutputStream(newFile);
-           IOUtils.copy(input, output);
-           return newFile.getPath();
-      } catch (Exception e) {
-           log.error(&amp;quot;error:&amp;quot;+getString+&amp;quot;[res:]&amp;quot;+res, e);
-           return null;
-      }finally{
-           //释放连接
-           if(method!=null)
-                method.releaseConnection();
-      }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将输入流写到输出流中使用了apache的IOUtils工具包，注意不要将服务端获取输入流单独提取方法，因为有个释放链接的过程，而对接的时候，连接是不能被关闭的。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&#xA;基本原理：通过httpClient获取服务器端输入流InputStream,然后新建一个输出流，将输入流写入到输出流中&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用场景：大量数据传输，list或数组装不下的情况&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;      DefaultHttpClient client = new DefaultHttpClient();&#xA;      StringBuffer getString = new StringBuffer();&#xA;      HttpMethod method = null;&#xA;      HttpResponse response;&#xA;      JSONObject res = null;&#xA;      try {&#xA;            //url拼接&#xA;&#xA;           //发起请求&#xA;           String url = getString.toString();&#xA;           HttpGet get = new HttpGet(url);&#xA;           response = client.execute(get);&#xA;           InputStream input = response.getEntity().getContent();&#xA;           File newFile = new File(tfsPath+&amp;quot;/&amp;quot;+new Date().getTime()+&amp;quot;_&amp;quot;+groupid+&amp;quot;.txt&amp;quot;);&#xA;           OutputStream output = new FileOutputStream(newFile);&#xA;           IOUtils.copy(input, output);&#xA;           return newFile.getPath();&#xA;      } catch (Exception e) {&#xA;           log.error(&amp;quot;error:&amp;quot;+getString+&amp;quot;[res:]&amp;quot;+res, e);&#xA;           return null;&#xA;      }finally{&#xA;           //释放连接&#xA;           if(method!=null)&#xA;                method.releaseConnection();&#xA;      }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;将输入流写到输出流中使用了apache的IOUtils工具包，注意不要将服务端获取输入流单独提取方法，因为有个释放链接的过程，而对接的时候，连接是不能被关闭的。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>《effective java》笔记（更新中）</title>
       <link>http://bakky.github.io/2013/笔记/effective_java.html</link>
       <pubDate>2013-05-12 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4&gt;第21条：用函数对象表示策略&lt;/h4&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;java没有函数指针，可以用对象引用实现同样的功能&lt;/li&gt;
-&lt;li&gt;如果一个类仅仅导出一个方法，那么这个实例就等同于一个指向该方法的指针（例如常见的排序比较器使用：Comparator）这样就可以在某一个对象的方法中执行其它对象。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Arrays.sort(stringArray,new Comparator&amp;lt;String&amp;gt;(){
-     public int compare(String s1,String s2){
-          return s1.length()-s2.length();
-     }
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;每个比较器就是一个具体策略类，具体策略类往往使用匿名类声明（例如上面的例子），我们也可以声明一个普通的类实现Comparator接口。这个时候，我们可以考虑，因为用匿名类的话，每次执行调用的时候会生成一个新的对象实例，将这个函数对象存储在一个私有的静态final域中。&lt;/p&gt;
-
-&lt;p&gt;如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class A{
-     private static class Strlen implements Comparator&amp;lt;String&amp;gt;{
-         public int compare(String s1,String s2){
-          return s1.length()-s2.length();
-          } 
-     }
-     public static final Comparator&amp;lt;String&amp;gt; STRING_LEN_COMPARE = new Strlen();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用就变成这样了：Arrays.sorts(stringArray,A.STRING_LEN_COMPARE),这样做的好处是：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;减少频繁创建对象的开销&lt;/li&gt;
-&lt;li&gt;代码的可读性增加，重复利用，可以将A取一个有意义的域名称&lt;/li&gt;
-&lt;/ol&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;第21条：用函数对象表示策略&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;java没有函数指针，可以用对象引用实现同样的功能&lt;/li&gt;&#xA;&lt;li&gt;如果一个类仅仅导出一个方法，那么这个实例就等同于一个指向该方法的指针（例如常见的排序比较器使用：Comparator）这样就可以在某一个对象的方法中执行其它对象。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;例：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;Arrays.sort(stringArray,new Comparator&amp;lt;String&amp;gt;(){&#xA;     public int compare(String s1,String s2){&#xA;          return s1.length()-s2.length();&#xA;     }&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;每个比较器就是一个具体策略类，具体策略类往往使用匿名类声明（例如上面的例子），我们也可以声明一个普通的类实现Comparator接口。这个时候，我们可以考虑，因为用匿名类的话，每次执行调用的时候会生成一个新的对象实例，将这个函数对象存储在一个私有的静态final域中。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;class A{&#xA;     private static class Strlen implements Comparator&amp;lt;String&amp;gt;{&#xA;         public int compare(String s1,String s2){&#xA;          return s1.length()-s2.length();&#xA;          } &#xA;     }&#xA;     public static final Comparator&amp;lt;String&amp;gt; STRING_LEN_COMPARE = new Strlen();&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;使用就变成这样了：Arrays.sorts(stringArray,A.STRING_LEN_COMPARE),这样做的好处是：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;减少频繁创建对象的开销&lt;/li&gt;&#xA;&lt;li&gt;代码的可读性增加，重复利用，可以将A取一个有意义的域名称&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
     </item>
     <item>
       <title>《重构》笔记（更新中）</title>
       <link>http://bakky.github.io/2013/笔记/restruct.html</link>
       <pubDate>2013-05-08 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4&gt;第1章&lt;/h4&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;在设计前期采用模式常常导致过度工程&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;开发业务代码时很容易面向过程编程&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;大方法差成小方法:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;所有行为拆成很多小行为，然后将合适的行为提炼到对象中
-分拆出小方法（要避免过多参数的传递）
-这样做可能还会带来代码量的增加
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;运用常用设计模式
-    可以穿插看设计模式的书籍（对应设计模式）&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4&gt;第2章&lt;/h4&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;设计模式更像是重构的一种手段&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;重构就是在整理代码，让代码容易被理解喝修改&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4&gt;第6章&lt;/h4&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;优秀的代码组织和性能间的权衡&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;第1章&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;p&gt;在设计前期采用模式常常导致过度工程&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;开发业务代码时很容易面向过程编程&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;大方法差成小方法:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;所有行为拆成很多小行为，然后将合适的行为提炼到对象中&#xA;分拆出小方法（要避免过多参数的传递）&#xA;这样做可能还会带来代码量的增加&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;运用常用设计模式&#xA;    可以穿插看设计模式的书籍（对应设计模式）&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h4&gt;第2章&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;p&gt;设计模式更像是重构的一种手段&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;重构就是在整理代码，让代码容易被理解喝修改&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h4&gt;第6章&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;优秀的代码组织和性能间的权衡&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
     </item>
     <item>
       <title>【转】关于java中的移位操作 - 红旗飘飘 - 博客频道 - CSDN.NET</title>
       <link>http://bakky.github.io/2013/工作/shift.html</link>
       <pubDate>2013-05-07 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;在Think in Java中有这么一段话“对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。只有右侧的5个低位才会有用。这样可防止我们在一个int数里移动不切实际的位数。若对一个long值进行处理，最后得到的结果也是long。此时只会用到右侧的6个低位，防止移动超过long值里现成的位数。”&lt;/p&gt;
-
-&lt;p&gt;对上面那段话的理解是：移位操作符操作的运算对象是二进制的“位”，int类型是32位也就是2的5次幂 ！如果移32位以上，那么原来的数的信息会全部丢失，这样也就没有什么意义了！所以上面的“只有右侧的5个低位才会有用”说的是：移位操作符右端的那个数（化成二进制）的低5位才有用，即 X &amp;lt; &amp;lt;y; 是指y的低5位才有用，即不能大于32。 而对于long型也是同样的道理！&lt;/p&gt;
-
-&lt;p&gt;因此，如果对一个int 型，进行移位，X &amp;lt; &amp;lt;y; 当y小于32时，移位后的结果一般都在我们的预料当中；而如果y大于32时，由于移位超出了int所能表示的范围，这时就先把y化成二进制数，然后取该二进制数右端的低5位，再把这5位化成十进制，此时的这个十进制就是要对X移动的位数。&lt;/p&gt;
-
-&lt;p&gt;例如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;int a=140;   
-a &amp;lt;&amp;lt; 34
-System.out.println(Integer.toBinaryString(a &amp;lt;&amp;lt; 34));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面那两个语句的执行过程是：先把a化成二进制数：10001100
-执行语句 a &amp;lt;&amp;lt; 34   对a左移32位时，先把 34化成二进制：100010，对该二进制数取右边5位，即00010，化成十进制数为2，所以实际上是对a左移两位。现在，地球人都会知道上面程序的输出结果是：1000110000&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在Think in Java中有这么一段话“对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。只有右侧的5个低位才会有用。这样可防止我们在一个int数里移动不切实际的位数。若对一个long值进行处理，最后得到的结果也是long。此时只会用到右侧的6个低位，防止移动超过long值里现成的位数。”&lt;/p&gt;&#xA;&#xA;&lt;p&gt;对上面那段话的理解是：移位操作符操作的运算对象是二进制的“位”，int类型是32位也就是2的5次幂 ！如果移32位以上，那么原来的数的信息会全部丢失，这样也就没有什么意义了！所以上面的“只有右侧的5个低位才会有用”说的是：移位操作符右端的那个数（化成二进制）的低5位才有用，即 X &amp;lt; &amp;lt;y; 是指y的低5位才有用，即不能大于32。 而对于long型也是同样的道理！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;因此，如果对一个int 型，进行移位，X &amp;lt; &amp;lt;y; 当y小于32时，移位后的结果一般都在我们的预料当中；而如果y大于32时，由于移位超出了int所能表示的范围，这时就先把y化成二进制数，然后取该二进制数右端的低5位，再把这5位化成十进制，此时的这个十进制就是要对X移动的位数。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;例如：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;int a=140;   &#xA;a &amp;lt;&amp;lt; 34&#xA;System.out.println(Integer.toBinaryString(a &amp;lt;&amp;lt; 34));&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;上面那两个语句的执行过程是：先把a化成二进制数：10001100&#xA;执行语句 a &amp;lt;&amp;lt; 34   对a左移32位时，先把 34化成二进制：100010，对该二进制数取右边5位，即00010，化成十进制数为2，所以实际上是对a左移两位。现在，地球人都会知道上面程序的输出结果是：1000110000&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>btrace用法补充</title>
       <link>http://bakky.github.io/2012/工作/btrace.html</link>
       <pubDate>2012-10-25 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;下载btrace并安装，将bin目录加入到path路径下
-/builder 文件夹下为类文件 ，最好反编译下，因为写脚本的过程中只能用里面提供的api&lt;/p&gt;
-
-&lt;p&gt;/samples 文件夹下为一些例子，各种标签和属性的用法可以用来参考&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://kenai.com/projects/btrace/pages/UserGuide&#34;&gt;btrace user guide&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;自己写了个统计在一段时间内方法执行时间的脚本：&lt;/p&gt;
-
-&lt;p&gt;运行类：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import java. util. Random;
-public class CaseObject {
-      private static int sleepTotalTime= 0;    
-      public boolean execute(int sleepTime) throws Exception {
-          System. out. println( &amp;quot;sleep: &amp;quot;+sleepTime );
-          sleepTotalTime+=sleepTime ;
-          Thread. sleep(sleepTime );
-          return true ;
-      }
-      public static void main(String [] args ) throws Exception {
-           Random random =new Random();
-           CaseObject object =new CaseObject();
-           boolean result=true ;
-           while(result ){
-              result= object. execute( random. nextInt( 1000));
-              Thread. sleep(1000 );
-           }
-     }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;btrace脚本：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import static com. sun. btrace. BTraceUtils.println ;
-import static com. sun. btrace. BTraceUtils.str ;
-import static com. sun. btrace. BTraceUtils.strcat ;
-import static com. sun. btrace. BTraceUtils.timeMillis ;
-import java. util. concurrent. atomic. AtomicInteger;
-import com. sun. btrace. BTraceUtils;
-import com. sun. btrace. annotations.BTrace ;
-import com. sun. btrace. annotations.Kind ;
-import com. sun. btrace. annotations.Location ;
-import com. sun. btrace. annotations.OnMethod ;
-import com. sun. btrace. annotations.OnTimer ;
-import com. sun. btrace. annotations.Return ;
-import com. sun. btrace. annotations.Self ;
-import com. sun. btrace. annotations.TLS;
-@BTrace
-public class TraceMethodArgsAndReturn {
-     private static Long total_time = 0L;
-     private static AtomicInteger ato = BTraceUtils.newAtomicInteger (0 );    
-     @TLS static long beginTime;
-       @OnMethod(
-          clazz= &amp;quot;CaseObject&amp;quot;,
-          method= &amp;quot;execute&amp;quot;
-       )
-       public static void traceExecuteBegin(){
-          beginTime=timeMillis ();
-       }     
-       @OnMethod(
-          clazz= &amp;quot;CaseObject&amp;quot;,
-          method= &amp;quot;execute&amp;quot;,
-          location= @Location( Kind. RETURN)
-       )
-       public static void traceExecute(@Self CaseObject object,int sleepTime , @Return boolean result){
-             println( strcat(&amp;quot;sleepTime is:&amp;quot; ,str(sleepTime)));
-             BTraceUtils.getAndIncrement (ato);
-             println( strcat(&amp;quot;第&amp;quot; ,strcat(str( BTraceUtils.get (ato)),&amp;quot;次执行&amp;quot;)));
-             total_time += timeMillis()-beginTime ;
-             println( strcat(strcat (&amp;quot;此次执行时间是:&amp;quot; ,str(timeMillis()- beginTime)),&amp;quot;ms&amp;quot; ));
-     }   
-       @OnTimer( 4000)
-       public static void print(){
-             println( strcat(&amp;quot;总共耗时：&amp;quot; ,str(total_time)));
-             println( strcat(&amp;quot;总共执行&amp;quot; ,strcat(str( BTraceUtils.get (ato)),&amp;quot;次&amp;quot;)));
-             float average = total_time.floatValue ()/BTraceUtils .get(ato);
-             println( strcat(&amp;quot;平均执行时间:&amp;quot; ,str(average)));
-       }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;记住，btrace脚本中只能用btrace提供的api，可能会有些不适应，所以需要反编译类文件查看用法。&lt;/p&gt;
-
-&lt;p&gt;@TLS：标记为静态属性且为thread local&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下载btrace并安装，将bin目录加入到path路径下&#xA;/builder 文件夹下为类文件 ，最好反编译下，因为写脚本的过程中只能用里面提供的api&lt;/p&gt;&#xA;&#xA;&lt;p&gt;/samples 文件夹下为一些例子，各种标签和属性的用法可以用来参考&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;http://kenai.com/projects/btrace/pages/UserGuide&#34;&gt;btrace user guide&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;自己写了个统计在一段时间内方法执行时间的脚本：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;运行类：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;import java. util. Random;&#xA;public class CaseObject {&#xA;      private static int sleepTotalTime= 0;    &#xA;      public boolean execute(int sleepTime) throws Exception {&#xA;          System. out. println( &amp;quot;sleep: &amp;quot;+sleepTime );&#xA;          sleepTotalTime+=sleepTime ;&#xA;          Thread. sleep(sleepTime );&#xA;          return true ;&#xA;      }&#xA;      public static void main(String [] args ) throws Exception {&#xA;           Random random =new Random();&#xA;           CaseObject object =new CaseObject();&#xA;           boolean result=true ;&#xA;           while(result ){&#xA;              result= object. execute( random. nextInt( 1000));&#xA;              Thread. sleep(1000 );&#xA;           }&#xA;     }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;btrace脚本：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;import static com. sun. btrace. BTraceUtils.println ;&#xA;import static com. sun. btrace. BTraceUtils.str ;&#xA;import static com. sun. btrace. BTraceUtils.strcat ;&#xA;import static com. sun. btrace. BTraceUtils.timeMillis ;&#xA;import java. util. concurrent. atomic. AtomicInteger;&#xA;import com. sun. btrace. BTraceUtils;&#xA;import com. sun. btrace. annotations.BTrace ;&#xA;import com. sun. btrace. annotations.Kind ;&#xA;import com. sun. btrace. annotations.Location ;&#xA;import com. sun. btrace. annotations.OnMethod ;&#xA;import com. sun. btrace. annotations.OnTimer ;&#xA;import com. sun. btrace. annotations.Return ;&#xA;import com. sun. btrace. annotations.Self ;&#xA;import com. sun. btrace. annotations.TLS;&#xA;@BTrace&#xA;public class TraceMethodArgsAndReturn {&#xA;     private static Long total_time = 0L;&#xA;     private static AtomicInteger ato = BTraceUtils.newAtomicInteger (0 );    &#xA;     @TLS static long beginTime;&#xA;       @OnMethod(&#xA;          clazz= &amp;quot;CaseObject&amp;quot;,&#xA;          method= &amp;quot;execute&amp;quot;&#xA;       )&#xA;       public static void traceExecuteBegin(){&#xA;          beginTime=timeMillis ();&#xA;       }     &#xA;       @OnMethod(&#xA;          clazz= &amp;quot;CaseObject&amp;quot;,&#xA;          method= &amp;quot;execute&amp;quot;,&#xA;          location= @Location( Kind. RETURN)&#xA;       )&#xA;       public static void traceExecute(@Self CaseObject object,int sleepTime , @Return boolean result){&#xA;             println( strcat(&amp;quot;sleepTime is:&amp;quot; ,str(sleepTime)));&#xA;             BTraceUtils.getAndIncrement (ato);&#xA;             println( strcat(&amp;quot;第&amp;quot; ,strcat(str( BTraceUtils.get (ato)),&amp;quot;次执行&amp;quot;)));&#xA;             total_time += timeMillis()-beginTime ;&#xA;             println( strcat(strcat (&amp;quot;此次执行时间是:&amp;quot; ,str(timeMillis()- beginTime)),&amp;quot;ms&amp;quot; ));&#xA;     }   &#xA;       @OnTimer( 4000)&#xA;       public static void print(){&#xA;             println( strcat(&amp;quot;总共耗时：&amp;quot; ,str(total_time)));&#xA;             println( strcat(&amp;quot;总共执行&amp;quot; ,strcat(str( BTraceUtils.get (ato)),&amp;quot;次&amp;quot;)));&#xA;             float average = total_time.floatValue ()/BTraceUtils .get(ato);&#xA;             println( strcat(&amp;quot;平均执行时间:&amp;quot; ,str(average)));&#xA;       }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;记住，btrace脚本中只能用btrace提供的api，可能会有些不适应，所以需要反编译类文件查看用法。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;@TLS：标记为静态属性且为thread local&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>定义一种返回结果</title>
       <link>http://bakky.github.io/2012/工作/result.html</link>
       <pubDate>2012-10-11 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Result &amp;lt;T&amp;gt; {
-     private boolean isSuccess ;
-     private String message;
-     private T result ;     
-     /**
-      * 创建一个只包含结果的result
-      * @param isSuccess
-      */
-     public Result( boolean isSuccess){
-            this.setSuccess (isSuccess );
-     }     
-     /**
-      * 创建一个不带返回对象的result
-      * @param isSuccess
-      * @param message
-      */
-     public Result( boolean isSuccess, String message) {
-            this.isSuccess = isSuccess;
-            this.message = message;
-     }     
-     /**
-      * 创建一个带返回对象的result
-      * @param isSuccess
-      * @param message
-      */
-     public Result( boolean isSuccess, String message, T result ) {
-            this.isSuccess = isSuccess;
-            this.message = message;
-            this.result = result;
-     }     
-     /**
-      * 返回一个成功的result，包含要返回的对象
-      * @param result 结果对象
-      */
-     public Result( T result ){
-            this.isSuccess =true;
-            this.setResult (result );
-     }
-     /**
-      * 创建一个失败的result，不包含返回对象
-      * @param msg
-      * @return
-      */
-     public static Result &amp;lt;Boolean &amp;gt; fail( String msg ){
-            return new Result &amp;lt;Boolean &amp;gt;(false, msg);
-     }   
-     /**
-      * 创建一个成功的result，不包含返回对象
-      * @param msg
-      * @return
-      */
-     public static Result &amp;lt;Boolean &amp;gt; succeed( String msg ){
-            return new Result &amp;lt;Boolean &amp;gt;(true, msg);
-     }     
-     /**
-      * 创建一个成功的result，不包含返回对象
-      * @return
-      */
-     public static Result &amp;lt;Boolean &amp;gt; succeed(){
-            return new Result &amp;lt;Boolean &amp;gt;(true);
-     }     
-     public boolean isSuccess () {
-            return isSuccess ;
-     }
-     public Result&amp;lt; T&amp;gt; setSuccess(boolean isSuccess) {
-            this.isSuccess = isSuccess;
-            return this ;
-     }
-     public boolean isFailed (){
-            return !isSuccess;
-     }
-     public String getMessage() {
-            return message ;
-     }
-     public Result&amp;lt; T&amp;gt; setMessage(String message) {
-            this.message = message;
-            return this ;
-     }
-     public T getResult() {
-            return result ;
-     }
-     public Result&amp;lt; T&amp;gt; setResult(T result) {
-            this.result = result;
-            return this ;
-     }
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;public class Result &amp;lt;T&amp;gt; {&#xA;     private boolean isSuccess ;&#xA;     private String message;&#xA;     private T result ;     &#xA;     /**&#xA;      * 创建一个只包含结果的result&#xA;      * @param isSuccess&#xA;      */&#xA;     public Result( boolean isSuccess){&#xA;            this.setSuccess (isSuccess );&#xA;     }     &#xA;     /**&#xA;      * 创建一个不带返回对象的result&#xA;      * @param isSuccess&#xA;      * @param message&#xA;      */&#xA;     public Result( boolean isSuccess, String message) {&#xA;            this.isSuccess = isSuccess;&#xA;            this.message = message;&#xA;     }     &#xA;     /**&#xA;      * 创建一个带返回对象的result&#xA;      * @param isSuccess&#xA;      * @param message&#xA;      */&#xA;     public Result( boolean isSuccess, String message, T result ) {&#xA;            this.isSuccess = isSuccess;&#xA;            this.message = message;&#xA;            this.result = result;&#xA;     }     &#xA;     /**&#xA;      * 返回一个成功的result，包含要返回的对象&#xA;      * @param result 结果对象&#xA;      */&#xA;     public Result( T result ){&#xA;            this.isSuccess =true;&#xA;            this.setResult (result );&#xA;     }&#xA;     /**&#xA;      * 创建一个失败的result，不包含返回对象&#xA;      * @param msg&#xA;      * @return&#xA;      */&#xA;     public static Result &amp;lt;Boolean &amp;gt; fail( String msg ){&#xA;            return new Result &amp;lt;Boolean &amp;gt;(false, msg);&#xA;     }   &#xA;     /**&#xA;      * 创建一个成功的result，不包含返回对象&#xA;      * @param msg&#xA;      * @return&#xA;      */&#xA;     public static Result &amp;lt;Boolean &amp;gt; succeed( String msg ){&#xA;            return new Result &amp;lt;Boolean &amp;gt;(true, msg);&#xA;     }     &#xA;     /**&#xA;      * 创建一个成功的result，不包含返回对象&#xA;      * @return&#xA;      */&#xA;     public static Result &amp;lt;Boolean &amp;gt; succeed(){&#xA;            return new Result &amp;lt;Boolean &amp;gt;(true);&#xA;     }     &#xA;     public boolean isSuccess () {&#xA;            return isSuccess ;&#xA;     }&#xA;     public Result&amp;lt; T&amp;gt; setSuccess(boolean isSuccess) {&#xA;            this.isSuccess = isSuccess;&#xA;            return this ;&#xA;     }&#xA;     public boolean isFailed (){&#xA;            return !isSuccess;&#xA;     }&#xA;     public String getMessage() {&#xA;            return message ;&#xA;     }&#xA;     public Result&amp;lt; T&amp;gt; setMessage(String message) {&#xA;            this.message = message;&#xA;            return this ;&#xA;     }&#xA;     public T getResult() {&#xA;            return result ;&#xA;     }&#xA;     public Result&amp;lt; T&amp;gt; setResult(T result) {&#xA;            this.result = result;&#xA;            return this ;&#xA;     }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>异常</title>
       <link>http://bakky.github.io/2012/工作/exception.html</link>
       <pubDate>2012-09-13 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;异常都派生于Throwable类的一个实例。&lt;/li&gt;
-&lt;li&gt;Throwable下有两个子类分支：Error和Exception&lt;/li&gt;
-&lt;li&gt;Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现&lt;/li&gt;
-&lt;li&gt;Exception下面又派生出两种异常分支：通常有程序导致的错误为RuntimeException，还有一类是IOException&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;java可以声明已检查异常，告诉编译器可能会发生什么样的错误。例如读文件方法可以&lt;code&gt;throw FileNotFoundException&lt;/code&gt;异常。已检查异常可以抛出多个。&lt;/p&gt;
-
-&lt;p&gt;我们可以自定义一个派生于Exception或其子类的类&lt;/p&gt;
-
-&lt;p&gt;再次抛出异常或异常链：&lt;/p&gt;
-
-&lt;p&gt;这个可能大家在调用一些通用的模块的时候会发现它的异常信息是被包装了一层的，我们需要调用
-对象的&lt;code&gt;getCause()&lt;/code&gt;方法才能得到异常信息。&lt;/p&gt;
-
-&lt;p&gt;因为每个子系统可能会产生同样的异常，当我们的上层系统捕捉到这种异常时我们并不知道是哪个底层子系统抛出的。这个时候我们就可以将原是一场捕获后重新进行包装然后抛出代表这个子系统的异常，但是原始的异常信息也不会丢失。如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;try{
-   access db
-}catch(SQLException e){
-   Throwable se = new MyAppException(&amp;quot;db error&amp;quot;);
-    se.initCause(e);
-    throw se;
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;异常都派生于Throwable类的一个实例。&lt;/li&gt;&#xA;&lt;li&gt;Throwable下有两个子类分支：Error和Exception&lt;/li&gt;&#xA;&lt;li&gt;Error类描述java运行时系统的内部错误和资源耗尽，这种情况很少出现&lt;/li&gt;&#xA;&lt;li&gt;Exception下面又派生出两种异常分支：通常有程序导致的错误为RuntimeException，还有一类是IOException&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;java可以声明已检查异常，告诉编译器可能会发生什么样的错误。例如读文件方法可以&lt;code&gt;throw FileNotFoundException&lt;/code&gt;异常。已检查异常可以抛出多个。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我们可以自定义一个派生于Exception或其子类的类&lt;/p&gt;&#xA;&#xA;&lt;p&gt;再次抛出异常或异常链：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这个可能大家在调用一些通用的模块的时候会发现它的异常信息是被包装了一层的，我们需要调用&#xA;对象的&lt;code&gt;getCause()&lt;/code&gt;方法才能得到异常信息。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;因为每个子系统可能会产生同样的异常，当我们的上层系统捕捉到这种异常时我们并不知道是哪个底层子系统抛出的。这个时候我们就可以将原是一场捕获后重新进行包装然后抛出代表这个子系统的异常，但是原始的异常信息也不会丢失。如：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;try{&#xA;   access db&#xA;}catch(SQLException e){&#xA;   Throwable se = new MyAppException(&amp;quot;db error&amp;quot;);&#xA;    se.initCause(e);&#xA;    throw se;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>velocity渲染相关</title>
       <link>http://bakky.github.io/2012/工作/velocity.html</link>
       <pubDate>2012-09-12 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4&gt;velocity中对象field的渲染&lt;/h4&gt;
-
-&lt;p&gt;&lt;br /&gt;
-没看源码，但经过实验得知：&lt;/p&gt;
-
-&lt;p&gt;如:&lt;code&gt;$!xxx.name&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;引擎渲染的时候先去调用xxx对象的&lt;code&gt;getName()&lt;/code&gt;方法，如果有这个方法，就直接返回&lt;code&gt;getName()&lt;/code&gt;的结果，
-如果没有的话就回去调用xxx对象的&lt;code&gt;get(&amp;quot;name&amp;quot;)&lt;/code&gt;方法。&lt;/p&gt;
-
-&lt;h4&gt;velocity判断为空和null&lt;/h4&gt;
-
-&lt;p&gt;&lt;br /&gt;
-&lt;code&gt;$!item.name.isNull()&lt;/code&gt;    是否为null&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;$!item.name.isNotNull()&lt;/code&gt;  是否不为null&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-&lt;code&gt;#if(!$!item.name)&lt;/code&gt;    如果不为空&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;#if($!item.name)&lt;/code&gt;     如果为空&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;velocity中对象field的渲染&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&#xA;没看源码，但经过实验得知：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如:&lt;code&gt;$!xxx.name&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;引擎渲染的时候先去调用xxx对象的&lt;code&gt;getName()&lt;/code&gt;方法，如果有这个方法，就直接返回&lt;code&gt;getName()&lt;/code&gt;的结果，&#xA;如果没有的话就回去调用xxx对象的&lt;code&gt;get(&amp;quot;name&amp;quot;)&lt;/code&gt;方法。&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;velocity判断为空和null&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&#xA;&lt;code&gt;$!item.name.isNull()&lt;/code&gt;    是否为null&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;$!item.name.isNotNull()&lt;/code&gt;  是否不为null&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&#xA;&lt;code&gt;#if(!$!item.name)&lt;/code&gt;    如果不为空&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;#if($!item.name)&lt;/code&gt;     如果为空&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>代理、动态代理</title>
       <link>http://bakky.github.io/2012/工作/proxy.html</link>
       <pubDate>2012-09-08 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-代理很容易理解，我们平时想要去买火车票，票贩子和代售点都可以理解为代理。
-代理的结构图也很简单，代理类中含有真实类的引用，客户端调用代理类的方法，实际上代理类会去调用真实类的真实方法。那么代理类的主要作用是什么呢？就是在执行真实类的真实方法时，额外做些事情。
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;那么动态代理呢，试想我们买火车票、买飞机票用代理了，如果我们想要买国外奶粉，我们可以用代购，那么这个时候我们又要创建一个代理，如果有很多这种情况而且我们额外要做的事情差不多，那么创建很多代理类就浪费了，动态代理就是解决这种情况的，允许运行时指定其为实现任意一种接口实现类的代理类。&lt;/p&gt;
-
-&lt;p&gt;简单示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/**
- *买票接口
- *
- */
- pubic interface Ticket{
-    public void buyTicket();
- }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt; /**
- *真实买火车票类
- *
- */
- public class TrainTicket implements Ticket{
-    @override
-    public void buyTicket(){
-        System.out.println(&amp;quot;买火车票&amp;quot;);
-    }
- }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt; /**
- *真实买飞机票类
- *
- */
-  public class PlainTicket implements Ticket{
-    @override
-    public void buyTicket(){
-        System.out.println(&amp;quot;买飞机票&amp;quot;);
-    }
- }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt; /**
- * 代理类
- *
- */
- public class TicketProxy implements InvocationHandler{
-    private Object object=null;
-    public TicketProxy(Object o){
-        this.object = o;
-    }   
-    @override
-    public Object invoke(Object arg0, Method arg1, Object[] arg2){
-        Object result = null;
-        try{
-            System.out.println(&amp;quot;我是票贩子，买票一律收20元手续费&amp;quot;);
-            result = arg1.invoke(object , arg2);
-            System.out.println(&amp;quot;挣钱了，买酒喝去。。。&amp;quot;);
-        }catch(Exception ex){
-            System.exit(1);
-        }
-        return result;
-    }
- }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt; public class Client{
-    public static void main(String[] args){
-        Ticket t = new PlainTicket();
-        Ticket proxy = Proxy.newProxyInstance(t.getClass().getClassLoader() , t.getClass().getInterfaces() , new TicketProxy(t));
-        proxy.buyTicket();
-    }
- } 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;当需要增加买奶粉的时候，我们就不需要再增加一个代理类了，而只是需要创建相关买奶粉的接口，然后增加不同的实现类。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&#xA;代理很容易理解，我们平时想要去买火车票，票贩子和代售点都可以理解为代理。&#xA;代理的结构图也很简单，代理类中含有真实类的引用，客户端调用代理类的方法，实际上代理类会去调用真实类的真实方法。那么代理类的主要作用是什么呢？就是在执行真实类的真实方法时，额外做些事情。&#xA;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;那么动态代理呢，试想我们买火车票、买飞机票用代理了，如果我们想要买国外奶粉，我们可以用代购，那么这个时候我们又要创建一个代理，如果有很多这种情况而且我们额外要做的事情差不多，那么创建很多代理类就浪费了，动态代理就是解决这种情况的，允许运行时指定其为实现任意一种接口实现类的代理类。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;简单示例：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;/**&#xA; *买票接口&#xA; *&#xA; */&#xA; pubic interface Ticket{&#xA;    public void buyTicket();&#xA; }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt; /**&#xA; *真实买火车票类&#xA; *&#xA; */&#xA; public class TrainTicket implements Ticket{&#xA;    @override&#xA;    public void buyTicket(){&#xA;        System.out.println(&amp;quot;买火车票&amp;quot;);&#xA;    }&#xA; }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt; /**&#xA; *真实买飞机票类&#xA; *&#xA; */&#xA;  public class PlainTicket implements Ticket{&#xA;    @override&#xA;    public void buyTicket(){&#xA;        System.out.println(&amp;quot;买飞机票&amp;quot;);&#xA;    }&#xA; }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt; /**&#xA; * 代理类&#xA; *&#xA; */&#xA; public class TicketProxy implements InvocationHandler{&#xA;    private Object object=null;&#xA;    public TicketProxy(Object o){&#xA;        this.object = o;&#xA;    }   &#xA;    @override&#xA;    public Object invoke(Object arg0, Method arg1, Object[] arg2){&#xA;        Object result = null;&#xA;        try{&#xA;            System.out.println(&amp;quot;我是票贩子，买票一律收20元手续费&amp;quot;);&#xA;            result = arg1.invoke(object , arg2);&#xA;            System.out.println(&amp;quot;挣钱了，买酒喝去。。。&amp;quot;);&#xA;        }catch(Exception ex){&#xA;            System.exit(1);&#xA;        }&#xA;        return result;&#xA;    }&#xA; }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt; public class Client{&#xA;    public static void main(String[] args){&#xA;        Ticket t = new PlainTicket();&#xA;        Ticket proxy = Proxy.newProxyInstance(t.getClass().getClassLoader() , t.getClass().getInterfaces() , new TicketProxy(t));&#xA;        proxy.buyTicket();&#xA;    }&#xA; } &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;当需要增加买奶粉的时候，我们就不需要再增加一个代理类了，而只是需要创建相关买奶粉的接口，然后增加不同的实现类。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>String和StringUtil的判断为空区别</title>
       <link>http://bakky.github.io/2012/工作/empty.html</link>
       <pubDate>2012-08-29 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-1.&lt;code&gt;str.isEmpty();return str==null||str.length()==0&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;str为null,则抛出空指针异常&lt;/p&gt;
-
-&lt;p&gt;2.&lt;code&gt;StringUtils.isEmpty(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt;    null安全&lt;/p&gt;
-
-&lt;p&gt;3.&lt;code&gt;StringUtils.isBlank(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt; 或 由空白符(whitespace) 构成&lt;/p&gt;
-
-&lt;p&gt;4.&lt;code&gt;StringUtils.trimToNull(str)&lt;/code&gt;、&lt;code&gt;StringUtils.trimToEmpty(str)&lt;/code&gt;  去掉字符串两端的控制符(control characters, char &amp;lt;= 32) ,如果变为 null 或&amp;rdquo;&amp;ldquo;，则返回 null、&amp;rdquo;&amp;rdquo;&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&#xA;1.&lt;code&gt;str.isEmpty();return str==null||str.length()==0&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;str为null,则抛出空指针异常&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2.&lt;code&gt;StringUtils.isEmpty(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt;    null安全&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3.&lt;code&gt;StringUtils.isBlank(str)&lt;/code&gt;返回true的条件是&lt;code&gt;str==null&lt;/code&gt; 或 &lt;code&gt;str.length()==0&lt;/code&gt; 或 由空白符(whitespace) 构成&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4.&lt;code&gt;StringUtils.trimToNull(str)&lt;/code&gt;、&lt;code&gt;StringUtils.trimToEmpty(str)&lt;/code&gt;  去掉字符串两端的控制符(control characters, char &amp;lt;= 32) ,如果变为 null 或&amp;rdquo;&amp;ldquo;，则返回 null、&amp;rdquo;&amp;rdquo;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>数组的trimToSize方法</title>
       <link>http://bakky.github.io/2012/工作/shuzu.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方
-法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。
-- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.
-- 代码洁癖的人适用&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&#xA;- 一旦能确认数组列表的大小不再发生变化，就可以调用&lt;code&gt;trimToSize&lt;/code&gt;方法。这个方&#xA;法将存储区域的大小调整为当前元素数量所需要的是存储空间数目。垃圾回收器将回收多余的存储空间。&#xA;- 一旦整理了数组列表的大小，添加新元素就需要花时间再次移动存储块，所以应该确认不会添加任何元素时，再调用&lt;code&gt;trimToSize&lt;/code&gt;.&#xA;- 代码洁癖的人适用&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>java自动装箱和拆箱</title>
       <link>http://bakky.github.io/2012/工作/box.html</link>
       <pubDate>2012-08-23 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;
-如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;arrayList&amp;lt;Integer&amp;gt; list = new ArrayList&amp;lt;Integer&amp;gt;();
-list.add(3);    //1     自动打包（autowrapping）    
-int n = list.get(i)  //2   拆包
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;步骤1，相当于list.add(new Integer(3))&lt;br /&gt;
-步骤2，相当于nt n = list.get(i).intValue();&lt;/p&gt;
-
-&lt;p&gt;对于封装类型的==比较 需要注意：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Integer a =100;
-Integer b = 100;           
-Integer c = 1000;
-Integer d = 1000;           
-int m = 1000;
-int n = 1000;        
-System. out.println(a==b);
-System. out.println(c==d);           
-System. out.println(m==n);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如上，返回结果分别为：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;true
-false
-true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;为什么会出现这样的结果呢？&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;自动打包规范要求boolean、byte、char&amp;lt;=127,介于-128~127之间的short和int被包装到固定的对象中去&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;看源码，拿Integer举例:&lt;/p&gt;
-
-&lt;p&gt;平常我们使用&lt;code&gt;Integer a = xxx；&lt;/code&gt;的时候，Integer类实际上是调用的是&lt;code&gt;public static Integer valueOf(int i)&lt;/code&gt;方法。这个方法是这样的:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public static Integer valueOf(int i){
-     final int offset = 128;
-     if(i&amp;gt;= -128 &amp;amp;&amp;amp; i&amp;lt;= 127){
-          return IntegerCache.cache[i+offset];
-     }
-     return new Integer(i); 
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;IntegerCache.class:&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;static final Integer cache[] = new Integer[-(-128)+127+1];
-static {
-     for(int i=0;i&amp;lt;cache.length;i++){
-          cache[i] = new Integer(i - 128);
-     }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&#xA;如：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;arrayList&amp;lt;Integer&amp;gt; list = new ArrayList&amp;lt;Integer&amp;gt;();&#xA;list.add(3);    //1     自动打包（autowrapping）    &#xA;int n = list.get(i)  //2   拆包&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;步骤1，相当于list.add(new Integer(3))&lt;br /&gt;&#xA;步骤2，相当于nt n = list.get(i).intValue();&lt;/p&gt;&#xA;&#xA;&lt;p&gt;对于封装类型的==比较 需要注意：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;Integer a =100;&#xA;Integer b = 100;           &#xA;Integer c = 1000;&#xA;Integer d = 1000;           &#xA;int m = 1000;&#xA;int n = 1000;        &#xA;System. out.println(a==b);&#xA;System. out.println(c==d);           &#xA;System. out.println(m==n);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;如上，返回结果分别为：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;true&#xA;false&#xA;true&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;为什么会出现这样的结果呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;&lt;em&gt;自动打包规范要求boolean、byte、char&amp;lt;=127,介于-128~127之间的short和int被包装到固定的对象中去&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;看源码，拿Integer举例:&lt;/p&gt;&#xA;&#xA;&lt;p&gt;平常我们使用&lt;code&gt;Integer a = xxx；&lt;/code&gt;的时候，Integer类实际上是调用的是&lt;code&gt;public static Integer valueOf(int i)&lt;/code&gt;方法。这个方法是这样的:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;public static Integer valueOf(int i){&#xA;     final int offset = 128;&#xA;     if(i&amp;gt;= -128 &amp;amp;&amp;amp; i&amp;lt;= 127){&#xA;          return IntegerCache.cache[i+offset];&#xA;     }&#xA;     return new Integer(i); &#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;IntegerCache.class:&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;static final Integer cache[] = new Integer[-(-128)+127+1];&#xA;static {&#xA;     for(int i=0;i&amp;lt;cache.length;i++){&#xA;          cache[i] = new Integer(i - 128);&#xA;     }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;也就是说，当赋值在[-128, 127]区间时，Java是从同一个数据中取出同一个对象，即内存地址一样.可能[-128, 127]区间比较常用，这个区间内的Integer对象也作为静态变量初始化完成，这样直接返回对象可以提高效率。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>map的遍历和排序</title>
       <link>http://bakky.github.io/2012/工作/map.html</link>
       <pubDate>2012-08-10 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3&gt;map的遍历&lt;/h3&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;最常规的一种遍历方法：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;public static void work(Map&amp;lt;String, Student&amp;gt; map) {
-    Collection&amp;lt;Student&amp;gt; c = map.values();
-    Iterator it = c.iterator();
-    for (; it.hasNext();) {
-        System.out.println(it.next());
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;利用keyset进行遍历，它的优点在于可以根据你所想要的key值得到你想要的 values，更具灵活性！！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;public static void workByKeySet(Map&amp;lt;String, Student&amp;gt; map) {
-    Set&amp;lt;String&amp;gt; key = map.keySet();
-    for (Iterator it = key.iterator(); it.hasNext();) {
-        String s = (String) it.next();
-        System.out.println(map.get(s));
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;比较复杂的一种遍历，它的灵活性太强了，想得到什么就能得到什么&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;public static void workByEntry(Map&amp;lt;String, Student&amp;gt; map) {
-    Set&amp;lt;Map.Entry&amp;lt;String, Student&amp;gt;&amp;gt; set = map.entrySet();
-    for (Iterator&amp;lt;Map.Entry&amp;lt;String, Student&amp;gt;&amp;gt; it = set.iterator(); it.hasNext();) {
-        Map.Entry&amp;lt;String, Student&amp;gt; entry = (Map.Entry&amp;lt;String, Student&amp;gt;) it.next();
-        System.out.println(entry.getKey() + &amp;quot;---&amp;gt;&amp;quot; + entry.getValue());
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3&gt;map中的value排序&lt;/h3&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;中心思想：对key按value进行排序，然后放入linkedHashMap中,按要求定制Comparator&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;List&amp;lt;Long&amp;gt; keys = new ArrayList&amp;lt;Long&amp;gt;(map.keySet());           
-Collections. sort(keys,new Comparator&amp;lt;Object &amp;gt;(){
-    @Override
-    public int compare( Object arg0, Object arg1) {
-        return map.get(arg0).compareTo(map.get(arg1));
-    }                
-});    
-Map&amp;lt;Long, String&amp;gt; catmap = new LinkedHashMap&amp;lt;Long,String&amp;gt;();  for(Long l : keys){           
-    catmap.put(l, map.get(l));       
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;map的遍历&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;最常规的一种遍历方法：&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;public static void work(Map&amp;lt;String, Student&amp;gt; map) {&#xA;    Collection&amp;lt;Student&amp;gt; c = map.values();&#xA;    Iterator it = c.iterator();&#xA;    for (; it.hasNext();) {&#xA;        System.out.println(it.next());&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;利用keyset进行遍历，它的优点在于可以根据你所想要的key值得到你想要的 values，更具灵活性！！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;public static void workByKeySet(Map&amp;lt;String, Student&amp;gt; map) {&#xA;    Set&amp;lt;String&amp;gt; key = map.keySet();&#xA;    for (Iterator it = key.iterator(); it.hasNext();) {&#xA;        String s = (String) it.next();&#xA;        System.out.println(map.get(s));&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;比较复杂的一种遍历，它的灵活性太强了，想得到什么就能得到什么&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;public static void workByEntry(Map&amp;lt;String, Student&amp;gt; map) {&#xA;    Set&amp;lt;Map.Entry&amp;lt;String, Student&amp;gt;&amp;gt; set = map.entrySet();&#xA;    for (Iterator&amp;lt;Map.Entry&amp;lt;String, Student&amp;gt;&amp;gt; it = set.iterator(); it.hasNext();) {&#xA;        Map.Entry&amp;lt;String, Student&amp;gt; entry = (Map.Entry&amp;lt;String, Student&amp;gt;) it.next();&#xA;        System.out.println(entry.getKey() + &amp;quot;---&amp;gt;&amp;quot; + entry.getValue());&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;map中的value排序&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;中心思想：对key按value进行排序，然后放入linkedHashMap中,按要求定制Comparator&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;List&amp;lt;Long&amp;gt; keys = new ArrayList&amp;lt;Long&amp;gt;(map.keySet());           &#xA;Collections. sort(keys,new Comparator&amp;lt;Object &amp;gt;(){&#xA;    @Override&#xA;    public int compare( Object arg0, Object arg1) {&#xA;        return map.get(arg0).compareTo(map.get(arg1));&#xA;    }                &#xA;});    &#xA;Map&amp;lt;Long, String&amp;gt; catmap = new LinkedHashMap&amp;lt;Long,String&amp;gt;();  for(Long l : keys){           &#xA;    catmap.put(l, map.get(l));       &#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
   </channel>
 </rss>

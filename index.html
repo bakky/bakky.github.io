@@ -369,68 +369,6 @@ public void countDown() {
 		  </div>
 		</div>
 		
-		<div class="post">
-		  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
-
-		  <p><br /></p>
-
-<h4>第1章</h4>
-
-<p><br /></p>
-
-<ul>
-<li><p>在设计前期采用模式常常导致过度工程</p></li>
-
-<li><p>开发业务代码时很容易面向过程编程</p></li>
-
-<li><p>大方法差成小方法:</p>
-
-<pre><code>所有行为拆成很多小行为，然后将合适的行为提炼到对象中
-分拆出小方法（要避免过多参数的传递）
-这样做可能还会带来代码量的增加
-</code></pre></li>
-
-<li><p>运用常用设计模式
-    可以穿插看设计模式的书籍（对应设计模式）</p></li>
-</ul>
-
-<h4>第2章</h4>
-
-<p><br /></p>
-
-
-		  <div class="more">
-		    <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
-		<div class="post">
-		  <h3 class="title"><a href="/2013/工作/shift.html">【转】关于java中的移位操作 - 红旗飘飘 - 博客频道 - CSDN.NET</a> <span class="date">2013-05-07</span></h3>
-
-		  <p><br /></p>
-
-<p>在Think in Java中有这么一段话“对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。只有右侧的5个低位才会有用。这样可防止我们在一个int数里移动不切实际的位数。若对一个long值进行处理，最后得到的结果也是long。此时只会用到右侧的6个低位，防止移动超过long值里现成的位数。”</p>
-
-<p>对上面那段话的理解是：移位操作符操作的运算对象是二进制的“位”，int类型是32位也就是2的5次幂 ！如果移32位以上，那么原来的数的信息会全部丢失，这样也就没有什么意义了！所以上面的“只有右侧的5个低位才会有用”说的是：移位操作符右端的那个数（化成二进制）的低5位才有用，即 X &lt; &lt;y; 是指y的低5位才有用，即不能大于32。 而对于long型也是同样的道理！</p>
-
-<p>因此，如果对一个int 型，进行移位，X &lt; &lt;y; 当y小于32时，移位后的结果一般都在我们的预料当中；而如果y大于32时，由于移位超出了int所能表示的范围，这时就先把y化成二进制数，然后取该二进制数右端的低5位，再把这5位化成十进制，此时的这个十进制就是要对X移动的位数。</p>
-
-<p>例如：</p>
-
-<pre><code>int a=140;   
-a &lt;&lt; 34
-System.out.println(Integer.toBinaryString(a &lt;&lt; 34));
-</code></pre>
-
-<p>上面那两个语句的执行过程是：先把a化成二进制数：10001100
-执行语句 a &lt;&lt; 34   对a左移32位时，先把 34化成二进制：100010，对该二进制数取右边5位，即00010，化成十进制数为2，所以实际上是对a左移两位。现在，地球人都会知道上面程序的输出结果是：1000110000</p>
-
-
-		  <div class="more">
-		    <a href="/2013/工作/shift.html" class="btn">read more..</a>
-		  </div>
-		</div>
-		
 	</div>
 	<div class="span4">
 	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1846521517&verifier=0b6bb11b&dpc=1"></iframe>
@@ -452,7 +390,7 @@ System.out.println(Integer.toBinaryString(a &lt;&lt; 34));
     </div> <!-- /container -->
 
     
-<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script src="http://cdn.bootcss.com/prettify/r298/prettify.min.js"></script>
 <script>
   var pres = document.getElementsByTagName("pre");
   for (var i=0; i < pres.length; ++i) {
@@ -462,11 +400,20 @@ System.out.println(Integer.toBinaryString(a &lt;&lt; 34));
 </script>
 
     
-<script>
-    var _gaq=[['_setAccount','UA-43190712-1'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-43190712-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
 </script>
   </body>
 </html>
