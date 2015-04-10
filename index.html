@@ -371,6 +371,72 @@ public void countDown() {
 		  </div>
 		</div>
 		
+		<div class="post">
+		  <h3 class="title"><a href="/2013/笔记/effective_java.html">《effective java》笔记（更新中）</a> <span class="date">2013-05-12</span></h3>
+
+		  <p><br /></p>
+
+<h4>第21条：用函数对象表示策略</h4>
+
+<p><br /></p>
+
+<ul>
+<li>java没有函数指针，可以用对象引用实现同样的功能</li>
+<li>如果一个类仅仅导出一个方法，那么这个实例就等同于一个指向该方法的指针（例如常见的排序比较器使用：Comparator）这样就可以在某一个对象的方法中执行其它对象。</li>
+</ul>
+
+<p>例：</p>
+
+<pre><code>Arrays.sort(stringArray,new Comparator&lt;String&gt;(){
+     public int compare(String s1,String s2){
+          return s1.length()-s2.length();
+     }
+})
+</code></pre>
+
+<p>每个比较器就是一个具体策略类，具体策略类往往使用匿名类声明（例如上面的例子），我们也可以声明一个普通的类实现Comparator接口。这个时候，我们可以考虑，因为用匿名类的话，每次执行调用的时候会生成一个新的对象实例，将这个函数对象存储在一个私有的静态final域中。</p>
+
+
+		  <div class="more">
+		    <a href="/2013/笔记/effective_java.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
+		<div class="post">
+		  <h3 class="title"><a href="/2013/笔记/restruct.html">《重构》笔记（更新中）</a> <span class="date">2013-05-08</span></h3>
+
+		  <p><br /></p>
+
+<h4>第1章</h4>
+
+<p><br /></p>
+
+<ul>
+<li><p>在设计前期采用模式常常导致过度工程</p></li>
+
+<li><p>开发业务代码时很容易面向过程编程</p></li>
+
+<li><p>大方法差成小方法:</p>
+
+<pre><code>所有行为拆成很多小行为，然后将合适的行为提炼到对象中
+分拆出小方法（要避免过多参数的传递）
+这样做可能还会带来代码量的增加
+</code></pre></li>
+
+<li><p>运用常用设计模式
+    可以穿插看设计模式的书籍（对应设计模式）</p></li>
+</ul>
+
+<h4>第2章</h4>
+
+<p><br /></p>
+
+
+		  <div class="more">
+		    <a href="/2013/笔记/restruct.html" class="btn">read more..</a>
+		  </div>
+		</div>
+		
 	</div>
 	<div class="span4">
 	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1846521517&verifier=0b6bb11b&dpc=1"></iframe>
@@ -392,7 +458,7 @@ public void countDown() {
     </div> <!-- /container -->
 
     
-<script src="http://cdn.bootcss.com/prettify/r298/prettify.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
 <script>
   var pres = document.getElementsByTagName("pre");
   for (var i=0; i < pres.length; ++i) {
