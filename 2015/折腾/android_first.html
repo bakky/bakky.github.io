@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>安卓开发学习之路-工具篇</title>
+  
+    <meta name="author" content="霸小奇">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <link rel="shortcut icon" href="https://tfsimg.alipay.com/images/partner/T1NZtaXdJcXXXXXXXX">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/" style="padding-left:46px;">霸小奇的博客</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/blogs">Blogs</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About Me</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>安卓开发学习之路-工具篇 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><br /></p>
+
+<p>安卓开发准备工作网上教程很多，这几篇文章详细介绍了开发工具<code>andriod studio</code>的使用以及编译工具<code>gradle</code>的相关知识。</p>
+
+<blockquote>
+<p><a href="http://stormzhang.com/devtools/2014/11/25/android-studio-tutorial1/">Android Studio系列教程一 —- 下载与安装</a></p>
+
+<p><a href="http://stormzhang.com/devtools/2014/11/28/android-studio-tutorial2/">Android Studio系列教程二 —- 基本设置与运行</a></p>
+
+<p><a href="http://stormzhang.com/devtools/2014/12/18/android-studio-tutorial4/">Android Studio系列教程四 —- Gradle基础</a></p>
+
+<p><a href="http://stormzhang.com/devtools/2014/12/18/android-studio-tutorial5/">Android Studio系列教程五–Gradle命令详解与导入第三方包</a></p>
+</blockquote>
+
+<p>推荐直接使用<code>android studio</code>(基于<code>IDEA</code>)取代<code>eclipse</code>作为开发工具，作为资深<code>Java</code>码农，从<code>eclipse</code>投身<code>IDEA</code>后，从此写代码更加有劲了。</p>
+
+<p>按照上面的教程一步一步来由于版本的问题还是会遇到一些问题的，这里作个记录：</p>
+
+<ol>
+<li>下载最新版本的<code>andriod studio(1.1.0)</code>,新建一个安卓工程,过程中会去下载<code>andriod SDK</code>,默认下载到<code>/Users/${user}/Library/Android/sdk</code>,也会去下载<code>gradle</code>,默认下载到<code>/Applications/Android Studio.app/Contents/gradle/gradle-2.2.1</code>目录下面,如果你已经在本地下载了<code>gradle</code>,你可以在<code>Preferences-&gt;gradle</code>中更改。</li>
+<li>新建好第一个<code>Hello World</code>程序后，发现提示<code>gradle sync failed</code>,解决办法是下载<code>jdk7</code>(mac自带<code>jdk6</code>),同时设置<code>JDK Location</code>,这里如果你jdk7是采用安装包<code>dmg</code>形式安装的话，你要注意<code>JAVA HOME</code>路径是在<code>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home</code>这里，而不是<code>/System/Library/Frameworks/JavaVM.framework/</code>,因为你用<code>whereis java</code>查看会发现它们都是软链到这个目录下的。</li>
+<li>导入外部开源工程后，如上述教程中的<code>9GAG</code>,你会发现执行<code>./gradlew build</code>可能会失败，这是因为模块<code>build.gradle</code>文件中指定的<code>compileSdkVersion</code>和<code>buildToolsVersion</code>本地并没有，更改<code>compileSdkVersion</code>和<code>buildToolsVersion</code>成你本地版本即可。</li>
+</ol>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+          
+            <li class="prev disabled"><a>&larr; Previous</a></li>
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2014/工作/feelings.html" title="【转】【共勉】「我只是认真」聊聊工匠情怀">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'bakky'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2015-04-29</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%8A%98%E8%85%BE-ref">折腾 <span>2</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#andriod-ref">andriod <span>1</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <ul>
+     <!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+    <!-- <span class="bds_more">分享到：</span> -->
+    <a class="bds_tsina"></a>
+    <a class="bds_qzone"></a>
+    <a class="bds_douban"></a>
+    </div>
+    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6751105" ></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+    </script>
+<!-- Baidu Button END -->
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 霸小奇 2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-43190712-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>
